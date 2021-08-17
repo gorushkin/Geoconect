@@ -1,0 +1,27 @@
+.promo {
+  background: url("../img/promo__back.jpg") no-repeat center / cover;
+  padding-top: 220px;
+  padding-bottom: 330px;
+}
+
+.promo__inner {
+  display: grid;
+}
+
+.promo__title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 75px;
+  color: #000000;
+  font-family: $font2;
+  margin-bottom: 40px;
+}
+
+.promo__text {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 45px;
+  font-family: $font1;
+  color: #000000;
+}
