@@ -1,0 +1,24 @@
+.btn {
+  background: $color-main;
+  border-radius: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  font-family: $font1;
+  color: #ffffff;
+  max-width: 405px;
+  padding: 23px 0;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 56px;
+  line-height: 42px;
+  font-family: $font2;
+  color: #ffffff;
+  margin-bottom: 50px;
+}

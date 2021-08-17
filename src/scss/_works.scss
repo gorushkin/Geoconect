@@ -1,0 +1,186 @@
+.works {
+  background: url("../img/works__back.jpg") no-repeat center / cover;
+  padding-top: 75px;
+  padding-bottom: 170px;
+}
+
+.works__info-text {
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 33px;
+  font-family: $font1;
+  color: #ffffff;
+  margin-bottom: 75px;
+}
+
+.works__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+  row-gap: 75px;
+  counter-reset: item;
+}
+
+.works__item {
+  width: 25%;
+  padding: 0 15px;
+}
+
+.works__item-inner {
+  position: relative;
+  min-height: 230px;
+  border-radius: 18px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-right: 45px;
+
+  &::before {
+    counter-increment: item;
+    content: "0" counter(item);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 30px;
+    font-feature-settings: "pnum" on, "lnum" on;
+    font-family: $font2;
+    color: #000000;
+  }
+
+  &--01 {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.798102) 0%,
+        rgba(0, 0, 0, 0.617716) 0%,
+        rgba(0, 0, 0, 0.552673) 0%,
+        #000000 0%,
+        rgba(0, 0, 0, 0.20396) 0.01%,
+        #000000 0.02%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../img/works__img01.jpg") no-repeat center / cover;
+  }
+
+  &--02 {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.798102) 0%,
+        rgba(0, 0, 0, 0.617716) 0%,
+        rgba(0, 0, 0, 0.552673) 0%,
+        #000000 0%,
+        rgba(0, 0, 0, 0.20396) 0.01%,
+        #000000 0.02%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../img/works__img02.jpg") no-repeat center / cover;
+  }
+
+  &--03 {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.798102) 0%,
+        rgba(0, 0, 0, 0.617716) 0%,
+        rgba(0, 0, 0, 0.552673) 0%,
+        #000000 0%,
+        rgba(0, 0, 0, 0.20396) 0.01%,
+        #000000 0.02%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../img/works__img03.jpg") no-repeat center / cover;
+  }
+
+  &--04 {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.798102) 0%,
+        rgba(0, 0, 0, 0.617716) 0%,
+        rgba(0, 0, 0, 0.552673) 0%,
+        #000000 0%,
+        rgba(0, 0, 0, 0.20396) 0.01%,
+        #000000 0.02%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../img/works__img04.jpg") no-repeat center / cover;
+  }
+
+  &--05 {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.798102) 0%,
+        rgba(0, 0, 0, 0.617716) 0%,
+        rgba(0, 0, 0, 0.552673) 0%,
+        #000000 0%,
+        rgba(0, 0, 0, 0.20396) 0.01%,
+        #000000 0.02%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../img/works__img05.jpg") no-repeat center / cover;
+  }
+
+  &--06 {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.798102) 0%,
+        rgba(0, 0, 0, 0.617716) 0%,
+        rgba(0, 0, 0, 0.552673) 0%,
+        #000000 0%,
+        rgba(0, 0, 0, 0.20396) 0.01%,
+        #000000 0.02%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../img/works__img06.jpg") no-repeat center / cover;
+  }
+
+  &--07 {
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.798102) 0%,
+        rgba(0, 0, 0, 0.617716) 0%,
+        rgba(0, 0, 0, 0.552673) 0%,
+        #000000 0%,
+        rgba(0, 0, 0, 0.20396) 0.01%,
+        #000000 0.02%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("../img/works__img07.jpg") no-repeat center / cover;
+  }
+}
+
+.works__item-description {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+  color: #ffffff;
+  font-family: $font1;
+}
+
+.works__item-arrow {
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+
+  &::before,
+  &::after {
+    position: absolute;
+    width: 15px;
+    height: 3px;
+    background: #ffffff;
+    right: -3px;
+    content: "";
+  }
+
+  &::before {
+    top: -4px;
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+    top: 4px;
+  }
+}
