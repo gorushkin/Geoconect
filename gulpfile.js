@@ -35,9 +35,11 @@ const watch = () => {
   watcher(paths.whatch.html, series(html, refresh));
   watcher(paths.whatch.js, series(scripts, refresh));
   watcher(paths.whatch.img, gulp.series(copy, refresh));
+  watcher(paths.whatch.imgRaw, gulp.series(images, refresh));
 
   serverInit();
 };
+// TODO: При сборке надо сначала обработатьвсе картинки, потом делать все остальное
 
 const build = series(clean, parallel(styles, copy, html, scripts));
 const start = series(build, watch);
