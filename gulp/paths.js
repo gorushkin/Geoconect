@@ -6,7 +6,7 @@ export const paths = {
     html: `${source}/*.html`,
     styles: `${source}/scss/style.scss`,
     scss: `${source}/sass/**/*.*`,
-    jsModules: `/js/modules/*.js`,
+    jsModules: `${source}/js/modules/*.js`,
     jsVendors: `${source}/js/vendors/*.js`,
     svgSrc: `${source}/img/**/icon__*.svg`,
     img: `${source}/img/**`,

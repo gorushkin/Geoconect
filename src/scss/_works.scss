@@ -2,6 +2,16 @@
   background: url("../img/works__back.jpg") no-repeat center / cover;
   padding-top: 75px;
   padding-bottom: 170px;
+  min-height: 100vh;
+}
+
+.works__title {
+  font-weight: bold;
+  font-size: 56px;
+  line-height: 42px;
+  font-family: $font2;
+  color: #ffffff;
+  margin-bottom: 50px;
 }
 
 .works__info-text {

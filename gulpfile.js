@@ -42,4 +42,4 @@ const watch = () => {
 const build = series(clean, parallel(styles, copy, html, scripts));
 const start = series(build, watch);
 
-export { styles, watch, serverInit, clean, start, build, createSprite, images };
+export { styles, watch, serverInit, clean, start, build, createSprite, images, scripts };
