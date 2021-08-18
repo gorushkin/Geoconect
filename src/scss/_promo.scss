@@ -2,7 +2,7 @@
   background: url("../img/promo__back.jpg") no-repeat center / cover;
   padding-top: 220px;
   padding-bottom: 100px;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -14,22 +14,6 @@
   }
 }
 
-.promo__inner {
-  grid-auto-flow: row;
-  flex-grow: 1;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  row-gap: 35px;
-  grid-template-rows: auto auto auto 1fr;
-  align-content: stretch;
-  grid-template-areas:
-    "title title"
-    "text info"
-    "btn info"
-    "social social";
-}
-
 .promo__title {
   grid-area: title;
   font-style: normal;
@@ -39,6 +23,20 @@
   color: #000000;
   font-family: $font2;
   max-width: 900px;
+  margin-bottom: 30px;
+}
+
+.promo__inner {
+  display: flex;
+  height: 100%;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.promo__left {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .promo__text {
@@ -49,6 +47,7 @@
   font-family: $font1;
   color: #000000;
   max-width: 900px;
+  margin-bottom: 30px;
 }
 
 .promo__btn {
@@ -82,10 +81,10 @@
   grid-area: social;
   align-self: stretch;
   align-self: end;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  margin-top: auto;
 }
 
 .promo__social-text {
