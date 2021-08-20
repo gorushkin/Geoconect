@@ -38,6 +38,10 @@
 .footer__social-item {
   background: #7f93a2;
 
+  &:hover {
+    background: $color-main;
+  }
+
   &:not(:last-of-type) {
     margin-right: 30px;
   }
@@ -49,7 +53,7 @@
 
     &:hover {
       svg {
-        fill: $color-main;
+        // fill: $color-main;
       }
     }
   }
