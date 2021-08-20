@@ -27,5 +27,6 @@ export const paths = {
     js: `${source}/js/**/*.*`,
     img: `${source}/img/**`,
     imgRaw: `${source}/imgRaw/**/*.{png,jpg,svg}`,
+    imgSvg: `${source}/img/**/icon__*.svg`,
   },
 };
