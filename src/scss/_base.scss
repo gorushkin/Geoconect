@@ -94,11 +94,15 @@ body {
   color: #000000;
   background: #ffffff;
   min-height: 100vh;
+  position: relative;
 }
-
 
 .wrapper {
   width: 100%;
   margin: 0 auto;
   padding: 0 120px;
+
+  @include _1280 {
+    padding: 0 15px;
+  }
 }

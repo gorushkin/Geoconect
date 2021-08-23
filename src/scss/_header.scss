@@ -4,29 +4,73 @@
   top: 0;
   right: 0;
   left: 0;
+
+  @include _768 {
+    padding-top: 20px;
+  }
 }
 
 .header__inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  width: 154px;
+  position: relative;
+  z-index: 50;
+
+  @include _768 {
+    width: 100px;
+  }
 }
 
 .header__logo-img {
-  width: 154px;
 }
 
 .header__nav {
-  margin: 0 auto;
+  @include _768 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: rgba($color: #000000, $alpha: 0.7);
+    z-index: 15;
+    padding-top: 100px;
+    display: none;
+  }
+
+  &--show {
+    display: block;
+  }
 }
 
 .header__nav-list {
   display: flex;
   align-items: center;
   margin: 0 -20px;
+
+  @include _768 {
+    margin: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .header__nav-item {
   padding: 0 20px;
+
+  @include _992 {
+    padding: 0 15px;
+  }
+
+  @include _768 {
+    padding: 15px 0;
+    padding-left: 15px;
+  }
 
   a {
     font-family: $font1;
@@ -37,6 +81,11 @@
     color: #000000;
     transition: all 0.3s;
 
+    @include _768 {
+      font-size: 24px;
+      color: #ffffff;
+    }
+
     &:hover {
       color: $color-main;
     }
@@ -44,7 +93,13 @@
 }
 
 .header__btn--wrapper {
-  width: 154px;
+  display: none;
+  position: relative;
+  z-index: 50;
+
+  @include _768 {
+    display: block;
+  }
 }
 
 .header__btn {
@@ -60,29 +115,63 @@
   margin-left: auto;
   cursor: pointer;
 
-  span {
-    width: 100%;
-    background: #000000;
-    height: 2px;
-    display: block;
-
-    &::before,
-    &::after {
+  &--open {
+    span {
       width: 100%;
       background: #000000;
       height: 2px;
-      left: 0;
-      right: 0;
-      content: "";
-      position: absolute;
-    }
+      display: block;
 
-    &::before {
-      top: 0;
-    }
+      &--open {
+        background: #ffffff;
+      }
 
-    &::after {
-      bottom: 0;
+      &::before,
+      &::after {
+        width: 100%;
+        background: #000000;
+        height: 2px;
+        left: 0;
+        right: 0;
+        content: "";
+        position: absolute;
+
+        &--open {
+          background: #ffffff;
+        }
+      }
+
+      &::before {
+        top: 0;
+      }
+
+      &::after {
+        bottom: 0;
+      }
+    }
+  }
+
+  &--close {
+    span {
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        left: -3px;
+        width: calc(100% + 6px);
+        height: 2px;
+        background: #ffffff;
+      }
+
+      &::before {
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      &::after {
+        transform: translateY(-50%) rotate(-45deg);
+      }
     }
   }
 }
