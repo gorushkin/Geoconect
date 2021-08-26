@@ -17,6 +17,13 @@
   transition: all 0.2s;
   border: 2px solid $color-main;
 
+  @include _768 {
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px 5px;
+    max-width: 300px;
+  }
+
   &:hover {
     border: 2px solid $color-main;
     background: transparent;

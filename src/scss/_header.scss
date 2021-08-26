@@ -8,6 +8,12 @@
   @include _768 {
     padding-top: 20px;
   }
+
+  &--open {
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      url("../img/promo__back.jpg") no-repeat center / cover;
+  }
 }
 
 .header__inner {
@@ -30,17 +36,23 @@
 }
 
 .header__nav {
+  overflow: hidden;
+  padding: 0 20px;
+
   @include _768 {
     position: absolute;
+    overflow: auto;
+    padding: 0;
     left: 0;
     top: 0;
     bottom: 0;
     width: 100%;
     min-height: 100vh;
-    background: rgba($color: #000000, $alpha: 0.7);
+    // background: rgba($color: #000000, $alpha: 0.7);
     z-index: 15;
     padding-top: 100px;
     display: none;
+    outline: 2px solid red;
   }
 
   &--show {
