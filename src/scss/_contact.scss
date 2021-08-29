@@ -84,6 +84,10 @@
   margin-bottom: 30px;
   padding: 21px 0;
 
+  &:hover {
+    padding: 21px 0;
+  }
+
   @include _992 {
     max-width: none;
   }
