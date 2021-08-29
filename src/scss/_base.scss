@@ -103,6 +103,10 @@ body {
   padding: 0 120px;
 
   @include _1280 {
+    padding: 0 30px;
+  }
+
+  @include _992 {
     padding: 0 15px;
   }
 }
