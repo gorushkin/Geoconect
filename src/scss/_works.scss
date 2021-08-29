@@ -2,6 +2,11 @@
   background: url("../img/works__back.jpg") no-repeat center / 100% 100%;
   padding-top: 75px;
   min-height: 100vh;
+
+  @include _992 {
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
 }
 
 .works__title {
@@ -11,6 +16,10 @@
   font-family: $font2;
   color: #ffffff;
   margin-bottom: 50px;
+
+  @include _992 {
+    margin-bottom: 30px;
+  }
 }
 
 .works__info-text {
@@ -20,6 +29,10 @@
   font-family: $font1;
   color: #ffffff;
   margin-bottom: 75px;
+
+  @include _992 {
+    margin-bottom: 40px;
+  }
 }
 
 .works__list {
@@ -28,11 +41,27 @@
   margin: 0 -15px;
   row-gap: 75px;
   counter-reset: item;
+
+  @media (max-width: 1600px) {
+    row-gap: 30px;
+  }
 }
 
 .works__item {
   width: 25%;
   padding: 0 15px;
+
+  @media (max-width: 1600px) {
+    width: 33.33%;
+  }
+
+  @include _992 {
+    width: 50%;
+  }
+
+  @include _768 {
+    width: 100%;
+  }
 }
 
 .works__item-inner {
@@ -48,7 +77,6 @@
 
   &:hover {
     transform: scale(1.01);
-
   }
 
   &::before {
