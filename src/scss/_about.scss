@@ -6,11 +6,19 @@
   display: flex;
   column-gap: 75px;
   justify-content: space-between;
+
+  @include _992 {
+    column-gap: normal;
+  }
 }
 
 .about__title {
   text-align: left;
   margin-bottom: 85px;
+
+  @include _992 {
+    margin-bottom: 30px;
+  }
 }
 
 .about__content {
@@ -20,6 +28,11 @@
 
 .about__text {
   max-width: 850px;
+
+  @include _992 {
+    max-width: none;
+  }
+
   p {
     font-family: $font1;
     font-weight: normal;
@@ -33,8 +46,39 @@
 .about__img {
   width: 610px;
   flex-shrink: 0;
+
+  @media (max-width: 1600px) {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--desktop {
+    @include _992 {
+      display: none;
+    }
+  }
+
+  &--tablet {
+    display: none;
+
+    @include _992 {
+      display: block;
+      float: right;
+      padding-left: 15px;
+    }
+
+    @include _768 {
+      max-width: 40%;
+    }
+  }
 }
 
 .about__btn {
   margin-top: auto;
+
+  @include _992 {
+    margin: 0 auto;
+  }
 }
