@@ -3,6 +3,11 @@
   min-height: 518px;
   padding-top: 145px;
   padding-bottom: 35px;
+
+  @include _992 {
+    padding: 30px 0;
+    background: url("../img/contact__back.jpg") no-repeat / cover;
+  }
 }
 
 .contact__inner {
@@ -10,6 +15,12 @@
   margin-left: auto;
   margin-right: 120px;
   display: flex;
+
+  @include _992 {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
 }
 
 .contact__title {
@@ -19,6 +30,13 @@
   line-height: 42px;
   color: #000000;
   margin-bottom: 30px;
+
+  @include _992 {
+    margin-bottom: 30px;
+    font-size: 40px;
+    line-height: 42px;
+    text-align: center;
+  }
 }
 
 .contact__text {
@@ -27,6 +45,12 @@
   line-height: 27px;
   color: #000000;
   max-width: 250px;
+
+  @include _992 {
+    text-align: center;
+    max-width: none;
+    margin-bottom: 30px;
+  }
 }
 
 .contact__form {
@@ -35,6 +59,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @include _992 {
+    max-width: 450px;
+  }
 }
 
 .contact__input {
@@ -55,6 +83,10 @@
   border: 2px solid $color-main;
   margin-bottom: 30px;
   padding: 21px 0;
+
+  @include _992 {
+    max-width: none;
+  }
 }
 
 .contact__warning {

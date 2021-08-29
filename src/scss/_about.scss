@@ -1,5 +1,10 @@
 .about {
   min-height: 100vh;
+
+  @include _992 {
+    min-height: auto;
+    padding: 30px 0;
+  }
 }
 
 .about__inner {
@@ -31,6 +36,7 @@
 
   @include _992 {
     max-width: none;
+    margin-bottom: 35px;
   }
 
   p {

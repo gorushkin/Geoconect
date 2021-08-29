@@ -8,6 +8,7 @@
     padding-top: 50px;
     padding-bottom: 30px;
     min-height: auto;
+    background: url("../img/news__back.jpg") no-repeat center / 100% 100%;
   }
 }
 
@@ -37,8 +38,8 @@
   }
 
   @include _992 {
-    margin: 0 -15px;
     display: block;
+    margin: 0;
   }
 }
 
@@ -93,6 +94,12 @@
   @include _992 {
     padding: 0 15px;
     display: block;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 1%,
+      rgba(0, 0, 0, 0.3) 95%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
   }
 
   a {
