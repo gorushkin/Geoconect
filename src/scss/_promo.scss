@@ -122,13 +122,13 @@
 .promo__social {
   grid-area: social;
   align-self: stretch;
-  align-self: end;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   margin-top: auto;
 
   @include _768 {
+    align-self: end;
     margin: 0 auto;
   }
 }
