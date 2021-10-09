@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 const MainHead = () => (
   <Head>
-    <meta charset='UTF-8' />
+    <meta charSet='UTF-8' />
     <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <link rel='apple-touch-icon' sizes='152x152' href='img/favicon/apple-touch-icon.png' />
