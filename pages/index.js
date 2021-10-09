@@ -30,28 +30,28 @@ export default function Home() {
                     <li className='promo__social-item'>
                       <a href=''>
                         <svg className='img'>
-                          <use xlinkHref='img/sprite.svg#icon__instagram'></use>
+                          <use xlinkHref='sprite.svg#icon__instagram'></use>
                         </svg>
                       </a>
                     </li>
                     <li className='promo__social-item'>
                       <a href=''>
                         <svg className='img'>
-                          <use xlinkHref='img/sprite.svg#icon__youtube'></use>
+                          <use xlinkHref='sprite.svg#icon__youtube'></use>
                         </svg>
                       </a>
                     </li>
                     <li className='promo__social-item'>
                       <a href=''>
                         <svg className='img'>
-                          <use xlinkHref='img/sprite.svg#icon__facebook'></use>
+                          <use xlinkHref='sprite.svg#icon__facebook'></use>
                         </svg>
                       </a>
                     </li>
                     <li className='promo__social-item'>
                       <a href=''>
                         <svg className='img'>
-                          <use xlinkHref='img/sprite.svg#icon__twitter'></use>
+                          <use xlinkHref='sprite.svg#icon__twitter'></use>
                         </svg>
                       </a>
                     </li>
