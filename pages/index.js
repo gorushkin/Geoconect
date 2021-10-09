@@ -156,7 +156,13 @@ export default function Home() {
             <h2 className='section-title documents__title'>Наши сертификаты</h2>
             <div className='documents__inner'>
               <div className='documents__left documents__img-wrpapper'>
-                <img className='documents__img' src='img/documents__img01.jpg' alt='' />
+                <Image
+                  className='documents__img'
+                  src='/documents__img01.jpg'
+                  width='426'
+                  height='611'
+                  alt='Лицензия'
+                />
               </div>
               <div className='documents__content'>
                 <div className='document__content-inner'>
@@ -180,7 +186,13 @@ export default function Home() {
                 </div>
               </div>
               <div className='documents__right documents__img-wrpapper'>
-                <img className='documents__img' src='img/documents__img02.jpg' alt='' />
+                <Image
+                  className='documents__img'
+                  src='/documents__img02.jpg'
+                  width='426'
+                  height='611'
+                  alt='Диплом'
+                />
               </div>
             </div>
           </div>
@@ -192,7 +204,7 @@ export default function Home() {
             <ul className='news__list'>
               <li className='news__item'>
                 <div className='news__img'>
-                  <img src='img/news__img01.jpg' alt='' />
+                  <img src='news__img01.jpg' alt='' />
                 </div>
                 <div className='news__content'>
                   <h3 className='news__item-title'>
@@ -261,7 +273,7 @@ export default function Home() {
                 <h2 className='about__title section-title'>О компании</h2>
                 <div className='about__text'>
                   <div className='about__img about__img--tablet'>
-                    <img src='img/about__logo.png' alt='' />
+                    <img src='about__logo.png' alt='' />
                   </div>
                   <p>
                     Наша организация успешно осуществляет работы по проектированию горных
@@ -286,7 +298,7 @@ export default function Home() {
                 </a>
               </div>
               <div className='about__img about__img--desktop'>
-                <img src='img/about__logo.png' alt='' />
+                <img src='about__logo.png' alt='' />
               </div>
             </div>
           </div>
@@ -321,19 +333,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <footer classNameName={styles.footer}>
-        <a
-          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Powered by{' '}
-          <span classNameName={styles.logo}>
-            <Image src='/vercel.svg' alt='Vercel Logo' width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   );
 }
