@@ -1,32 +1,52 @@
+import { useEffect, useState } from 'react';
+import cn from 'classnames';
+import { headerList } from '../../constants';
+/* eslint-disable @next/next/no-img-element */
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const clickHandler = () => setIsMenuOpen(!isMenuOpen);
+
+  const onClick = () => setIsMenuOpen(false);
+
+  const menuButtonClassNames = cn('header__btn', {
+    'header__btn--close': isMenuOpen,
+    'header__btn--open': !isMenuOpen,
+  });
+
+  const menuClassNames = cn('header__nav', {
+    'header__nav--hide': !isMenuOpen,
+    'header__nav--show': isMenuOpen,
+  });
+
+  const headerClassNames = cn('header', {
+    'header--close': !isMenuOpen,
+    'header--open': isMenuOpen,
+  });
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMenuOpen]);
+
   return (
-    <header className='header js__header'>
+    <header className={headerClassNames}>
       <div className='wrapper'>
         <div className='header__inner'>
           <a className='header__logo'>
             <img src='logo.png' alt='Geoconect Logo' />
           </a>
-          <nav className='header__nav js__menu'>
+          <nav className={menuClassNames}>
             <ul className='header__nav-list'>
-              <li className='header__nav-item'>
-                <a href='#works'>Виды работ</a>
-              </li>
-              <li className='header__nav-item'>
-                <a href='#documents'>Сертификаты</a>
-              </li>
-              <li className='header__nav-item'>
-                <a href='#news'>Новости</a>
-              </li>
-              <li className='header__nav-item'>
-                <a href='#about'>О Компании</a>
-              </li>
-              <li className='header__nav-item'>
-                <a href='#contact'>Контакты</a>
-              </li>
+              {headerList.map(({ href, name }, index) => (
+                <li onClick={onClick} key={index} className='header__nav-item'>
+                  <a href={href}>{name}</a>
+                </li>
+              ))}
             </ul>
           </nav>
           <div className='header__btn--wrapper'>
-            <button className='header__btn header__btn--open js__btn'>
+            <button onClick={clickHandler} className={menuButtonClassNames}>
               <span></span>
             </button>
           </div>

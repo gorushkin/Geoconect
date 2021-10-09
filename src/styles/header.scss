@@ -9,10 +9,12 @@
     padding-top: 20px;
   }
 
-  &--open {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-      url("/promo__back.jpg") no-repeat center / cover;
-    height: 100vh;
+  @include _768 {
+    &--open {
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('/promo__back.jpg') no-repeat center / cover;
+      height: 100vh;
+    }
   }
 }
 
@@ -51,8 +53,16 @@
     outline: 2px solid red;
   }
 
+  &--hide {
+    @include _768 {
+      display: none;
+    }
+  }
+
   &--show {
-    display: block;
+    @include _768 {
+      display: block;
+    }
   }
 }
 
@@ -141,7 +151,7 @@
         height: 2px;
         left: 0;
         right: 0;
-        content: "";
+        content: '';
         position: absolute;
 
         &--open {
@@ -164,7 +174,7 @@
       &::before,
       &::after {
         position: absolute;
-        content: "";
+        content: '';
         top: 50%;
         transform: translateY(-50%) rotate(45deg);
         left: -3px;
