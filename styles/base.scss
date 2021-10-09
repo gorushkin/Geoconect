@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display+SC:wght@400;700&display=swap');
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -66,7 +68,7 @@ video {
 }
 
 .clearfix::after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
