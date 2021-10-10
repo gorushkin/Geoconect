@@ -1,70 +1,73 @@
-.btn {
-  background: $color-main;
-  border-radius: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 30px;
-  text-align: center;
-  font-family: $font1;
-  color: #ffffff;
-  max-width: 405px;
-  padding: 21px 0;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 2px solid $color-main;
-
-  @include _768 {
-    font-size: 18px;
-    line-height: 24px;
-    padding: 10px 5px;
-    max-width: 300px;
-  }
-
-  &:hover {
+.index {
+  .btn {
+    background: $color-main;
+    border-radius: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    font-family: $font1;
+    color: #ffffff;
+    max-width: 405px;
+    padding: 21px 0;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s;
     border: 2px solid $color-main;
-    background: transparent;
-    color: $color-main;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
 
-  &--trans {
-    border: 2px solid $color-main;
-    background: transparent;
-    color: $color-main;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    @include _768 {
+      font-size: 18px;
+      line-height: 24px;
+      padding: 10px 5px;
+      max-width: 300px;
+    }
 
     &:hover {
       border: 2px solid $color-main;
-      background: $color-main;
-      color: #ffffff;
-      // padding: 21px 0;
+      background: transparent;
+      color: $color-main;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    &--trans {
+      border: 2px solid $color-main;
+      background: transparent;
+      color: $color-main;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+      &:hover {
+        border: 2px solid $color-main;
+        background: $color-main;
+        color: #ffffff;
+        // padding: 21px 0;
+      }
+    }
+
+    &:hover {
+      padding: 21px 0;
+
+      @include _768 {
+        padding: 10px 5px;
+      }
     }
   }
 
-  &:hover {
-    padding: 21px 0;
-
-    @include _768 {
-      padding: 10px 5px;
-    }
-  }
-}
-
-.section-title {
-  font-weight: bold;
-  font-size: 48px;
-  line-height: 42px;
-  font-family: $font2;
-  text-align: center;
-  color: #000000;
-
-  @include _992 {
-    margin-bottom: 30px;
-    font-size: 40px;
+  .section-title {
+    font-weight: bold;
+    font-size: 48px;
     line-height: 42px;
+    font-family: $font2;
+    text-align: center;
+    color: #000000;
+
+    @include _992 {
+      margin-bottom: 30px;
+      font-size: 40px;
+      line-height: 42px;
+    }
   }
+
 }
