@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import user from './user';
+import user, { asyncActions as userAsyncActions } from './user';
 
 const reducer = combineReducers({ user });
 
-export default configureStore({ reducer })
+export default configureStore({ reducer });
+export const actions = { ...userAsyncActions }

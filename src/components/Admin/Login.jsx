@@ -1,31 +1,26 @@
 import { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { authRequest } from '../../api';
+import { actions } from '../../slices';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
-  const [values, setValues] = useState({ email: '', password: '' });
+  const [values, setValues] = useState({ email: 'qwerty@qwe.com', password: '12345' });
   const onChange = (e) => setValues((value) => ({ ...value, [e.target.name]: e.target.value }));
+  const dispatch = useDispatch();
+  const { isAuthorized } = useSelector((state) => state.user);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
-    try {
-      const {
-        data: { token },
-      } = await authRequest(values);
-      console.log('token: ', token);
-    } catch (error) {
-      console.log('error: ', error);
-    }
+    dispatch(actions.authLoginhRequest(values));
   };
 
   return (
     <Container>
-      <Row>
-        <h1>Login</h1>
+      <Row className='justify-content-center'>
+        <h1 lg={8}>Login</h1>
       </Row>
       <Row className='justify-content-center'>
-        <Col lg={8}>
+        <Col>
           <Form onSubmit={onSubmit}>
             <Form.Group className='mb-3' controlId='formBasicEmail'>
               <Form.Label>Email address</Form.Label>
