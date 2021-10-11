@@ -1,1 +1,2 @@
 export { useClient } from './useClient';
+export { useAthorized } from './useAthorized';

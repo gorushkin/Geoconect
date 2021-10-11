@@ -1,14 +1,20 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions } from '../../slices';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const {
     user: { isAuthorized },
   } = useSelector((state) => state);
 
-  const logoutHandler = () => dispatch(actions.logout());
+  const logoutHandler = () => {
+    dispatch(actions.logout());
+    router.push('admin/login');
+  };
 
   return (
     <Navbar bg='primary' variant='dark' expand='lg'>
@@ -17,8 +23,12 @@ const Header = () => {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
-            <Nav.Link href='#home'>Home</Nav.Link>
-            <Nav.Link href='#link'>News</Nav.Link>
+            <Link href='/admin' passHref>
+              <Nav.Link>Home</Nav.Link>
+            </Link>
+            <Link href='/admin/news' passHref>
+              <Nav.Link>News</Nav.Link>
+            </Link>
           </Nav>
           {isAuthorized && (
             <Nav>
@@ -26,7 +36,6 @@ const Header = () => {
                 <NavDropdown.Item href='#action/3.1'>Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item
-                  // href='#action/3.4'
                   onClick={logoutHandler}
                 >
                   Logout

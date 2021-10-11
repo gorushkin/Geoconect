@@ -1,5 +1,4 @@
 import Header from '../Admin/Header';
-
 const Layout = ({ children }) => (
   <>
     <Header />
