@@ -1,23 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { actions } from '../slices';
-import LoginPage from '../components/Pages/LoginPage';
-import CMSPage from '../components/Pages/CMSPage';
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import { useClient } from '../hooks';
+import Layout from '../components/Admin/Layout';
+import CMS from '../components/Admin/CMS';
+import LoginForm from '../components/Admin/LoginForm';
 
 const Admin = () => {
-  const dispatch = useDispatch();
+  const isClient = useClient();
+
   const {
     user: { isAuthorized },
   } = useSelector((state) => state);
 
-  useEffect(() => {
-    const token = Cookies.get('token');
-    dispatch(actions.userInit(token));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return <>{isAuthorized ? <CMSPage /> : <LoginPage />}</>;
+  return isClient ? <Layout>{isAuthorized ? <CMS /> : <LoginForm />}</Layout> : null;
 };
 
 export default Admin;

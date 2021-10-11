@@ -18,10 +18,12 @@ const slice = createSlice({
   initialState: initialState,
   reducers: {
     logout(state) {
+      Cookies.remove('token');
       return initialState;
     },
-    userInit(state, { payload }) {
-      console.log('payload: ', payload);
+    userInit(state) {
+      const token = Cookies.get('token');
+      return token ? { ...state, isAuthorized: true } : initialState;
     },
   },
   extraReducers: (builder) => {
