@@ -2,7 +2,6 @@ import Layout from '../../../components/Admin/Layout';
 import { useClient } from '../../../hooks';
 
 const News = ({number}) => {
-  console.log('number: ', number);
   const isClient = useClient();
 
   return isClient ? (
@@ -16,6 +15,7 @@ const News = ({number}) => {
 export default News;
 
 export async function getServerSideProps(context) {
+  console.log('context: ', context.headers);
   console.log('context: ', context.params.id);
   const { id } = context.params;
   return {

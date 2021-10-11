@@ -3,7 +3,7 @@ import config from '../configs';
 import Cookies from 'js-cookie';
 
 export const routes = {
-  AUTH: '/auth',
+  AUTH: 'auth',
 };
 
 const token = Cookies.get('token');

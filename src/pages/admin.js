@@ -11,7 +11,9 @@ const Admin = () => {
     user: { isAuthorized },
   } = useSelector((state) => state);
 
-  return isClient ? <Layout>{isAuthorized ? <CMS /> : <LoginForm />}</Layout> : null;
+  const title = isAuthorized ? 'CMS' : 'Login';
+
+  return isClient ? <Layout title={title}>{isAuthorized ? <CMS /> : <LoginForm />}</Layout> : null;
 };
 
 export default Admin;

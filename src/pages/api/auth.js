@@ -1,15 +1,12 @@
-const user = { name: 'admin', passwod: '12345' };
+import cookies from '../../utils';
 
-const checkUserCredentials = (_name, password) => {
-  const token = '1234567890';
-  return password === user.passwod ? token : null;
-};
+import { checkUserCredentials } from '../../services';
 
 const login = async (req, res) => {
-  console.log('req: ', req.headers.authorization);
   const { name, password } = req.body;
   const token = checkUserCredentials(name, password);
   if (token) {
+    res.cookie('token', token);
     res.status(200).json({ token });
   } else {
     res.status(403).json({ message: 'Password is wrong!!!' });
@@ -25,4 +22,4 @@ const handler = async (req, res) => {
   }
 };
 
-export default handler;
+export default cookies(handler);

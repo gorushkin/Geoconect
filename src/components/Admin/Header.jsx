@@ -13,7 +13,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(actions.logout());
-    router.push('admin/login');
+    router.push('login');
   };
 
   return (
@@ -29,17 +29,16 @@ const Header = () => {
             <Link href='/admin/news' passHref>
               <Nav.Link>News</Nav.Link>
             </Link>
+            <Link href='/admin/add_news' passHref>
+              <Nav.Link>Add News</Nav.Link>
+            </Link>
           </Nav>
           {isAuthorized && (
             <Nav>
               <NavDropdown title='User' id='basic-nav-dropdown'>
-                <NavDropdown.Item href='#action/3.1'>Profile</NavDropdown.Item>
+                <NavDropdown.Item>Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item
-                  onClick={logoutHandler}
-                >
-                  Logout
-                </NavDropdown.Item>
+                <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           )}

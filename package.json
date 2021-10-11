@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NEXT_PUBLIC_TYPE=local next dev",
+    "dev": "NEXT_PUBLIC_TYPE=local next dev -p 3500",
     "dev:local": "NEXT_PUBLIC_TYPE=local next dev",
     "build": "next build",
     "build:prod": "NEXT_PUBLIC_TYPE=prod next build",
@@ -11,6 +11,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^30.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.3",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.22.0",
     "bootstrap": "^5.1.3",
