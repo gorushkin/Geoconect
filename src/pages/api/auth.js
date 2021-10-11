@@ -6,6 +6,7 @@ const checkUserCredentials = (_name, password) => {
 };
 
 const login = async (req, res) => {
+  console.log('req: ', req.headers.authorization);
   const { name, password } = req.body;
   const token = checkUserCredentials(name, password);
   if (token) {
@@ -16,7 +17,6 @@ const login = async (req, res) => {
 };
 
 const handler = async (req, res) => {
-  console.log(req.body);
   if (req.method === 'POST') {
     await login(req, res);
   } else {

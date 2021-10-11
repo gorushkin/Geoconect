@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+import Cookies from 'js-cookie';
 import axios, { routes, authRequest } from '../api';
 
 const initialState = {
@@ -20,13 +20,17 @@ const slice = createSlice({
     logout(state) {
       return initialState;
     },
+    userInit(state, { payload }) {
+      console.log('payload: ', payload);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(authLoginhRequest.fulfilled, (state, { payload: { token } }) => {
-      return { ...state, token, isAuthorized: true };
+      Cookies.set('token', token);
+      return { ...state, isAuthorized: true };
     });
     builder.addCase(authLoginhRequest.rejected, (state, action) => {
-      return { ...state, token: '', isAuthorized: false };
+      return { ...state, isAuthorized: false };
     });
   },
 });
