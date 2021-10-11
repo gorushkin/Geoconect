@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
-import CMS from '../components/Admin/CMS'
-import CMSPage from '../components/Pages/LoginPage'
+import LoginPage from '../components/Pages/LoginPage'
+import CMSPage from '../components/Pages/CMSPage'
 
 const Admin = () => {
   const { user: { isAuthorized } } = useSelector(state => state);
 
   return (
     <>
-      {isAuthorized ? <CMS /> : <CMSPage />}
+      {isAuthorized ? <CMSPage /> : <LoginPage />}
     </>
   );
 };

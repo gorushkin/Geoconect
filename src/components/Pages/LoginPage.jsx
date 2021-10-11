@@ -1,10 +1,10 @@
 import Layout from '../Admin/Layout';
 
-import CMS from '../Admin/CMS';
+import LoginForm from '../Admin/LoginForm';
 
 const CMSPage = () => (
   <Layout>
-    <CMS />
+    <LoginForm />
   </Layout>
 );
 
