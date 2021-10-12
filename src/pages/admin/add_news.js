@@ -1,23 +1,29 @@
 import Layout from '../../components/Admin/Layout';
-import { Container, Row } from 'react-bootstrap';
-import { useClient } from '../../hooks';
-import { useEffect, useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
+import { useState } from 'react';
 
-import { useEditor, EditorContent, BubbleMenu } from '@tiptap/react';
-import StarterKit, { defaultExtensions } from '@tiptap/starter-kit';
+import Editor from 'rich-markdown-editor';
 
 const AddNews = () => {
-  const [content, setContent] = useState();
+  const [content, setContent] = useState('Hello world!');
 
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content,
-    onUpdate: ({ editor }) => setContent(editor.getHTML()),
-  });
+  const onSaveHandler = () => {
+    console.log('onSaveHandler');
+    console.log(content);
+  };
+
   return (
     <Layout>
-      <EditorContent editor={editor} />
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <Row>
+        <Col>
+          <div className='editor__wrapper'>
+            <Editor onChange={setContent} />
+          </div>
+          <Button onClick={onSaveHandler} variant='primary' type='submit'>
+            Save
+          </Button>
+        </Col>
+      </Row>
     </Layout>
   );
 };
