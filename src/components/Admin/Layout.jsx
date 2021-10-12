@@ -3,13 +3,11 @@ import { Container, Row } from 'react-bootstrap';
 import { useClient } from '../../hooks';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 const Layout = ({ children, title, closed = false }) => {
-  const isClient = true;
+  const isClient = useClient();
   const router = useRouter();
-  const [reday, setReady] = useState(false);
-
 
   const {
     user: { isAuthorized },

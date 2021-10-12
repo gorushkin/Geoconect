@@ -3,30 +3,21 @@ import { Container, Row } from 'react-bootstrap';
 import { useClient } from '../../hooks';
 import { useEffect, useState } from 'react';
 
-import Editor from '../../components/Admin/Editor';
+import { useEditor, EditorContent, BubbleMenu } from '@tiptap/react';
+import StarterKit, { defaultExtensions } from '@tiptap/starter-kit';
 
 const AddNews = () => {
-  const isClient = useClient();
+  const [content, setContent] = useState();
 
-  const [data, setData] = useState('');
-
-  const [text, setText] = useState('<p>Hello from CKEditor 5!</p>');
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content,
+    onUpdate: ({ editor }) => setContent(editor.getHTML()),
+  });
   return (
     <Layout>
-      <div className='App'>
-        <h1>ckEditor 5</h1>
-
-        <Editor
-          name='description'
-          value={text}
-          onChange={(text) => {
-            setText(text);
-          }}
-          editorLoaded={isClient}
-        />
-
-        {JSON.stringify(text)}
-      </div>
+      <EditorContent editor={editor} />
+      <div dangerouslySetInnerHTML={{ __html: content }} />
     </Layout>
   );
 };
