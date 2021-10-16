@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import News from '../News';
 
-const Main = () => {
+const Main = ({ posts }) => {
   return (
     <main className='main'>
       <section className='promo'>
@@ -189,73 +190,7 @@ const Main = () => {
         </div>
       </section>
 
-      <section id='news' className='news'>
-        <div className='wrapper'>
-          <h2 className='section-title news__title'>Новости</h2>
-          <ul className='news__list'>
-            <li className='news__item'>
-              <div className='news__img'>
-                <img src='news__img01.jpg' alt='' />
-              </div>
-              <div className='news__content'>
-                <h3 className='news__item-title'>
-                  НА ДАЛЬНЕМ ВОСТОКЕ МОГУТ ВВЕСТИ НАЛОГОВЫЕ ЛЬГОТЫ ДЛЯ ДОБЫВАЮЩИХ КОМПАНИЙ
-                </h3>
-                <p>
-                  Минвостокразвития выступил с предложение об уменьшении НДПИ для проектов по добыче
-                  твёрдых ископаемых на Дальнем Востоке. Как отметил Алексей ЧЕКУНКОВ, возглавляющий
-                  Министерство, при разработке месторождений в регионе, из-за отдалённого
-                  расположения, а также порой и климатических условий, компании сталкиваются с
-                  высокими затратами на обустройство как транспортной, так и энергетической
-                  инфраструктуры.
-                </p>
-                <p>
-                  Разработанный законопроект предлагает рассчитывать вычет как сумму понесённых
-                  расходов на необходимые строительные и логистические операции для подобных
-                  объектов. При этом вычет не должен превышать 50% от выплаченного НДПИ.
-                </p>
-                <p>
-                  На снижение ставки смогут рассчитывать только те проекты, где добывающие работы
-                  стартовали не ранее 2021 года. Предполагается, что действие льгот продлится вплоть
-                  до 2032 г. В Минвостокразвития рассчитывают, что данная мера поможет привлечь на
-                  Дальний Восток более 96 миллиардов руб. инвестиций.
-                </p>
-                <ul className='news__tag-list'>
-                  <li className='news__tag-item'>
-                    <a href=''>#ГорноеДело</a>
-                  </li>
-                  <li className='news__tag-item'>
-                    <a href=''>#Промышленость</a>
-                  </li>
-                  <li className='news__tag-item'>
-                    <a href=''>#добыча</a>
-                  </li>
-                  <li className='news__tag-item'>
-                    <a href=''>#горнаяпромышленность</a>
-                  </li>
-                  <li className='news__tag-item'>
-                    <a href=''>#mining</a>
-                  </li>
-                  <li className='news__tag-item'>
-                    <a href=''>#журналглобус</a>
-                  </li>
-                  <li className='news__tag-item'>
-                    <a href=''>#недропользователи</a>
-                  </li>
-                </ul>
-                <dl className='news__source'>
-                  <dt>Источник:</dt>
-                  <dd>
-                    <a href=''>
-                      https://www.vnedra.ru/novosti/na-dalnem-vostoke-mogut-vvesti-nalogovye-lgoty-dlya-dobyvayushhih-kompanij-15215/
-                    </a>
-                  </dd>
-                </dl>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <News posts={posts} />
 
       <section id='about' className='about'>
         <div className='wrapper'>

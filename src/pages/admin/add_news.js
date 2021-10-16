@@ -1,6 +1,7 @@
 import Layout from '../../components/Admin/Layout';
 import { Button, Col, Row } from 'react-bootstrap';
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import Editor from 'rich-markdown-editor';
 
@@ -8,8 +9,7 @@ const AddNews = () => {
   const [content, setContent] = useState('Hello world!');
 
   const onSaveHandler = () => {
-    console.log('onSaveHandler');
-    console.log(content);
+    console.log('content: ', content);
   };
 
   return (
@@ -22,6 +22,13 @@ const AddNews = () => {
           <Button onClick={onSaveHandler} variant='primary' type='submit'>
             Save
           </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className='news__content'>
+            <ReactMarkdown>{content}</ReactMarkdown>
+          </div>
         </Col>
       </Row>
     </Layout>
