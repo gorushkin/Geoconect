@@ -29,4 +29,4 @@ const tags = [
   'недропользователи',
 ];
 
-export const posts = [new Post(body, source, tags)];
+export const posts = [new Post(body, source, tags), new Post(body, source, tags), new Post(body, source, tags), new Post(body, source, tags)];

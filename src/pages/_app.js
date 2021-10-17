@@ -1,5 +1,8 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/style.scss';
 import { Provider } from 'react-redux';
 import store from '../slices';
