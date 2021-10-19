@@ -6,14 +6,14 @@ import ReactMarkdown from 'react-markdown';
 import Editor from 'rich-markdown-editor';
 
 const AddNews = () => {
-  const [content, setContent] = useState('Hello world!');
+  const [content, setContent] = useState('');
 
   const onSaveHandler = () => {
     console.log('content: ', content);
   };
 
   return (
-    <Layout>
+    <Layout closed>
       <Row>
         <Col>
           <div className='editor__wrapper'>

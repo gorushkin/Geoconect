@@ -11,7 +11,7 @@ const News = () => {
   } = useSelector((state) => state);
 
   return isClient ? (
-    <Layout>
+    <Layout closed>
       <Container>
         <Row className='justify-content-center pt-3'>
           <h1 lg={8}>AllNews</h1>

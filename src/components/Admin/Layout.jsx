@@ -3,7 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import { useClient } from '../../hooks';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import {  useState } from 'react';
+import { useState } from 'react';
 
 const Layout = ({ children, title, closed = false }) => {
   const isClient = useClient();
