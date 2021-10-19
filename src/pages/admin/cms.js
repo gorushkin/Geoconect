@@ -3,7 +3,7 @@ import CMS from '../../components/Admin/CMS';
 
 const Admin = () => {
   return (
-    <Layout title='CMS'>
+    <Layout closed title='CMS'>
       <CMS />
     </Layout>
   );

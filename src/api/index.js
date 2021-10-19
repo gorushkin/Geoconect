@@ -2,9 +2,13 @@ import axios from 'axios';
 import config from '../configs';
 import Cookies from 'js-cookie';
 
-export const routes = {
+export const apiRoutes = {
   AUTH: 'auth',
   POSTS: 'posts',
+};
+
+export const routes = {
+  LOGIN: '/admin/login',
 };
 
 const token = Cookies.get('token');
@@ -18,11 +22,8 @@ const instance = axios.create({
   }),
 });
 
+export const authRequest = (data) => instance.post(apiRoutes.AUTH, data);
 
-
-
-export const authRequest = (data) => instance.post(routes.AUTH, data);
-
-export const postRequest = () => instance.get(routes.POSTS);
+export const postRequest = () => instance.get(apiRoutes.POSTS);
 
 export default instance;

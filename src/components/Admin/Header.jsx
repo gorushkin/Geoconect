@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actions } from '../../slices';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { routes } from '../../api';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(actions.logout());
-    router.push('login');
+    router.push(routes.LOGIN);
   };
 
   return (
