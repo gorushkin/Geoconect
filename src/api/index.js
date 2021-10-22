@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 export const apiRoutes = {
   AUTH: 'auth',
-  POSTS: 'posts',
+  NEWS: 'news',
 };
 
 export const routes = {
@@ -24,6 +24,6 @@ const instance = axios.create({
 
 export const authRequest = (data) => instance.post(apiRoutes.AUTH, data);
 
-export const postRequest = () => instance.get(apiRoutes.POSTS);
+export const postRequest = () => instance.get(apiRoutes.NEWS);
 
 export default instance;

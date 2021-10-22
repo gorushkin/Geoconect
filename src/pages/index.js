@@ -15,7 +15,7 @@ export const getStaticProps = async (context) => {
     },
   } = await postRequest('posts');
   return {
-    props: {posts},
+    props: { posts },
   };
 };
 

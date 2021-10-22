@@ -1,14 +1,4 @@
-import _ from 'lodash';
-export const user = { name: 'admin', passwod: '12345' };
-
-class Post {
-  constructor(body, source = '', tags = []) {
-    this.body = body;
-    this.id = _.uniqueId();
-    this.source = source;
-    this.tags = tags;
-  }
-}
+import { Knex } from 'knex';
 
 const body = `
   ### НА ДАЛЬНЕМ ВОСТОКЕ МОГУТ ВВЕСТИ НАЛОГОВЫЕ ЛЬГОТЫ ДЛЯ ДОБЫВАЮЩИХ КОМПАНИЙ\n\n
@@ -16,17 +6,28 @@ const body = `
   Разработанный законопроект предлагает рассчитывать вычет как сумму понесённых расходов на необходимые строительные и логистические операции для подобных объектов. При этом вычет не должен превышать 50% от выплаченного НДПИ. \n\n
   На снижение ставки смогут рассчитывать только те проекты, где добывающие работы стартовали не ранее 2021 года. Предполагается, что действие льгот продлится вплоть до 2032 г. В Минвостокразвития рассчитывают, что данная мера поможет привлечь на Дальний Восток более 96 миллиардов руб. инвестиций.`;
 
-const source =
-  'https://www.vnedra.ru/novosti/na-dalnem-vostoke-mogut-vvesti-nalogovye-lgoty-dlya-dobyvayushhih-kompanij-15215/';
+export async function seed(knex: Knex): Promise<void> {
+  // Deletes ALL existing entries
+  // await knex('table_name').del();
 
-const tags = [
-  'ГорноеДело',
-  'Промышленость',
-  'добыча',
-  'горнаяпромышленность',
-  'mining',
-  'журналглобус',
-  'недропользователи',
-];
+  try {
+    await knex('news').del();
+    console.log('news is empty');
+  } catch (error) {
+    console.log(error);
+  }
 
-export const posts = [new Post(body, source, tags), new Post(body, source, tags), new Post(body, source, tags), new Post(body, source, tags)];
+  // Inserts seed entries
+  // await knex('table_name').insert([
+  //   { id: 1, colName: 'rowValue1' },
+  //   { id: 2, colName: 'rowValue2' },
+  //   { id: 3, colName: 'rowValue3' },
+  // ]);
+
+  try {
+    await knex('news').insert({ body });
+    console.log('Added dummy news!');
+  } catch (error) {
+    console.log(error);
+  }
+}

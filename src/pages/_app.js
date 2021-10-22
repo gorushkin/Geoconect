@@ -9,8 +9,8 @@ import store from '../slices';
 import { actions } from '../slices/user';
 import { useEffect } from 'react';
 
-const MyApp = ({ Component, pageProps }) => {
 
+const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     store.dispatch(actions.userInit());
   }, []);

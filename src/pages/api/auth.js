@@ -1,6 +1,5 @@
-import cookies from '../../utils';
-
 import { checkUserCredentials } from '../../services';
+import cookies from '../../utils';
 
 const login = async (req, res) => {
   const { name, password } = req.body;
