@@ -1,6 +1,7 @@
 import axios from 'axios';
-import config from '../configs';
 import Cookies from 'js-cookie';
+
+import config from '../configs';
 
 export const apiRoutes = {
   AUTH: 'auth',
