@@ -1,8 +1,10 @@
-import knex from 'knex';
+import Knex from 'knex';
 import configs from './knexfile';
+import { Model, ForeignKeyViolationError, ValidationError } from 'objection';
 
 const config = configs[process.env.NODE_ENV || 'development'];
 
-const db = knex(config);
+const knex = Knex(config);
+Model.knex(knex);
 
-export default db;
+export default knex;
