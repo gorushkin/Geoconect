@@ -4,8 +4,13 @@ import News from './news.model';
 const router = express.Router();
 
 const getAllnews = async (req: Request, res: Response) => {
-  const news = await News.query();
-  res.status(200).json({ news });
+  try {
+    const news = await News.query();
+    res.status(200).json({ news });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : error;
+    res.status(500).json({ message });
+  }
 };
 
 const createNews = async (req: Request, res: Response) => {

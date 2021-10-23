@@ -16,7 +16,8 @@
     "lint": "next lint",
     "migrate": "node scripts/migrate.js",
     "seed": "node scripts/seed.js",
-    "knex": "./node_modules/.bin/knex --knexfile server/database/knexfile.ts"
+    "knex2": "./node_modules/.bin/knex --knexfile server/database/knexfile.ts",
+    "knex": "./node_modules/.bin/knex --knexfile ./knexfile.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
@@ -28,6 +29,7 @@
     "cookie": "^0.4.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "g": "^2.0.1",
     "js-cookie": "^3.0.1",
     "knex": "^0.95.11",
     "lodash": "^4.17.21",

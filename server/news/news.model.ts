@@ -7,10 +7,11 @@ export default class News extends Model {
 
   static jsonSchema = {
     type: 'object',
-    required: ['body'],
+    required: ['body', 'title'],
 
     properties: {
       id: { type: 'integer' },
+      title: { type: 'string', minLength: 1 },
       body: { type: 'string', minLength: 1 },
     },
   };

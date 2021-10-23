@@ -11,6 +11,6 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "include": ["server/**/*.ts"],
+  "include": ["server/**/*.ts", "20211023204727_news_add_title.ts", "knexfile.ts"],
   "exclude": ["node_modules"]
 }
