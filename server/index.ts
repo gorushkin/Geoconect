@@ -10,7 +10,7 @@ const show = async () => {
   console.log('list: ', list);
 };
 
-show();
+// show();
 
 app.listen(PORT, () => {
   console.log(`app start at port ${PORT}`);

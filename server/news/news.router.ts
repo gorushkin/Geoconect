@@ -15,6 +15,7 @@ const getAllnews = async (req: Request, res: Response) => {
 
 const createNews = async (req: Request, res: Response) => {
   const body = req.body;
+  console.log('body: ', body);
   try {
     const news = News.fromJson(body);
     await News.query().insert(news);
