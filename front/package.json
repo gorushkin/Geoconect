@@ -1,23 +1,14 @@
 {
-  "name": "geoconect",
+  "name": "geoconect_front",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:back": "nodemon server/index.ts",
-    "build:back": "tsc",
-    "dev:back2": "nodemon server/index.js",
-    "dev:back3": "nodemon --exec ts-node server/index.ts",
+    "dev": "NEXT_PUBLIC_TYPE=local next dev -p 3500",
     "dev:local": "NEXT_PUBLIC_TYPE=local next dev",
-    "dev:front": "NEXT_PUBLIC_TYPE=local next dev -p 3500",
     "build": "next build",
     "build:prod": "NEXT_PUBLIC_TYPE=prod next build",
     "start": "next start",
-    "start:back": "node build/index.js",
-    "lint": "next lint",
-    "migrate": "node scripts/migrate.js",
-    "seed": "node scripts/seed.js",
-    "knex2": "./node_modules/.bin/knex --knexfile server/database/knexfile.ts",
-    "knex": "./node_modules/.bin/knex --knexfile ./knexfile.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
@@ -28,14 +19,9 @@
     "classnames": "^2.3.1",
     "cookie": "^0.4.1",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "g": "^2.0.1",
     "js-cookie": "^3.0.1",
-    "knex": "^0.95.11",
     "lodash": "^4.17.21",
     "next": "11.1.2",
-    "objection": "^2.2.17",
-    "pg": "^8.7.1",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
     "react-bootstrap": "^1.6.4",
@@ -45,17 +31,11 @@
     "react-router-dom": "^5.3.0",
     "rich-markdown-editor": "^11.18.6",
     "sass": "^1.42.1",
-    "sqlite3": "^5.0.2",
     "styled-components": "^5.3.1",
-    "swiper": "^7.0.8",
-    "typeorm": "^0.2.38"
+    "swiper": "^7.0.8"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.8",
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
-    "@types/node": "^16.11.2",
-    "@types/uuid": "^8.3.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.2",
@@ -67,9 +47,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "nodemon": "^2.0.14",
-    "prettier": "^2.4.1",
-    "ts-node": "^10.3.1",
-    "typescript": "^4.4.4"
+    "prettier": "^2.4.1"
   }
 }
