@@ -1,9 +1,10 @@
-import Header from '../Admin/Header';
-import { Container, Row } from 'react-bootstrap';
-import { useClient } from '../../hooks';
-import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
+import { useClient } from '../../hooks';
+import Header from '../Admin/Header';
 
 const Layout = ({ children, title, closed = false }) => {
   const isClient = useClient();
@@ -21,10 +22,10 @@ const Layout = ({ children, title, closed = false }) => {
     <>
       <Header />
       <Container>
-        <Row className='justify-content-center pt-3'>
+        <Row className="justify-content-center pt-3">
           <h1 lg={8}>{title}</h1>
         </Row>
-        <Row className='justify-content-center'>{children}</Row>
+        <Row className="justify-content-center">{children}</Row>
       </Container>
     </>
   ) : null;
