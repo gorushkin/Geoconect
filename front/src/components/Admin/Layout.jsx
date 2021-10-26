@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { useClient } from '../../hooks';
 import Header from '../Admin/Header';
 
+import ModalWindow from './ModalWindow';
+
 const Layout = ({ children, title, closed = false }) => {
   const isClient = useClient();
   const router = useRouter();
@@ -21,6 +23,7 @@ const Layout = ({ children, title, closed = false }) => {
   return isShown ? (
     <>
       <Header />
+      <ModalWindow />
       <Container>
         <Row className="justify-content-center pt-3">
           <h1 lg={8}>{title}</h1>
