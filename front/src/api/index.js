@@ -10,6 +10,8 @@ export const apiRoutes = {
 
 export const routes = {
   LOGIN: '/admin/login',
+  NEWS: '/admin/news',
+  EDIT_NEWS: '/admin/edit_news',
 };
 
 const token = Cookies.get('token');
@@ -29,6 +31,8 @@ export const postRequest = () => instance.get(apiRoutes.NEWS);
 
 export const createNewsRequest = (data) => instance.post(apiRoutes.NEWS, data);
 
-export const getNewsRequest = (data) => instance.get(apiRoutes.NEWS);
+export const getAllNewsRequest = () => instance.get(apiRoutes.NEWS);
+
+export const getNewsRequest = (id) => instance.get(`${apiRoutes.NEWS}/${id}`);
 
 export default instance;

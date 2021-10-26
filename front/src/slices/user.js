@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
+
 import axios, { apiRoutes, authRequest } from '../api';
 
 const initialState = {

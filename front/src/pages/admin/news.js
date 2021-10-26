@@ -1,19 +1,30 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Container, Row, ListGroup, Badge } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { getNewsRequest } from '../../api';
+import { getAllNewsRequest } from '../../api';
+import { routes } from '../../api';
 import Layout from '../../components/Admin/Layout';
 
 const NewsItem = ({ item }) => {
+  const router = useRouter();
+
+  const onEditClickHandler = () => router.push(`${routes.EDIT_NEWS}?id=${item.id}`);
+
   return (
     <ListGroup.Item className="d-flex justify-content-between align-items-start">
       <p>{item.title || 'Нет заголовка'}</p>
       <div>
-        <Badge className="bg-success" variant="success" bg="success">
+        <Badge
+          onClick={onEditClickHandler}
+          className="bg-success badge__link"
+          variant="success"
+          bg="success"
+        >
           Edit
         </Badge>{' '}
-        <Badge className="bg-danger" variant="danger" bg="danger">
+        <Badge className="bg-danger badge__link" variant="danger" bg="danger">
           Delete
         </Badge>
       </div>
@@ -25,16 +36,12 @@ const News = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    const getNews = async () => {
-      const { data } = await getNewsRequest();
+    const getAllNews = async () => {
+      const { data } = await getAllNewsRequest();
       setNews(data);
     };
-    getNews();
+    getAllNews();
   }, []);
-
-  useEffect(() => {
-    console.log('news: ', news);
-  }, [news]);
 
   const {
     user: { isAuthorized },
@@ -48,10 +55,9 @@ const News = () => {
         </Row>
         <Row className="justify-content-center">
           <ListGroup>
-            {news.map((item) => {
-              console.log('item: ', item);
-              return <NewsItem key={item.id} item={item} />;
-            })}
+            {news.map((item) => (
+              <NewsItem key={item.id} item={item} />
+            ))}
           </ListGroup>
         </Row>
       </Container>
