@@ -4,10 +4,11 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/style.scss';
+import { useEffect } from 'react';
 import { Provider } from 'react-redux';
+
 import store from '../slices';
 import { actions } from '../slices/user';
-import { useEffect } from 'react';
 
 
 const MyApp = ({ Component, pageProps }) => {

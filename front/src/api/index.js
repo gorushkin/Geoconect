@@ -27,7 +27,8 @@ export const authRequest = (data) => instance.post(apiRoutes.AUTH, data);
 
 export const postRequest = () => instance.get(apiRoutes.NEWS);
 
-export const createNews = (data) => instance.post(apiRoutes.NEWS, data)
+export const createNewsRequest = (data) => instance.post(apiRoutes.NEWS, data);
 
+export const getNewsRequest = (data) => instance.get(apiRoutes.NEWS);
 
 export default instance;

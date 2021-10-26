@@ -5,7 +5,7 @@ import Editor from '../../components/Admin/Editor';
 import 'react-markdown-editor-lite/lib/index.css';
 import Layout from '../../components/Admin/Layout';
 
-const AddNews = () => {
+const EditNews = () => {
   const onSubmit = async ({ title, body }) => {
     try {
       const { data: news } = await createNewsRequest({ title, body });
@@ -25,4 +25,4 @@ const AddNews = () => {
   );
 };
 
-export default AddNews;
+export default EditNews;
