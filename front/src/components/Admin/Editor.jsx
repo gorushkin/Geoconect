@@ -15,7 +15,7 @@ const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
   ssr: false,
 });
 
-const Editor = ({ onSubmit, data = { body: '', title: '' }, edit = false }) => {
+const Editor = ({ onSubmit, data, edit = false }) => {
   const {
     register,
     handleSubmit,
@@ -26,15 +26,15 @@ const Editor = ({ onSubmit, data = { body: '', title: '' }, edit = false }) => {
   } = useForm();
   const router = useRouter();
 
-  // TODO: После создания новости сделать вывод ее со стилями страницы
-
   const editorClassnames = cn('editor__wrapper form-control ', {
     'form-control is-invalid': errors.body,
   });
 
   useEffect(() => {
-    setValue('title', data?.title || '');
-    setValue('body', data?.body || '');
+    if (data) {
+      setValue('title', data?.title || '');
+      setValue('body', data?.body || '');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 

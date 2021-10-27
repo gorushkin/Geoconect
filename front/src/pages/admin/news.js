@@ -37,8 +37,10 @@ const News = () => {
 
   useEffect(() => {
     const getAllNews = async () => {
-      const { data } = await getAllNewsRequest();
-      setNews(data);
+      const data = await getAllNewsRequest();
+      if (data) {
+        setNews(data);
+      }
     };
     getAllNews();
   }, []);

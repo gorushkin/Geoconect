@@ -25,14 +25,32 @@ const instance = axios.create({
   }),
 });
 
+// TODO: Добавить вывод алерта с ошибкой
+
+const errorHandler = async (promise) => {
+  try {
+    const { data } = await promise;
+    return data;
+  } catch (error) {
+    const message =
+      error.response && typeof error.response.data === 'object'
+        ? Object.values(error.response.data).join(' \n')
+        : error.message;
+    console.log('message: ', message);
+  }
+};
+
 export const authRequest = (data) => instance.post(apiRoutes.AUTH, data);
 
 export const postRequest = () => instance.get(apiRoutes.NEWS);
 
-export const createNewsRequest = (data) => instance.post(apiRoutes.NEWS, data);
+export const createNewsRequest = (data) => errorHandler(instance.post(apiRoutes.NEWS, data));
 
-export const getAllNewsRequest = () => instance.get(apiRoutes.NEWS);
+export const getAllNewsRequest = () => errorHandler(instance.get(apiRoutes.NEWS));
 
-export const getNewsRequest = (id) => instance.get(`${apiRoutes.NEWS}/${id}`);
+export const getNewsRequest = (id) => errorHandler(instance.get(`${apiRoutes.NEWS}/${id}`));
+
+export const updateNewsRequest = (id, data) =>
+  errorHandler(instance.patch(`${apiRoutes.NEWS}/${id}`, data));
 
 export default instance;

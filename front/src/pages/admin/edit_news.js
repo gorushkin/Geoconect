@@ -2,13 +2,15 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { createNewsRequest, getNewsRequest } from '../../api';
+import { createNewsRequest, getNewsRequest, updateNewsRequest } from '../../api';
+import { routes } from '../../api';
 import Editor from '../../components/Admin/Editor';
 import 'react-markdown-editor-lite/lib/index.css';
 import Layout from '../../components/Admin/Layout';
 
 const EditNews = () => {
   const [news, setNews] = useState();
+  const router = useRouter();
 
   const {
     query: { id },
@@ -23,10 +25,9 @@ const EditNews = () => {
   }, [id]);
 
   const onSubmit = async ({ title, body }) => {
-    try {
-      const { data: news } = await createNewsRequest({ title, body });
-    } catch (error) {
-      console.log(error);
+    const data = await updateNewsRequest(id, { title, body });
+    if (data) {
+      router.push(routes.NEWS);
     }
   };
 
