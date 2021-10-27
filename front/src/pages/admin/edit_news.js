@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { createNewsRequest, getNewsRequest, updateNewsRequest } from '../../api';
+import { getNewsRequest, updateNewsRequest } from '../../api';
 import { routes } from '../../api';
 import Editor from '../../components/Admin/Editor';
 import 'react-markdown-editor-lite/lib/index.css';
@@ -18,8 +18,10 @@ const EditNews = () => {
 
   useEffect(() => {
     const getNews = async () => {
-      const { data } = await getNewsRequest(id);
-      setNews(data);
+      const news = await getNewsRequest(id);
+      if (news) {
+        setNews(news);
+      }
     };
     if (id) getNews();
   }, [id]);
