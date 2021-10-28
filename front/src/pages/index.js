@@ -1,6 +1,6 @@
-import Main from '../components/Main';
+import { getAllNewsRequest } from '../api';
 import Layout from '../components/Layout';
-import { postRequest } from '../api';
+import Main from '../components/Main';
 
 const Home = ({ posts }) => (
   <Layout>
@@ -9,11 +9,15 @@ const Home = ({ posts }) => (
 );
 
 export const getStaticProps = async (context) => {
-  const {
-    data: {
-      posts: { posts },
-    },
-  } = await postRequest('posts');
+  // const {
+  //   data: {
+  //     posts: { posts },
+  //   },
+  // } = await getAllNewsRequest();
+
+  const data = await getAllNewsRequest();
+  console.log('data: ', data);
+  const posts = [];
   return {
     props: { posts },
   };

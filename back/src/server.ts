@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use('/api/auth', auth);
 app.use('/api/news', news);
-app.use('/api/test', (req: Request, res: Response) =>
+app.use('/api/test', (_req: Request, res: Response) =>
   res.status(200).json({ message: 'Server is running!!!' })
 );
 

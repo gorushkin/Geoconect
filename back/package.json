@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon server/index.ts",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
     "dev:back2": "nodemon server/index.js",
-    "dev:back3": "nodemon --exec ts-node server/index.ts",
+    "dev:back3": "nodemon --exec ts-node src/index.ts",
     "dev:local": "NEXT_PUBLIC_TYPE=local next dev",
     "start": "node build/index.js",
     "lint": "next lint",
     "migrate": "node scripts/migrate.js",
     "seed": "node scripts/seed.js",
-    "knex2": "./node_modules/.bin/knex --knexfile server/database/knexfile.ts",
+    "knex2": "./node_modules/.bin/knex --knexfile src/database/knexfile.ts",
     "knex": "./node_modules/.bin/knex --knexfile ./knexfile.ts"
   },
   "dependencies": {

@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import { RequestOptions } from 'http';
 
 const router = express.Router();
 export const user = { name: 'admin', password: '12345' };
