@@ -8,6 +8,7 @@ import { useForm, Controller } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
 import { routes } from '../../api';
+import { deleteNewsRequest } from '../../api';
 import { showModalWindow } from '../../utils';
 import 'react-markdown-editor-lite/lib/index.css';
 
@@ -50,6 +51,20 @@ const Editor = ({ onSubmit, data, edit = false }) => {
       });
   };
 
+  const onRemoveBtnClick = (id) => {
+    showModalWindow({
+      title: 'Подтвердите действие',
+      body: 'Вы уверены, что хотите удалить новость?',
+      onConfirm: async () => {
+        const result = await deleteNewsRequest(id);
+        if (result) {
+          console.log('redirect');
+          router.push(routes.NEWS);
+        }
+      },
+    });
+  };
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -85,7 +100,7 @@ const Editor = ({ onSubmit, data, edit = false }) => {
       </Form.Group>
       <div>
         {edit && (
-          <Button onClick={onBackBtnClick} variant="warning" type="button">
+          <Button onClick={() => onRemoveBtnClick(data.id)} variant="warning" type="button">
             Remove
           </Button>
         )}{' '}

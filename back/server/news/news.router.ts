@@ -50,9 +50,22 @@ const updateNews = async (req: Request, res: Response) => {
   }
 };
 
+const deleteNews = async (req: Request, res: Response) => {
+  const {
+    params: { id },
+  } = req;
+  const deletedNews = await News.query().deleteById(id);
+  if (deletedNews) {
+    res.status(200).json(deletedNews);
+  } else {
+    res.status(404).json({ message: 'Новости с этим номером нет' });
+  }
+};
+
 router.get('/', getAllnews);
 router.post('/', createNews);
 router.get('/:id', getNews);
 router.patch('/:id', updateNews);
+router.delete('/:id', deleteNews);
 
 export { router };

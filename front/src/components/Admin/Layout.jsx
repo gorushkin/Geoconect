@@ -17,7 +17,7 @@ const Layout = ({ children, title, closed = false }) => {
       <Header />
       <ModalWindow />
       <Container>
-        <Row className="justify-content-center pt-3">
+        <Row className="justify-content-center pt-3 mb-3">
           <h1 lg={8}>{title}</h1>
         </Row>
         <Row className="justify-content-center">{isAuthorized ? children : <LoginForm />}</Row>

@@ -13,21 +13,12 @@ const NewsItem = ({ item }) => {
   const onEditClickHandler = () => router.push(`${routes.EDIT_NEWS}?id=${item.id}`);
 
   return (
-    <ListGroup.Item className="d-flex justify-content-between align-items-start">
+    <ListGroup.Item
+      onClick={onEditClickHandler}
+      action
+      className="d-flex justify-content-between align-items-start"
+    >
       <p>{item.title || 'Нет заголовка'}</p>
-      <div>
-        <Badge
-          onClick={onEditClickHandler}
-          className="bg-success badge__link"
-          variant="success"
-          bg="success"
-        >
-          Edit
-        </Badge>{' '}
-        <Badge className="bg-danger badge__link" variant="danger" bg="danger">
-          Delete
-        </Badge>
-      </div>
     </ListGroup.Item>
   );
 };
@@ -50,11 +41,8 @@ const News = () => {
   } = useSelector((state) => state);
 
   return (
-    <Layout closed>
+    <Layout title="AllNews" closed>
       <Container>
-        <Row className="justify-content-center pt-3">
-          <h1 lg={8}>AllNews</h1>
-        </Row>
         <Row className="justify-content-center">
           <ListGroup>
             {news.map((item) => (

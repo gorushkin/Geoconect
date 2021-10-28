@@ -53,4 +53,6 @@ export const getNewsRequest = (id) => errorHandler(instance.get(`${apiRoutes.NEW
 export const updateNewsRequest = (id, data) =>
   errorHandler(instance.patch(`${apiRoutes.NEWS}/${id}`, data));
 
+export const deleteNewsRequest = (id) => errorHandler(instance.delete(`${apiRoutes.NEWS}/${id}`));
+
 export default instance;
