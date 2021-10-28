@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { routes } from '../../api';
 import { actions } from '../../slices';
 
-
 const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -22,7 +21,9 @@ const Header = () => {
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/admin">Geoconect</Navbar.Brand>
+        <Link href="/admin" passHref>
+          <Navbar.Brand>Geoconect</Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
-import { useClient } from '../hooks';
-import Layout from '../components/Admin/Layout';
+
 import CMS from '../components/Admin/CMS';
+import Layout from '../components/Admin/Layout';
 import LoginForm from '../components/Admin/LoginForm';
+import { useClient } from '../hooks';
 
 const Admin = () => {
   const isClient = useClient();
