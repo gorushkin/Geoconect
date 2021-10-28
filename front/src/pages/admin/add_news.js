@@ -11,7 +11,7 @@ const AddNews = () => {
   const router = useRouter();
 
   const onSubmit = async ({ title, body }) => {
-    const data = await createNewsRequest({ title, body });
+    const { data } = await createNewsRequest({ title, body });
     if (data) {
       router.push(routes.NEWS);
     }

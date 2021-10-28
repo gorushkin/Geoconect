@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Container, Row, ListGroup, Badge } from 'react-bootstrap';
+import { Container, Row, ListGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { getAllNewsRequest } from '../../api';
@@ -28,17 +28,13 @@ const News = () => {
 
   useEffect(() => {
     const getAllNews = async () => {
-      const data = await getAllNewsRequest();
+      const { data } = await getAllNewsRequest();
       if (data) {
         setNews(data);
       }
     };
     getAllNews();
   }, []);
-
-  const {
-    user: { isAuthorized },
-  } = useSelector((state) => state);
 
   return (
     <Layout title="AllNews" closed>

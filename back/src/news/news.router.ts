@@ -19,7 +19,7 @@ const createNews = async (req: Request, res: Response) => {
   try {
     const news = News.fromJson(body);
     await News.query().insert(news);
-    res.status(200).json({ news });
+    res.status(200).json({ data: news });
   } catch (error) {
     const message = error instanceof Error ? error.message : error;
     res.status(500).json({ message });
@@ -33,7 +33,7 @@ const getNews = async (req: Request, res: Response) => {
   if (id) {
     const news = await News.query().findById(id);
     if (news) {
-      res.status(200).json(news);
+      res.status(200).json({ data: news });
     } else {
       res.status(404).json({ message: 'Новости с этим номером нет' });
     }
@@ -49,7 +49,7 @@ const updateNews = async (req: Request, res: Response) => {
   if (id) {
     const updatedNews = await News.query().findById(id).patch(body);
     if (updatedNews) {
-      res.status(200).json(updatedNews);
+      res.status(200).json({ data: updatedNews });
     } else {
       res.status(404).json({ message: 'Новости с этим номером нет' });
     }
@@ -64,7 +64,7 @@ const deleteNews = async (req: Request, res: Response) => {
   if (id) {
     const deletedNews = await News.query().deleteById(id);
     if (deletedNews) {
-      res.status(200).json(deletedNews);
+      res.status(200).json({ data: deletedNews });
     } else {
       res.status(404).json({ message: 'Новости с этим номером нет' });
     }

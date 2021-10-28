@@ -18,7 +18,7 @@ const EditNews = () => {
 
   useEffect(() => {
     const getNews = async () => {
-      const news = await getNewsRequest(id);
+      const { data: news } = await getNewsRequest(id);
       if (news) {
         setNews(news);
       }
@@ -27,7 +27,7 @@ const EditNews = () => {
   }, [id]);
 
   const onSubmit = async ({ title, body }) => {
-    const data = await updateNewsRequest(id, { title, body });
+    const { data } = await updateNewsRequest(id, { title, body });
     if (data) {
       router.push(routes.NEWS);
     }

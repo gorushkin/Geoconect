@@ -1,9 +1,9 @@
-import Layout from '../../components/Admin/Layout';
 import CMS from '../../components/Admin/CMS';
+import Layout from '../../components/Admin/Layout';
 
 const Admin = () => {
   return (
-    <Layout closed title='CMS'>
+    <Layout closed title="CMS">
       <CMS />
     </Layout>
   );
