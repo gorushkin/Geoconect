@@ -7,7 +7,7 @@ const router = express.Router();
 const getAllnews = async (_req: Request, res: Response) => {
   try {
     const news = await News.query();
-    res.status(200).json(news);
+    res.status(200).json({ data: news });
   } catch (error) {
     const message = error instanceof Error ? error.message : error;
     res.status(500).json({ message });
