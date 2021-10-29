@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Container, Row, ListGroup } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { getAllNewsRequest } from '../../api';
 import { routes } from '../../api';

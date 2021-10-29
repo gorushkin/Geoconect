@@ -10,9 +10,9 @@ import Layout from '../../components/Admin/Layout';
 const AddNews = () => {
   const router = useRouter();
 
-  const onSubmit = async ({ title, body }) => {
-    const { data } = await createNewsRequest({ title, body });
-    if (data) {
+  const onSubmit = async (data) => {
+    const response = await createNewsRequest(data);
+    if (response) {
       router.push(routes.NEWS);
     }
   };

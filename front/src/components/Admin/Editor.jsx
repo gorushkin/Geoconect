@@ -3,7 +3,7 @@ import _ from 'lodash';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
@@ -21,6 +21,7 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     register,
     handleSubmit,
     control,
+    watch,
     getValues,
     formState: { errors },
     setValue,
@@ -65,8 +66,21 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     });
   };
 
+  const onSubmitHandler = (data) => {
+    const file = getValues('file')[0];
+    onSubmit({ ...data, file });
+  };
+
+  const preview = watch('file')
+    ? watch('file')[0]
+      ? URL.createObjectURL(watch('file')[0])
+      : null
+    : null;
+
+  const onResetBtnClickHandler = () => setValue('file', null);
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmitHandler)}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Название новости</Form.Label>
         <Form.Control
@@ -79,6 +93,37 @@ const Editor = ({ onSubmit, data, edit = false }) => {
           Необходимо ввести название новости
         </Form.Control.Feedback>
       </Form.Group>
+      <Row className="align-items-end mb-3">
+        <Col>
+          <Form.Group controlId="formFile">
+            <Form.Label>Картинка</Form.Label>
+            <Form.Control
+              isInvalid={errors.file}
+              type="file"
+              name="file"
+              accept=".png,.jpg"
+              {...register('file', { required: true })}
+            />
+            <Form.Control.Feedback type="invalid">
+              Необходимо выбрать картинку
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+        <Col>
+          <Button
+            disabled={!watch('file')}
+            onClick={onResetBtnClickHandler}
+            variant="danger"
+            type="button"
+          >
+            Reset image
+          </Button>
+        </Col>
+      </Row>
+
+      <Col>
+        <img src={preview} alt="" />
+      </Col>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Текст новости</Form.Label>
         <Controller

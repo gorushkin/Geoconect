@@ -29,14 +29,14 @@ const instance = axios.create({
 
 const errorHandler = async (promise) => {
   try {
-    const { data } = await promise;
-    return data;
+    return await promise;
   } catch (error) {
     const message =
       error.response && typeof error.response.data === 'object'
         ? Object.values(error.response.data).join(' \n')
         : error.message;
     console.log('message: ', message);
+    return { data: null };
   }
 };
 
@@ -44,7 +44,13 @@ export const authRequest = (data) => instance.post(apiRoutes.AUTH, data);
 
 export const postRequest = () => instance.get(apiRoutes.NEWS);
 
-export const createNewsRequest = (data) => errorHandler(instance.post(apiRoutes.NEWS, data));
+export const createNewsRequest = (data) => {
+  const formData = new FormData();
+  formData.append('file', data.file);
+  formData.append('title', data.title);
+  formData.append('body', data.body);
+  return errorHandler(instance.post(apiRoutes.NEWS, formData));
+};
 
 export const getAllNewsRequest = () => errorHandler(instance.get(apiRoutes.NEWS));
 
