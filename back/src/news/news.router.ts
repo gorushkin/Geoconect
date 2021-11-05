@@ -4,7 +4,6 @@ import { fileHandler } from './news.services';
 import { UploadedFile, FileArray } from 'express-fileupload';
 
 const router = express.Router();
-// TODO: Добавить errorhandler на это все
 
 const getAllnews = async (_req: Request, res: Response) => {
   try {
@@ -18,9 +17,9 @@ const getAllnews = async (_req: Request, res: Response) => {
 
 const createNews = async (req: Request, res: Response) => {
   try {
-    const filenames = req.files ? await fileHandler(req.files as FileArray | undefined) : undefined;
-    const news = News.fromJson(req.body);
-    // await News.query().insert(news);
+    const imgSoruce = req.files ? await fileHandler(req.files as FileArray | undefined) : undefined;
+    const news = News.fromJson({ ...req.body, img_src: imgSoruce });
+    await News.query().insert(news);
     res.status(200).json(news);
   } catch (error) {
     const message = error instanceof Error ? error.message : error;

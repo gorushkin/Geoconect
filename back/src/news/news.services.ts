@@ -13,29 +13,43 @@ const getFilename = (inputFilename: string) => {
 
 const getPath = (filename: string) => path.join(dirname, 'images', filename);
 
+// export const fileHandler2 = async (data: FileArray | undefined) => {
+//   if (!data) return [];
+//   const files = Object.entries(data)
+//     .map(([key, value]) =>
+//       Array.isArray(value)
+//         ? value.map((item) => ({ ...item, formName: key }))
+//         : { ...value, formName: key }
+//     )
+//     .flat(1);
+
+//   const result = files
+//     .map((file) => {
+//       try {
+//         const filename = getFilename(file.name);
+//         const path = getPath(filename);
+//         file.mv(path);
+//         return filename;
+//       } catch (error) {
+//         console.log('error: ', error);
+//         return '';
+//       }
+//     })
+//     .filter((file) => file);
+
+//   return result;
+// };
+
 export const fileHandler = async (data: FileArray | undefined) => {
-  if (!data) return [];
-  const files = Object.entries(data)
-    .map(([key, value]) =>
-      Array.isArray(value)
-        ? value.map((item) => ({ ...item, formName: key }))
-        : { ...value, formName: key }
-    )
-    .flat(1);
-
-  const result = files
-    .map((file) => {
-      try {
-        const filename = getFilename(file.name);
-        const path = getPath(filename);
-        file.mv(path);
-        return filename;
-      } catch (error) {
-        console.log('error: ', error);
-        return '';
-      }
-    })
-    .filter((file) => file);
-
-  return result;
+  if (!data) throw Error('something wrong with image');
+  const file = data['imgSource'];
+  if (Array.isArray(file) || !file) throw Error('something wrong with image');
+  try {
+    const filename = getFilename(file.name);
+    const path = getPath(filename);
+    file.mv(path);
+    return filename;
+  } catch (error) {
+    return undefined;
+  }
 };
