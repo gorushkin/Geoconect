@@ -1,9 +1,7 @@
 import ReactMarkdown from 'react-markdown';
-import { Swiper, SwiperSlide } from 'swiper';
 import SwiperCore, { Scrollbar, Mousewheel, Navigation, Pagination, Autoplay } from 'swiper/core';
-// SwiperCore.use([Scrollbar, Mousewheel, Navigation, Pagination, Autoplay]);
-
-// import {S} from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react';
+SwiperCore.use([Scrollbar, Mousewheel, Navigation, Pagination, Autoplay]);
 
 const NewsTags = ({ tags }) => {
   return (
@@ -34,7 +32,7 @@ const News = ({ news }) => (
       <h2 className="section-title news__title">Новости</h2>
       <div className="news__swiper-wp">
         <Swiper pagination slidesPerView={1} autoplay loop tag="div" navigation>
-          {news?.map((post) => {
+          {news.map((post) => {
             return (
               <SwiperSlide tag="li" key={post.id} className="news__item">
                 <div className="news__img">
@@ -42,6 +40,8 @@ const News = ({ news }) => (
                 </div>
                 <div className="news__content">
                   <ReactMarkdown>{post.body}</ReactMarkdown>
+                  {/* <NewsTags tags={post.tags} /> */}
+                  {/* <NewsSource source={post.source} /> */}
                 </div>
               </SwiperSlide>
             );
