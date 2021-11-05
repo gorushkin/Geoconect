@@ -38,8 +38,9 @@ const getNews = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({ message: 'Новости с этим номером нет' });
     }
+  } else {
+    res.status(404).json({ message: 'Новости с этим номером нет' });
   }
-  res.status(404).json({ message: 'Новости с этим номером нет' });
 };
 
 const updateNews = async (req: Request, res: Response) => {
