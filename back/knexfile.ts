@@ -3,11 +3,11 @@ import path from 'path';
 const dirname = path.resolve();
 
 const migrations = {
-  directory: path.join(dirname, 'server', 'database', 'migrations'),
+  directory: path.join(dirname, 'src', 'database', 'migrations'),
 };
 
 const seeds = {
-  directory: path.join(dirname, 'server', 'database', 'seeds'),
+  directory: path.join(dirname, 'src', 'database', 'seeds'),
 };
 
 interface IKnexConfig {

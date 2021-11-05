@@ -1,5 +1,7 @@
 import express, { Request, Response } from 'express';
 import News from './news.model';
+import { fileHandler } from './news.services';
+import { UploadedFile } from 'express-fileupload';
 
 const router = express.Router();
 // TODO: Добавить errorhandler на это все
@@ -15,13 +17,17 @@ const getAllnews = async (_req: Request, res: Response) => {
 };
 
 const createNews = async (req: Request, res: Response) => {
+  console.log('createNews');
   const body = req.body;
   if (req.files) {
-    console.log(req.files);
+    // await fileHandler(files as unknown as UploadedFile[]);
+    await fileHandler(req.files);
+    // const file = req.files['avatar'] as UploadedFile;
+    // await fileHandler(file);
   }
   try {
     const news = News.fromJson(body);
-    await News.query().insert(news);
+    // await News.query().insert(news);
     res.status(200).json(news);
   } catch (error) {
     const message = error instanceof Error ? error.message : error;

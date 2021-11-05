@@ -3,6 +3,9 @@ import { router as news } from './news/news.router';
 import { router as auth } from './auth';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
+// import multer from 'multer';
+
+// const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 app.use(fileUpload());

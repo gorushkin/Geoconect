@@ -25,7 +25,10 @@ export async function seed(knex: Knex): Promise<void> {
   // ]);
 
   try {
-    await knex('news').insert({ body });
+    await knex('news').insert({
+      body,
+      title: 'НА ДАЛЬНЕМ ВОСТОКЕ МОГУТ ВВЕСТИ НАЛОГОВЫЕ ЛЬГОТЫ ДЛЯ ДОБЫВАЮЩИХ КОМПАНИЙ',
+    });
     console.log('Added dummy news!');
   } catch (error) {
     console.log(error);

@@ -13,7 +13,8 @@ const AddNews = () => {
   const onSubmit = async (data) => {
     const response = await createNewsRequest(data);
     if (response) {
-      router.push(routes.NEWS);
+      // router.push(routes.NEWS);
+      console.log('post');
     }
   };
 
