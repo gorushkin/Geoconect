@@ -58,8 +58,13 @@ export const getAllNewsRequest = () => errorHandler(instance.get(apiRoutes.NEWS)
 
 export const getNewsRequest = (id) => errorHandler(instance.get(`${apiRoutes.NEWS}/${id}`));
 
-export const updateNewsRequest = (id, data) =>
-  errorHandler(instance.patch(`${apiRoutes.NEWS}/${id}`, data));
+export const updateNewsRequest = (id, data) => {
+  const formData = new FormData();
+  if (data.file) formData.append('imgSource', data.file);
+  formData.append('title', data.title);
+  formData.append('body', data.body);
+  return errorHandler(instance.patch(`${apiRoutes.NEWS}/${id}`, formData));
+};
 
 export const deleteNewsRequest = (id) => errorHandler(instance.delete(`${apiRoutes.NEWS}/${id}`));
 

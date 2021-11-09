@@ -1,22 +1,12 @@
-import { useRouter } from 'next/router';
 import { Col, Row } from 'react-bootstrap';
 
 import { createNewsRequest } from '../../api';
-import { routes } from '../../api';
 import Editor from '../../components/Admin/Editor';
 import 'react-markdown-editor-lite/lib/index.css';
 import Layout from '../../components/Admin/Layout';
 
 const AddNews = () => {
-  const router = useRouter();
-
-  const onSubmit = async (data) => {
-    const response = await createNewsRequest(data);
-    if (response) {
-      // router.push(routes.NEWS);
-      console.log('post');
-    }
-  };
+  const onSubmit = (data) => createNewsRequest(data);
 
   return (
     <Layout closed>

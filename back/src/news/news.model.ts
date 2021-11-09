@@ -5,6 +5,11 @@ export default class News extends Model {
     return 'news';
   }
 
+  id: number;
+  title: string;
+  body: string;
+  img_src: string;
+
   static jsonSchema = {
     type: 'object',
     required: ['body', 'title', 'img_src'],

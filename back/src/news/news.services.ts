@@ -2,6 +2,7 @@ import { FileArray } from 'express-fileupload';
 import path from 'path';
 const dirname = path.join(path.resolve());
 import { v4 as uuid } from 'uuid';
+import { promises as fs } from 'fs';
 
 const getFileExtension = (filename: string) => filename.split('.').pop();
 
@@ -25,5 +26,15 @@ export const fileHandler = async (data: FileArray | undefined) => {
     return filename;
   } catch (error) {
     return undefined;
+  }
+};
+
+export const imgRemover = async (filename: string) => {
+  const filePath = getPath(filename);
+  try {
+    fs.unlink(filePath);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : error;
+    console.log(message);
   }
 };

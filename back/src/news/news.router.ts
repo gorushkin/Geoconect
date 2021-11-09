@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
 import News from './news.model';
-import { fileHandler } from './news.services';
-import { UploadedFile, FileArray } from 'express-fileupload';
+import { fileHandler, imgRemover } from './news.services';
+import { FileArray } from 'express-fileupload';
+
+// TODO: при редкатировании создавать копии в другой таблице для отката
 
 const router = express.Router();
 
@@ -47,16 +49,35 @@ const updateNews = async (req: Request, res: Response) => {
   const {
     params: { id },
     body,
+    files,
   } = req;
-  if (id) {
-    const updatedNews = await News.query().findById(id).patch(body);
-    if (updatedNews) {
-      res.status(200).json(updatedNews);
+  try {
+    if (id) {
+      const news = await News.query().findById(id);
+
+      const imgSoruce = files ? await fileHandler(files as FileArray | undefined) : undefined;
+
+      if (imgSoruce) {
+        const previousImgName = news.img_src;
+        await imgRemover(previousImgName);
+      }
+
+      const updatedNews = await News.query()
+        .findById(id)
+        .patch({ ...body, ...(imgSoruce && { img_src: imgSoruce }) });
+
+      if (updatedNews) {
+        res.status(200).json(updatedNews);
+      } else {
+        res.status(404).json({ message: 'Новости с этим номером нет' });
+      }
     } else {
       res.status(404).json({ message: 'Новости с этим номером нет' });
     }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : error;
+    res.status(500).json({ message });
   }
-  res.status(404).json({ message: 'Новости с этим номером нет' });
 };
 
 const deleteNews = async (req: Request, res: Response) => {

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form, Row, Col, NavItem } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
@@ -70,9 +70,12 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     });
   };
 
-  const onSubmitHandler = (data) => {
-    const file = getValues('file')[0];
-    onSubmit({ ...data, file });
+  const onSubmitHandler = async (values) => {
+    const file = getValues('file') ? getValues('file')[0] : null;
+    const { data } = await onSubmit({ ...values, file });
+    if (data) {
+      router.push(routes.NEWS);
+    }
   };
 
   useEffect(() => {
@@ -85,7 +88,7 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     const subscription = watch((value) => {
       const preview =
         value.file && value.file.length > 0 ? URL.createObjectURL(value.file[0]) : null;
-      setImagePreview(preview);
+      if (preview) setImagePreview(preview);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -120,7 +123,7 @@ const Editor = ({ onSubmit, data, edit = false }) => {
               type="file"
               name="file"
               accept=".png,.jpg"
-              {...register('file', { required: true })}
+              {...register('file', { required: edit ? false : true })}
             />
             <Form.Control.Feedback type="invalid">
               Необходимо выбрать картинку
