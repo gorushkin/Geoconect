@@ -28,6 +28,7 @@ export async function seed(knex: Knex): Promise<void> {
     await knex('news').insert({
       body,
       title: 'НА ДАЛЬНЕМ ВОСТОКЕ МОГУТ ВВЕСТИ НАЛОГОВЫЕ ЛЬГОТЫ ДЛЯ ДОБЫВАЮЩИХ КОМПАНИЙ',
+      img_src: 'b933924e-adbf-40bf-8cfa-a0725a79877f.jpg',
     });
     console.log('Added dummy news!');
   } catch (error) {

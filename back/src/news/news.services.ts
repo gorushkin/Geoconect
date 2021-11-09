@@ -12,6 +12,7 @@ const getFilename = (inputFilename: string) => {
 };
 
 const getPath = (filename: string) => path.join(dirname, 'images', filename);
+// TODO: если нет папки для картинок, то следует ее создавать
 
 export const fileHandler = async (data: FileArray | undefined) => {
   if (!data) throw Error('something wrong with image');

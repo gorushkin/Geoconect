@@ -6,12 +6,14 @@ import config from '../configs';
 export const apiRoutes = {
   AUTH: 'auth',
   NEWS: 'news',
+  IMAGES: 'images',
 };
 
 export const routes = {
   LOGIN: '/admin/login',
   NEWS: '/admin/news',
   EDIT_NEWS: '/admin/edit_news',
+  IMAGES: `${config.ORIGIN}/images`,
 };
 
 const token = Cookies.get('token');
