@@ -48,7 +48,7 @@ export const postRequest = () => instance.get(apiRoutes.NEWS);
 
 export const createNewsRequest = (data) => {
   const formData = new FormData();
-  formData.append('file', data.file);
+  formData.append('imgSource', data.file);
   formData.append('title', data.title);
   formData.append('body', data.body);
   return errorHandler(instance.post(apiRoutes.NEWS, formData));
