@@ -2,7 +2,7 @@ import cn from 'classnames';
 import _ from 'lodash';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
@@ -24,9 +24,12 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     watch,
     getValues,
     formState: { errors },
+    formState,
     setValue,
   } = useForm();
   const router = useRouter();
+
+  const [imgPreview, setImagePreview] = useState();
 
   const editorClassnames = cn('editor__wrapper form-control ', {
     'form-control is-invalid': errors.body,
@@ -36,6 +39,7 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     if (data) {
       setValue('title', data?.title || '');
       setValue('body', data?.body || '');
+      setValue('file', null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -71,13 +75,27 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     onSubmit({ ...data, file });
   };
 
-  const preview = watch('file')
-    ? watch('file')[0]
-      ? URL.createObjectURL(watch('file')[0])
-      : null
-    : null;
+  useEffect(() => {
+    if (data) {
+      setImagePreview(`${routes.IMAGES}/${data.img_src}`);
+    }
+  }, [data]);
 
-  const onResetBtnClickHandler = () => setValue('file', null);
+  useEffect(() => {
+    const subscription = watch((value) => {
+      const preview =
+        value.file && value.file.length > 0 ? URL.createObjectURL(value.file[0]) : null;
+      setImagePreview(preview);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  const onResetBtnClickHandler = () => {
+    setValue('file', null);
+    if (data) {
+      setImagePreview(`${routes.IMAGES}/${data.img_src}`);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -122,7 +140,7 @@ const Editor = ({ onSubmit, data, edit = false }) => {
       </Row>
 
       <Col>
-        <img src={preview} alt="" />
+        <img src={imgPreview} alt="" />
       </Col>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Текст новости</Form.Label>
