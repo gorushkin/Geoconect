@@ -1,4 +1,4 @@
-import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const CMS = () => {
   return (

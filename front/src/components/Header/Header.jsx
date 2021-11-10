@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import cn from 'classnames';
+import { useEffect, useState } from 'react';
+
 import { headerList } from '../../constants';
-/* eslint-disable @next/next/no-img-element */
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -31,21 +31,21 @@ const Header = () => {
 
   return (
     <header className={headerClassNames}>
-      <div className='wrapper'>
-        <div className='header__inner'>
-          <a className='header__logo'>
-            <img src='logo.png' alt='Geoconect Logo' />
+      <div className="wrapper">
+        <div className="header__inner">
+          <a className="header__logo">
+            <img src="logo.png" alt="Geoconect Logo" />
           </a>
           <nav className={menuClassNames}>
-            <ul className='header__nav-list'>
+            <ul className="header__nav-list">
               {headerList.map(({ href, name }, index) => (
-                <li onClick={onClick} key={index} className='header__nav-item'>
+                <li onClick={onClick} key={index} className="header__nav-item">
                   <a href={href}>{name}</a>
                 </li>
               ))}
             </ul>
           </nav>
-          <div className='header__btn--wrapper'>
+          <div className="header__btn--wrapper">
             <button onClick={clickHandler} className={menuButtonClassNames}>
               <span></span>
             </button>
