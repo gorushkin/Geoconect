@@ -38,14 +38,17 @@ const configs: IKnexConfig = {
     migrations: {
       tableName: 'knex_migrations',
     },
+    seeds,
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
+      host: '127.0.0.1',
+      port: 5432,
+      database: 'geo',
+      user: 'postgres',
+      password: 'postgres',
     },
     pool: {
       min: 2,
@@ -53,7 +56,9 @@ const configs: IKnexConfig = {
     },
     migrations: {
       tableName: 'knex_migrations',
+      directory: migrations.directory,
     },
+    seeds,
   },
 };
 

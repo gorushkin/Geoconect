@@ -28,6 +28,21 @@ services:
       PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
     networks:
       - geo_net
+  express:
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    command: npm run dev:back
+    networks:
+      - geo_net
+    depends_on:
+      - postgres
+    environment:
+      - PORT=${PORT}
+    volumes:
+      - ./server:/usr/app/server
+    restart: on-failure
+
 networks:
   geo_net:
     driver: bridge
