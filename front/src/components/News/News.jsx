@@ -26,30 +26,34 @@ const NewsSource = ({ source }) => (
   </dl>
 );
 
-const News = ({ news }) => (
-  <section id="news" className="news">
-    <div className="wrapper">
-      <h2 className="section-title news__title">Новости</h2>
-      <div className="news__swiper-wp">
-        <Swiper pagination slidesPerView={1} autoplay loop tag="div" navigation>
-          {news.map((post) => {
-            return (
-              <SwiperSlide tag="li" key={post.id} className="news__item">
-                <div className="news__img">
-                  <img src="news__img01.jpg" alt="" />
-                </div>
-                <div className="news__content">
-                  <ReactMarkdown>{post.body}</ReactMarkdown>
-                  {/* <NewsTags tags={post.tags} /> */}
-                  {/* <NewsSource source={post.source} /> */}
-                </div>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
-    </div>
-  </section>
-);
+const News = ({ news }) => {
+  return (
+    news && (
+      <section id="news" className="news">
+        <div className="wrapper">
+          <h2 className="section-title news__title">Новости</h2>
+          <div className="news__swiper-wp">
+            <Swiper pagination slidesPerView={1} autoplay loop tag="div" navigation>
+              {news.map((post) => {
+                return (
+                  <SwiperSlide tag="li" key={post.id} className="news__item">
+                    <div className="news__img">
+                      <img src="news__img01.jpg" alt="" />
+                    </div>
+                    <div className="news__content">
+                      <ReactMarkdown>{post.body}</ReactMarkdown>
+                      {/* <NewsTags tags={post.tags} /> */}
+                      {/* <NewsSource source={post.source} /> */}
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+    )
+  );
+};
 
 export default News;
