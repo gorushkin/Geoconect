@@ -12,6 +12,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     networks:
       - geo_net
+    restart: always
 networks:
   geo_net:
     driver: bridge
