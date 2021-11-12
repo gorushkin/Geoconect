@@ -85,14 +85,18 @@ const deleteNews = async (req: Request, res: Response) => {
     params: { id },
   } = req;
   if (id) {
+    const news = await News.query().findById(id);
+    const imgName = news.img_src;
     const deletedNews = await News.query().deleteById(id);
     if (deletedNews) {
       res.status(200).json(deletedNews);
+      await imgRemover(imgName);
     } else {
-      res.status(404).json({ message: 'Новости с этим номером нет' });
+      res.status(404).json({ message: 'Что-то пошло не так' });
     }
+  } else {
+    res.status(404).json({ message: 'Новости с этим номером нет' });
   }
-  res.status(404).json({ message: 'Новости с этим номером нет' });
 };
 
 router.get('/', getAllnews);

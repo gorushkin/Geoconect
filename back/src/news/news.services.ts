@@ -21,7 +21,6 @@ const checkFolder = async (path: string) => {
 };
 
 const getPath = (filename?: string) => path.join(dirname, 'images', filename ? filename : '');
-// TODO: если нет папки для картинок, то следует ее создавать
 
 export const fileHandler = async (data: FileArray | undefined) => {
   if (!data) throw Error('something wrong with image');
@@ -36,6 +35,7 @@ export const fileHandler = async (data: FileArray | undefined) => {
     return filename;
   } catch (error) {
     const message = error instanceof Error ? error.message : error;
+    // TODO: надо кидать исключение с ошибкой отсюда
     return undefined;
   }
 };
