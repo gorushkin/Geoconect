@@ -12,19 +12,30 @@ const getFilename = (inputFilename: string) => {
   return `${filname}.${fileExtension}`;
 };
 
-const getPath = (filename: string) => path.join(dirname, 'images', filename);
+const checkFolder = async (path: string) => {
+  try {
+    await fs.lstat(path);
+  } catch (error) {
+    await fs.mkdir(path);
+  }
+};
+
+const getPath = (filename?: string) => path.join(dirname, 'images', filename ? filename : '');
 // TODO: если нет папки для картинок, то следует ее создавать
 
 export const fileHandler = async (data: FileArray | undefined) => {
   if (!data) throw Error('something wrong with image');
   const file = data['imgSource'];
   if (Array.isArray(file) || !file) throw Error('something wrong with image');
+  const filename = getFilename(file.name);
+  const path = getPath(filename);
+  const folderPath = getPath();
+  await checkFolder(folderPath);
   try {
-    const filename = getFilename(file.name);
-    const path = getPath(filename);
-    file.mv(path);
+    await fs.writeFile(path, file.data);
     return filename;
   } catch (error) {
+    const message = error instanceof Error ? error.message : error;
     return undefined;
   }
 };

@@ -20,7 +20,7 @@ const getAllnews = async (_req: Request, res: Response) => {
 const createNews = async (req: Request, res: Response) => {
   try {
     const imgSoruce = req.files ? await fileHandler(req.files as FileArray | undefined) : undefined;
-    const news = News.fromJson({ ...req.body, img_src: imgSoruce });
+    const news = News.fromJson({ ...req.body, ...(imgSoruce && { img_src: imgSoruce }) });
     await News.query().insert(news);
     res.status(200).json(news);
   } catch (error) {
