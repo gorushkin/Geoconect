@@ -1,7 +1,7 @@
 .index {
   .news {
     min-height: 100vh;
-    background: url('/news__back.jpg') no-repeat center / 100% 100%;
+    background: url("/news__back.jpg") no-repeat center / 100% 100%;
     padding-top: 120px;
     padding-bottom: 300px;
 
@@ -9,7 +9,7 @@
       padding-top: 50px;
       padding-bottom: 30px;
       min-height: auto;
-      background: url('/news__back.jpg') no-repeat center / 100% 100%;
+      background: url("/news__back.jpg") no-repeat center / 100% 100%;
     }
   }
 
@@ -24,7 +24,6 @@
 
   .news__list,
   .swiper-wrapper {
-    // display: flex;
     width: 100%;
   }
 
@@ -32,7 +31,6 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    // margin: 0 -60px;
     overflow: hidden;
 
     @media (max-width: 1600px) {
@@ -137,9 +135,15 @@
   }
 }
 
-.news__swiper-wp {
+.news__news-container {
+  padding: 0 50px;
   position: relative;
+}
+
+.news__swiper-wp {
   z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .swiper {
@@ -148,7 +152,6 @@
 
 .news__swiper-btns {
   position: absolute;
-  outline: 2px solid blue;
   left: 0;
   right: 0;
   top: 50%;
@@ -162,26 +165,21 @@
   height: 50px;
   top: 50%;
   transform: translateY(-50%);
-  background: red;
   z-index: 75;
+  cursor: pointer;
 
   &--prev {
     left: 0;
+    background: url("/back-svgrepo-com.svg") no-repeat center / contain;
   }
 
   &--next {
     right: 0;
+    background: url("/next-svgrepo-com.svg") no-repeat center / contain;
   }
 }
 
-.swiper-button-prev, .swiper-button-next {
-  z-index: 10;
-}
-
-.swiper-button-prev {
-  background: url("/back-svgrepo-com.svg") no-repeat center / contain;
-}
-
+.swiper-button-prev,
 .swiper-button-next {
-  background: url("/next-svgrepo-com.svg") no-repeat center / contain;
+  z-index: 10;
 }

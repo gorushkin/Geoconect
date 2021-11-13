@@ -78,10 +78,14 @@ const Editor = ({ onSubmit, data, edit = false }) => {
     }
   };
 
-  useEffect(() => {
+  const setImage = (data) => {
     if (data) {
       setImagePreview(`${routes.IMAGES}/${data.img_src}`);
     }
+  };
+
+  useEffect(() => {
+    setImage(data);
   }, [data]);
 
   useEffect(() => {
@@ -95,9 +99,7 @@ const Editor = ({ onSubmit, data, edit = false }) => {
 
   const onResetBtnClickHandler = () => {
     setValue('file', null);
-    if (data) {
-      setImagePreview(`${routes.IMAGES}/${data.img_src}`);
-    }
+    setImage(data);
   };
 
   return (

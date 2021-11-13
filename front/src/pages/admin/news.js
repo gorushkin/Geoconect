@@ -22,16 +22,17 @@ const NewsItem = ({ item }) => {
   );
 };
 
+// TODO:  Если не получится получить новости, то вывести сообщение о том, что не удалось это сделать
+
 const News = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
     const getAllNews = async () => {
       const { data } = await getAllNewsRequest();
-      if (data) {
-        setNews(data);
-      }
+      setNews(data);
     };
+
     getAllNews();
   }, []);
 
@@ -40,7 +41,7 @@ const News = () => {
       <Container>
         <Row className="justify-content-center">
           <ListGroup>
-            {news.map((item) => (
+            {news?.map((item) => (
               <NewsItem key={item.id} item={item} />
             ))}
           </ListGroup>

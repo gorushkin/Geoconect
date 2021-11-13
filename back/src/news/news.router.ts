@@ -9,8 +9,8 @@ const router = express.Router();
 
 const getAllnews = async (_req: Request, res: Response) => {
   try {
-    const news = await News.query();
-    res.status(200).json(news);
+    const newsList = await News.query();
+    res.status(200).json(newsList);
   } catch (error) {
     const message = error instanceof Error ? error.message : error;
     res.status(500).json({ message });
@@ -20,9 +20,9 @@ const getAllnews = async (_req: Request, res: Response) => {
 const createNews = async (req: Request, res: Response) => {
   try {
     const imgSoruce = req.files ? await fileHandler(req.files as FileArray | undefined) : undefined;
-    const news = News.fromJson({ ...req.body, ...(imgSoruce && { img_src: imgSoruce }) });
-    await News.query().insert(news);
-    res.status(200).json(news);
+    const newsItem = News.fromJson({ ...req.body, ...(imgSoruce && { img_src: imgSoruce }) });
+    await News.query().insert(newsItem);
+    res.status(200).json(newsItem);
   } catch (error) {
     const message = error instanceof Error ? error.message : error;
     res.status(500).json({ message });
@@ -34,9 +34,9 @@ const getNews = async (req: Request, res: Response) => {
     params: { id },
   } = req;
   if (id) {
-    const news = await News.query().findById(id);
-    if (news) {
-      res.status(200).json(news);
+    const newsItem = await News.query().findById(id);
+    if (newsItem) {
+      res.status(200).json(newsItem);
     } else {
       res.status(404).json({ message: 'Новости с этим номером нет' });
     }
@@ -53,21 +53,21 @@ const updateNews = async (req: Request, res: Response) => {
   } = req;
   try {
     if (id) {
-      const news = await News.query().findById(id);
+      const newsItem = await News.query().findById(id);
 
       const imgSoruce = files ? await fileHandler(files as FileArray | undefined) : undefined;
 
       if (imgSoruce) {
-        const previousImgName = news.img_src;
+        const previousImgName = newsItem.img_src;
         await imgRemover(previousImgName);
       }
 
-      const updatedNews = await News.query()
+      const updatedNewsItem = await News.query()
         .findById(id)
         .patch({ ...body, ...(imgSoruce && { img_src: imgSoruce }) });
 
-      if (updatedNews) {
-        res.status(200).json(updatedNews);
+      if (updatedNewsItem) {
+        res.status(200).json(updatedNewsItem);
       } else {
         res.status(404).json({ message: 'Новости с этим номером нет' });
       }
@@ -85,11 +85,11 @@ const deleteNews = async (req: Request, res: Response) => {
     params: { id },
   } = req;
   if (id) {
-    const news = await News.query().findById(id);
-    const imgName = news.img_src;
-    const deletedNews = await News.query().deleteById(id);
-    if (deletedNews) {
-      res.status(200).json(deletedNews);
+    const newsItem = await News.query().findById(id);
+    const imgName = newsItem.img_src;
+    const deletedNewsItem = await News.query().deleteById(id);
+    if (deletedNewsItem) {
+      res.status(200).json(deletedNewsItem);
       await imgRemover(imgName);
     } else {
       res.status(404).json({ message: 'Что-то пошло не так' });
