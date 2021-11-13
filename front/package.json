@@ -9,7 +9,7 @@
     "build": "next build",
     "build:dev": "NEXT_PUBLIC_TYPE=dev next build",
     "build:prod": "NEXT_PUBLIC_TYPE=prod next build",
-    "start": "NEXT_PUBLIC_TYPE=local next start",
+    "start": "next start",
     "start:dev": "NEXT_PUBLIC_TYPE=dev next start",
     "lint": "node_modules/.bin/eslint \"**/*.jsx\" --fix"
   },

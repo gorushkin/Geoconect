@@ -13,6 +13,7 @@ export const getStaticProps = async (context) => {
     const { data } = await getAllNewsRequest();
     return {
       props: { news: data },
+      revalidate: 60,
     };
   } catch (error) {
     return {
