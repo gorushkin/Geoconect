@@ -1,7 +1,17 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import config from '../configs';
+const serverTypeMapping = {
+  dev: process.env.NEXT_PUBLIC_DEV_ORIGIN,
+  local: process.env.NEXT_PUBLIC_LOCAL_ORIGIN,
+};
+
+const ORIGIN = serverTypeMapping[process.env.NEXT_PUBLIC_TYPE] || process.env.NEXT_PUBLIC_ORIGIN;
+
+const config = {
+  API_BASE_URL: '/api/',
+  ORIGIN,
+};
 
 export const apiRoutes = {
   AUTH: 'auth',
@@ -27,6 +37,7 @@ const instance = axios.create({
   }),
 });
 
+console.log(`${config.ORIGIN}${config.API_BASE_URL}`);
 // TODO: Добавить вывод алерта с ошибкой
 
 const errorHandler = async (promise) => {
