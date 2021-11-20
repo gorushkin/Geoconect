@@ -10,5 +10,3 @@ Model.knex(knex);
 app.listen(PORT, () => {
   console.log(`app start at port ${PORT}`);
 });
-
-console.log('start');
