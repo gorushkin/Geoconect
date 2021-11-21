@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { router as news } from './news/news.router';
+import { router as users } from './users/users.router';
 import { router as auth } from './auth';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
@@ -15,6 +16,7 @@ app.use(express.urlencoded());
 
 app.use('/api/auth', auth);
 app.use('/api/news', news);
+app.use('/api/users', users);
 app.use('/api/test', (_req: Request, res: Response) =>
   res.status(200).json({ message: 'Server is running!!!' })
 );
