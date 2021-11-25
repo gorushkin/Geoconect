@@ -5,11 +5,14 @@ services:
     image: postgres:14.0
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - /tmp/pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_PORT: ${POSTGRES_PORT}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
+      PGDATA: ${PGDATA}
     networks:
       - geo_net
     restart: always
