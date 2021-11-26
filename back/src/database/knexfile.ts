@@ -2,12 +2,17 @@ import { Knex } from 'knex';
 import path from 'path';
 const dirname = path.resolve();
 
+const isModeDevelopment = process.env['NODE_ENV'];
+
+const getPath = (value: string) =>
+  isModeDevelopment ? path.join(dirname, 'src', 'database', value) : path.join(dirname, value);
+
 const migrations = {
-  directory: path.join(dirname, 'migrations'),
+  directory: getPath('migrations'),
 };
 
 const seeds = {
-  directory: path.join(dirname, 'seeds'),
+  directory: getPath('seeds'),
 };
 
 interface IKnexConfig {
@@ -18,7 +23,7 @@ const configs: IKnexConfig = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3',
+      filename: getPath('./dev.sqlite3'),
     },
     migrations,
     seeds,

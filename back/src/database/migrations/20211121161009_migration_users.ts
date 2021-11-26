@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('name').notNullable();
     table.string('email').notNullable();
     table.string('role').notNullable();
-    table.string('password');
+    table.string('passwordHash');
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());
   });

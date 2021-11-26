@@ -18,7 +18,9 @@ const initDatabase = async () => {
     //   });
     try {
       const list = await knex.queryBuilder().select('*').from('news');
-      // console.log('list: ', list);
+      const users = await knex.queryBuilder().select('*').from('users');
+      console.log('users: ', users);
+      console.log('list: ', list);
     } catch (error) {
       console.log(error);
     }

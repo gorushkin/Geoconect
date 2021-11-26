@@ -21,3 +21,6 @@ start:
 
 stop:
 	pm2 stop all
+
+db_init_dev:
+	cd back; npm run knex:init

@@ -22,5 +22,4 @@
     "strictPropertyInitialization": false
   },
   "exclude": ["src/node_modules"],
-  "include": ["src/**/*.ts", "knexfile.ts"]
 }
