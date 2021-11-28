@@ -1,7 +1,8 @@
 import Knex from 'knex';
+import { CONFIG } from '../helpers/config';
 import configs from './knexfile';
 
-const config = configs[process.env['NODE_ENV'] || 'development'];
+const config = configs[CONFIG.NODE_ENV || 'development'];
 
 const knex = config ? Knex(config) : null;
 
@@ -19,8 +20,8 @@ const initDatabase = async () => {
     try {
       const list = await knex.queryBuilder().select('*').from('news');
       const users = await knex.queryBuilder().select('*').from('users');
-      console.log('users: ', users);
-      console.log('list: ', list);
+      // console.log('users: ', users);
+      // console.log('list: ', list);
     } catch (error) {
       console.log(error);
     }

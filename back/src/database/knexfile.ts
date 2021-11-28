@@ -1,8 +1,9 @@
 import { Knex } from 'knex';
 import path from 'path';
+import { CONFIG } from '../helpers/config';
 const dirname = path.resolve();
 
-const isModeDevelopment = process.env['NODE_ENV'];
+const isModeDevelopment = CONFIG.NODE_ENV;
 
 const getPath = (value: string) =>
   isModeDevelopment ? path.join(dirname, 'src', 'database', value) : path.join(dirname, value);

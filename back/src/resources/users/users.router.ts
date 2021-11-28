@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import Users from './users.model';
-
+import { encrypt } from './users.model';
 // TODO: при редкатировании создавать копии в другой таблице для отката
 
 const router = express.Router();
@@ -19,6 +19,8 @@ const createUser = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
   try {
     const user = Users.fromJson({ name, email, password });
+    const isUserUnique = await Users.query().findOne({ email });
+    console.log('isUserUnique: ', isUserUnique);
     console.log('user: ', user);
     res.status(200).json('createUser');
   } catch (error) {

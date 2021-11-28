@@ -1,6 +1,9 @@
 import { Model } from 'objection';
+import crypto from 'crypto';
 
-export default class News extends Model {
+export const encrypt = (value: string) => crypto.createHash('sha256').update(value).digest('hex');
+
+export default class User extends Model {
   static get tableName() {
     return 'users';
   }
@@ -10,6 +13,7 @@ export default class News extends Model {
   email: string;
   role: string;
   password: string;
+  hashedPassword: string;
 
   static jsonSchema = {
     type: 'object',
@@ -17,10 +21,19 @@ export default class News extends Model {
 
     properties: {
       id: { type: 'integer' },
-      name: { type: 'string', minLength: 1 },
-      email: { type: 'string', minLength: 1 },
+      name: { type: 'string', minLength: 3 },
+      email: { type: 'string', format: 'email'  },
       role: { type: 'string', enum: ['user', 'admin'], default: 'user' },
       password: { type: 'string', minLength: 3 },
     },
   };
+
+  verifyPassword(password: string) {
+    return encrypt(password) === this.hashedPassword;
+  }
+
+  info() {
+    return this.name
+  }
+
 }
