@@ -17,8 +17,6 @@ app.use(express.json());
 app.use('/images', express.static(path.join(dirname, 'images')));
 app.use(express.urlencoded());
 
-// app.use(authMiddleware)
-
 app.use((req, _res, next) => {
   console.log(req.originalUrl);
   console.log(req.body);
@@ -37,6 +35,7 @@ app.use('/api/test', (_req: Request, res: Response) =>
 app.use('/api/authtest', authMiddleware, (_req: Request, res: Response) =>
   res.status(200).send({ message: 'Server is running!!!' })
 );
+
 app.use(ErrorHandler);
 
 export default app;

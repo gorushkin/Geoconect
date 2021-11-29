@@ -12,7 +12,6 @@ export default class User extends Model {
   name: string;
   email: string;
   role: string;
-  password: string;
   hashedPassword: string;
 
   static jsonSchema = {
@@ -22,18 +21,21 @@ export default class User extends Model {
     properties: {
       id: { type: 'integer' },
       name: { type: 'string', minLength: 3 },
-      email: { type: 'string', format: 'email'  },
+      email: { type: 'string', format: 'email' },
       role: { type: 'string', enum: ['user', 'admin'], default: 'user' },
       password: { type: 'string', minLength: 3 },
     },
   };
+
+  set password(value: string) {
+    this.hashedPassword = encrypt(value);
+  }
 
   verifyPassword(password: string) {
     return encrypt(password) === this.hashedPassword;
   }
 
   info() {
-    return this.name
+    return { id: this.id, email: this.email, name: this.name, role: this.role };
   }
-
 }

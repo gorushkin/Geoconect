@@ -18,15 +18,12 @@ const initDatabase = async () => {
     //     if (knex) table.timestamp('created_at').defaultTo(knex.fn.now());
     //   });
     try {
-      const list = await knex.queryBuilder().select('*').from('news');
-      const users = await knex.queryBuilder().select('*').from('users');
-      // console.log('users: ', users);
-      // console.log('list: ', list);
+      // const list = await knex.queryBuilder().select('*').from('news');
+      // const users = await knex.queryBuilder().select('*').from('users');
     } catch (error) {
       console.log(error);
     }
   }
-  console.log(config?.migrations?.directory);
 };
 
 initDatabase();

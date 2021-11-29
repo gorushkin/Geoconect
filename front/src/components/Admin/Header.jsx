@@ -10,7 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const {
-    user: { isAuthorized },
+    user: { isAuthorized, name },
   } = useSelector((state) => state);
 
   const logoutHandler = () => {
@@ -39,7 +39,7 @@ const Header = () => {
           </Nav>
           {isAuthorized && (
             <Nav>
-              <NavDropdown title="User" id="basic-nav-dropdown">
+              <NavDropdown title={name} id="basic-nav-dropdown">
                 <NavDropdown.Item>Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>

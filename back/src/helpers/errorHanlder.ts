@@ -1,18 +1,19 @@
 import { Request, Response, ErrorRequestHandler, NextFunction } from 'express';
 
 export class CustomError extends Error {
-  status: string;
+  status: number;
 
-  constructor(error: string, status: string) {
+  constructor(error: string, status: number) {
     super(error);
     this.status = status;
   }
 }
 
 export const ErrorHandler: ErrorRequestHandler = (error, _req, res, next) => {
+  console.log('error: ', error);
   const message = error instanceof Error ? error.message : error;
-  console.log('ErrorHandler: ', message);
-  res.status(500).send(message);
+  const status = error instanceof CustomError ? error.status : 500;
+  res.status(status).send(message);
   next();
 };
 
