@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
       <Container>
-        <Link href="/admin" passHref>
+        <Link href="/" passHref>
           <Navbar.Brand>Geoconect</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

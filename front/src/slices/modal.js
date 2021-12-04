@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { show: false, body: '', type: '', onConfirm: null, color: 'info' };
+const initialState = { show: false, body: '', type: '', color: 'info' };
 
 const slice = createSlice({
   name: 'modal',

@@ -11,3 +11,11 @@
 .badge__link {
   cursor: pointer;
 }
+
+.notification__alert {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1001;
+  box-sizing: border-box;
+}

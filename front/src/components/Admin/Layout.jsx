@@ -2,9 +2,9 @@ import { Container, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import LoginForm from '../../components/Admin/LoginForm';
-import { useClient } from '../../hooks';
 import Header from '../Admin/Header';
 
+import Alert from './Alert';
 import ModalWindow from './ModalWindow';
 
 const Layout = ({ children, title, closed = false }) => {
@@ -15,6 +15,7 @@ const Layout = ({ children, title, closed = false }) => {
   return (
     <>
       <Header />
+      <Alert />
       <ModalWindow />
       <Container>
         <Row className="justify-content-center pt-3 mb-3">

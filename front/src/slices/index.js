@@ -1,9 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import alert, { actions as alertActions } from './alert';
 import modal, { actions as modalActions } from './modal';
 import user, { asyncActions as userAsyncActions, actions as userActions } from './user';
 
-const reducer = combineReducers({ user, modal });
+const reducer = combineReducers({ user, modal, alert });
 
 export default configureStore({
   reducer,
@@ -19,4 +20,4 @@ export default configureStore({
       },
     }),
 });
-export const actions = { ...userAsyncActions, ...userActions, ...modalActions };
+export const actions = { ...userAsyncActions, ...userActions, ...modalActions, ...alertActions };

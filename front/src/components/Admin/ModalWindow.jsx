@@ -11,7 +11,9 @@ const ModalWindow = () => {
 
   const onConfirmHandler = () => {
     handleClose();
-    onConfirm();
+    if (onConfirm) {
+      onConfirm();
+    }
   };
 
   return (

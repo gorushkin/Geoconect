@@ -38,9 +38,7 @@ const slice = createSlice({
       localStorage.setItem('user', JSON.stringify(user));
       return { ...state, name: user.name, isAuthorized: true };
     });
-    builder.addCase(authLoginhRequest.rejected, (state, { payload }) => {
-      return { ...state, isAuthorized: false };
-    });
+    builder.addCase(authLoginhRequest.rejected, () => initialState);
   },
 });
 
