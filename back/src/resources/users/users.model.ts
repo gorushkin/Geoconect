@@ -35,6 +35,10 @@ export default class User extends Model {
     return encrypt(password) === this.hashedPassword;
   }
 
+  isAdmin() {
+    return this.role == 'admin';
+  }
+
   info() {
     return { id: this.id, email: this.email, name: this.name, role: this.role };
   }
