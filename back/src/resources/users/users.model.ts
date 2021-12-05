@@ -16,11 +16,11 @@ export default class User extends Model {
 
   static jsonSchema = {
     type: 'object',
-    required: ['name', 'email', 'role', 'password'],
+    required: ['email', 'role', 'password'],
 
     properties: {
       id: { type: 'integer' },
-      name: { type: 'string', minLength: 3 },
+      name: { type: 'string' },
       email: { type: 'string', format: 'email' },
       role: { type: 'string', enum: ['user', 'admin'], default: 'user' },
       password: { type: 'string', minLength: 3 },

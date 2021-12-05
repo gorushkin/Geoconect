@@ -21,7 +21,10 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncActions.authLoginhRequest.rejected, (state, { payload }) => {
+    builder.addCase(asyncActions.authLogin.rejected, (state, { payload }) => {
+      return { ...state, show: true, body: payload };
+    });
+    builder.addCase(asyncActions.createUser.rejected, (state, { payload }) => {
       return { ...state, show: true, body: payload };
     });
   },

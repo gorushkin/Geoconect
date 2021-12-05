@@ -16,7 +16,9 @@ const config = {
 export const apiRoutes = {
   AUTH: 'auth',
   NEWS: 'news',
+  USERS: 'users',
   IMAGES: 'images',
+  TEST: 'test',
 };
 
 export const routes = {
@@ -37,8 +39,7 @@ const instance = axios.create({
   }),
 });
 
-console.log(`${config.ORIGIN}${config.API_BASE_URL}`);
-// TODO: Добавить вывод алерта с ошибкой
+// TODO: вывод ошибок с новой строки
 
 const errorHandler = async (promise) => {
   try {
@@ -46,10 +47,9 @@ const errorHandler = async (promise) => {
   } catch (error) {
     const message =
       error.response && typeof error.response.data === 'object'
-        ? Object.values(error.response.data).join(' \n')
-        : error.message;
-    console.log('message: ', message);
-    return { data: null };
+        ? Object.values(error.response.data).join('\n')
+        : error.response?.data || error.message;
+    throw Error(message);
   }
 };
 
@@ -78,5 +78,8 @@ export const updateNewsRequest = (id, data) => {
 };
 
 export const deleteNewsRequest = (id) => errorHandler(instance.delete(`${apiRoutes.NEWS}/${id}`));
+
+export const createUserRequest = (data) => errorHandler(instance.post(apiRoutes.USERS, data));
+export const testRequest = () => errorHandler(instance.post(apiRoutes.TEST));
 
 export default instance;

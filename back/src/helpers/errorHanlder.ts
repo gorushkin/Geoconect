@@ -1,4 +1,5 @@
 import { Request, Response, ErrorRequestHandler, NextFunction } from 'express';
+import { ValidationError } from 'objection';
 
 export class CustomError extends Error {
   status: number;
@@ -10,11 +11,15 @@ export class CustomError extends Error {
 }
 
 export const ErrorHandler: ErrorRequestHandler = (error, _req, res, next) => {
-  console.log('error: ', error);
-  const message = error instanceof Error ? error.message : error;
-  const status = error instanceof CustomError ? error.status : 500;
-  res.status(status).send(message);
-  next();
+  if (error instanceof ValidationError) {
+    const message = error.message.split(', ');
+    res.status(400).send(message);
+  } else {
+    const message = error instanceof Error ? error.message : error;
+    const status = error instanceof CustomError ? error.status : 500;
+    res.status(status).send(message);
+    next();
+  }
 };
 
 export const errorWrapper =

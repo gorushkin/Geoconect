@@ -14,7 +14,7 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch(actions.authLoginhRequest(values));
+    dispatch(actions.authLogin(values));
   };
 
   useEffect(() => {

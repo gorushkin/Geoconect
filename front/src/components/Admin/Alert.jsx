@@ -7,18 +7,20 @@ import { actions } from '../../slices';
 const ModalWindow = () => {
   const { show, body, type, color } = useSelector((state) => state.alert);
   const dispatch = useDispatch();
-  const [timer, setTimer] = useState();
+  // const [timer, setTimer] = useState();
 
   const handleClose = () => dispatch(actions.hideAlert());
 
-  useEffect(() => {
-    setTimer(
-      setTimeout(() => {
-        handleClose();
-      }, 5000)
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show, body]);
+  // TODO: Настроить автозкрытие алерта
+
+  // useEffect(() => {
+  //   setTimer(
+  //     setTimeout(() => {
+  //       handleClose();
+  //     }, 5000)
+  //   );
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [show, body]);
 
   return (
     <div className="notification__alert">
