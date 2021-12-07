@@ -8,6 +8,7 @@ import fileUpload from 'express-fileupload';
 import path from 'path';
 import { ErrorHandler } from './helpers/errorHanlder';
 import { authMiddleware } from './resources/auth/auth.services';
+import { RequestWithUser } from './resources/users/users.services';
 const dirname = path.join(path.resolve());
 
 const app = express();
@@ -32,7 +33,7 @@ app.use('/api/test', (_req: Request, res: Response) =>
   res.status(200).json({ message: 'Server is running!!!' })
 );
 
-app.use('/api/authtest', authMiddleware, (_req: Request, res: Response) =>
+app.use('/api/authtest', authMiddleware, (_req: RequestWithUser, res: Response) =>
   res.status(200).send({ message: 'Server is running!!!' })
 );
 

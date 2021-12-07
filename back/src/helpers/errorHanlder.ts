@@ -18,8 +18,8 @@ export const ErrorHandler: ErrorRequestHandler = (error, _req, res, next) => {
     const message = error instanceof Error ? error.message : error;
     const status = error instanceof CustomError ? error.status : 500;
     res.status(status).send(message);
-    next();
   }
+  next();
 };
 
 export const errorWrapper =

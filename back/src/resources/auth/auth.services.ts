@@ -12,9 +12,14 @@ export const createToken = (user: User, password: string) => {
   return token;
 };
 
+// TODO: передавать в next() объект с текстом и статусом
+
 export const authMiddleware = async (req: RequestWithUser, _res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
-  if (!authorization) throw new CustomError('UNAUTHORIZED', 401);
+  if (!authorization) {
+    const error = new CustomError('UNAUTHORIZED', 401);
+    return next(error);
+  }
   const data = jwt.verify(authorization, CONFIG.SECRET);
   if (typeof data !== 'string') {
     const { id } = data;
@@ -25,6 +30,6 @@ export const authMiddleware = async (req: RequestWithUser, _res: Response, next:
 };
 
 export const forAdminOnly = async (req: RequestWithUser, _res: Response, next: NextFunction) => {
-  if (!req.user?.isAdmin()) throw Error('You can not do this action');
-  next();
+  if (!req.user?.isAdmin()) return next('You can not do this action');
+  return next();
 };
