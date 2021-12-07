@@ -24,7 +24,7 @@ const ModalWindow = () => {
 
   return (
     <div className="notification__alert">
-      <Alert show={show} variant="danger" onClose={handleClose} dismissible>
+      <Alert show={show} variant={color} onClose={handleClose} dismissible>
         {/* <Alert.Heading>Hey, nice to see you</Alert.Heading> */}
         <p className="mb-0">{body}</p>
       </Alert>

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 
-import axios, { apiRoutes, authRequest, createUserRequest } from '../api';
+import { authRequest, createUserRequest } from '../api';
 
 const initialState = {
   name: '',
@@ -11,21 +11,13 @@ const initialState = {
 };
 
 const authLogin = createAsyncThunk('user/auth', async (values, { rejectWithValue }) => {
-  try {
-    const { data } = await authRequest(values);
-    return data;
-  } catch (error) {
-    return rejectWithValue(error.response.data);
-  }
+  const { data } = await authRequest(values);
+  return data;
 });
 
 const createUser = createAsyncThunk('user/create', async (values, { rejectWithValue }) => {
-  try {
-    const { data } = await createUserRequest(values);
-    return data;
-  } catch (error) {
-    return rejectWithValue(error.message);
-  }
+  const { data } = await createUserRequest(values);
+  return data;
 });
 
 const slice = createSlice({
@@ -38,15 +30,23 @@ const slice = createSlice({
     },
     userInit(state) {
       const token = Cookies.get('token');
+      const isAdmin = Cookies.get('isAdmin');
       const user = JSON.parse(localStorage.getItem('user'));
-      return token ? { ...state, isAuthorized: true, name: user.name } : initialState;
+      return token ? { ...state, isAuthorized: true, name: user.name, isAdmin } : initialState;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(authLogin.fulfilled, (state, { payload: { token, user } }) => {
       Cookies.set('token', token);
+      Cookies.set('isAdmin', user.role === 'admin');
       localStorage.setItem('user', JSON.stringify(user));
-      return { ...state, name: user.name, isAuthorized: true, isAdmin: user.role === 'admin' };
+      return {
+        ...state,
+        name: user.name,
+        isAuthorized: true,
+        isAdmin: user.role === 'admin',
+        token,
+      };
     });
     builder.addCase(authLogin.rejected, () => initialState);
   },

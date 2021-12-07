@@ -21,12 +21,15 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncActions.authLogin.rejected, (state, { payload }) => {
-      return { ...state, show: true, body: payload };
+    // builder.addCase(asyncActions.authLogin.rejected, (state, { payload }) => {
+    //   return { ...state, show: true, body: payload, color: 'danger'  };
+    // });
+    builder.addCase(asyncActions.createUser.fulfilled, (state, { payload }) => {
+      return { ...state, show: true, body: payload, color: 'success' };
     });
-    builder.addCase(asyncActions.createUser.rejected, (state, { payload }) => {
-      return { ...state, show: true, body: payload };
-    });
+    // builder.addCase(asyncActions.createUser.rejected, (state, { payload }) => {
+    //   return { ...state, show: true, body: payload, color: 'danger'  };
+    // });
   },
 });
 

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+import store, { actions } from '../slices';
+
 const serverTypeMapping = {
   dev: process.env.NEXT_PUBLIC_DEV_ORIGIN,
   local: process.env.NEXT_PUBLIC_LOCAL_ORIGIN,
@@ -19,6 +21,7 @@ export const apiRoutes = {
   USERS: 'users',
   IMAGES: 'images',
   TEST: 'test',
+  AUTH__TEST: 'authtest',
 };
 
 export const routes = {
@@ -28,16 +31,22 @@ export const routes = {
   IMAGES: `${config.ORIGIN}/images`,
 };
 
-const token = Cookies.get('token');
-
 const instance = axios.create({
   baseURL: `${config.ORIGIN}${config.API_BASE_URL}`,
-  ...(token && {
-    headers: {
-      Authorization: token,
-    },
-  }),
 });
+
+instance.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get('token');
+
+    if (token) {
+      config.headers.Authorization = token;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 // TODO: вывод ошибок с новой строки
 
@@ -49,13 +58,17 @@ const errorHandler = async (promise) => {
       error.response && typeof error.response.data === 'object'
         ? Object.values(error.response.data).join('\n')
         : error.response?.data || error.message;
-    throw Error(message);
+    if (message) {
+      store.dispatch(actions.showAlert({ body: message, color: 'danger' }));
+    } else {
+      throw Error(error);
+    }
   }
 };
 
-export const authRequest = (data) => instance.post(apiRoutes.AUTH, data);
+export const authRequest = (data) => errorHandler(instance.post(apiRoutes.AUTH, data));
 
-export const postRequest = () => instance.get(apiRoutes.NEWS);
+export const postRequest = () => errorHandler(instance.get(apiRoutes.NEWS));
 
 export const createNewsRequest = (data) => {
   const formData = new FormData();
@@ -80,6 +93,6 @@ export const updateNewsRequest = (id, data) => {
 export const deleteNewsRequest = (id) => errorHandler(instance.delete(`${apiRoutes.NEWS}/${id}`));
 
 export const createUserRequest = (data) => errorHandler(instance.post(apiRoutes.USERS, data));
-export const testRequest = () => errorHandler(instance.post(apiRoutes.TEST));
+export const testRequest = () => errorHandler(instance.post(apiRoutes.AUTH__TEST));
 
 export default instance;
