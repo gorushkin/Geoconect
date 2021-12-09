@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import ContactForm from '../ContactForm';
 import News from '../News';
 
 const Main = ({ news }) => {
@@ -231,34 +232,7 @@ const Main = ({ news }) => {
         </div>
       </section>
 
-      <section id="contact" className="contact">
-        <div className="wrapper">
-          <div className="contact__inner">
-            <div className="contact__text-wrapper">
-              <h2 className="contact__title">Оставьте заявку на бесплатную консультацию</h2>
-              <p className="contact__text">Мы перезвоним Вам в ближайшее время</p>
-            </div>
-            <form className="contact__form" action="">
-              <input
-                type="text"
-                className="contact__input contact__from-element"
-                placeholder="Ваше имя"
-              />
-              <input
-                type="text"
-                className="contact__input contact__from-element"
-                placeholder="+7 (___) ___-__-__"
-              />
-              <button type="submit" className="contact__btn btn contact__from-element">
-                Отправить заявку
-              </button>
-              <p className="contact__warning">
-                Нажимая кнопку Вы даете согласие на <a href="">обработку персональных данных</a>
-              </p>
-            </form>
-          </div>
-        </div>
-      </section>
+      <ContactForm />
     </main>
   );
 };

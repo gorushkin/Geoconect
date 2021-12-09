@@ -22,6 +22,7 @@ export const apiRoutes = {
   IMAGES: 'images',
   TEST: 'test',
   AUTH__TEST: 'authtest',
+  CONTACT: 'contact'
 };
 
 export const routes = {
@@ -94,5 +95,6 @@ export const deleteNewsRequest = (id) => errorHandler(instance.delete(`${apiRout
 
 export const createUserRequest = (data) => errorHandler(instance.post(apiRoutes.USERS, data));
 export const testRequest = () => errorHandler(instance.post(apiRoutes.AUTH__TEST));
+export const contactRequest = () => errorHandler(instance.post(apiRoutes.CONTACT));
 
 export default instance;
