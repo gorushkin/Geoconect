@@ -14,9 +14,8 @@ const getUsers = async (_req: RequestWithUser, res: Response) => {
 
 const createUser = async (req: RequestWithUser, res: Response) => {
   const { name, email, password } = req.body;
-  await User.checkEmail(email);
-  const user = User.createUser(name, email, password);
-  await User.addUser(user);
+  const user = await User.addUser(name, email, password);
+  // TODO: добавить возврат юзера
   res.status(200).json('createUser');
 };
 
