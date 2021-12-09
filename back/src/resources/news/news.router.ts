@@ -1,48 +1,32 @@
 import express, { Request, Response } from 'express';
 import News from './news.model';
-import { fileHandler, imgRemover } from './news.services';
-import { FileArray } from 'express-fileupload';
+import { news } from './news.services';
+import { CustomError } from '../../helpers/errorHanlder';
 
 // TODO: при редкатировании создавать копии в другой таблице для отката
 
 const router = express.Router();
+import { errorWrapper } from '../../helpers/errorHanlder';
 
 const getAllnews = async (_req: Request, res: Response) => {
-  try {
-    const newsList = await News.query();
-    res.status(200).json(newsList);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : error;
-    res.status(500).json({ message });
-  }
+  const newsList = await News.query();
+  res.status(200).json(newsList);
 };
 
 const createNews = async (req: Request, res: Response) => {
-  try {
-    const imgSoruce = req.files ? await fileHandler(req.files as FileArray | undefined) : undefined;
-    const newsItem = News.fromJson({ ...req.body, ...(imgSoruce && { img_src: imgSoruce }) });
-    await News.query().insert(newsItem);
-    res.status(200).json(newsItem);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : error;
-    res.status(500).json({ message });
-  }
+  const newsItem = await news.addNews(req);
+  res.status(200).json(newsItem);
 };
 
 const getNews = async (req: Request, res: Response) => {
   const {
     params: { id },
   } = req;
-  if (id) {
-    const newsItem = await News.query().findById(id);
-    if (newsItem) {
-      res.status(200).json(newsItem);
-    } else {
-      res.status(404).json({ message: 'Новости с этим номером нет' });
-    }
-  } else {
-    res.status(404).json({ message: 'Новости с этим номером нет' });
-  }
+
+  if (!id) throw new CustomError('News id is required', 400);
+
+  const newsItem = await news.getNews(id);
+  res.status(200).json(newsItem);
 };
 
 const updateNews = async (req: Request, res: Response) => {
@@ -51,58 +35,28 @@ const updateNews = async (req: Request, res: Response) => {
     body,
     files,
   } = req;
-  try {
-    if (id) {
-      const newsItem = await News.query().findById(id);
 
-      const imgSoruce = files ? await fileHandler(files as FileArray | undefined) : undefined;
+  if (!id) throw new CustomError('News id is required', 400);
 
-      if (imgSoruce) {
-        const previousImgName = newsItem.img_src;
-        await imgRemover(previousImgName);
-      }
-
-      const updatedNewsItem = await News.query()
-        .findById(id)
-        .patch({ ...body, ...(imgSoruce && { img_src: imgSoruce }) });
-
-      if (updatedNewsItem) {
-        res.status(200).json(updatedNewsItem);
-      } else {
-        res.status(404).json({ message: 'Новости с этим номером нет' });
-      }
-    } else {
-      res.status(404).json({ message: 'Новости с этим номером нет' });
-    }
-  } catch (error) {
-    const message = error instanceof Error ? error.message : error;
-    res.status(500).json({ message });
-  }
+  const updatedNewsItem = await news.updateNews(id, body, files);
+  res.status(200).json(updatedNewsItem);
 };
 
 const deleteNews = async (req: Request, res: Response) => {
   const {
     params: { id },
   } = req;
-  if (id) {
-    const newsItem = await News.query().findById(id);
-    const imgName = newsItem.img_src;
-    const deletedNewsItem = await News.query().deleteById(id);
-    if (deletedNewsItem) {
-      res.status(200).json(deletedNewsItem);
-      await imgRemover(imgName);
-    } else {
-      res.status(404).json({ message: 'Что-то пошло не так' });
-    }
-  } else {
-    res.status(404).json({ message: 'Новости с этим номером нет' });
-  }
+
+  if (!id) throw new CustomError('News id is required', 400);
+
+  const deletedNewsItem = await news.deleteNews(id);
+  res.status(200).json(deletedNewsItem);
 };
 
-router.get('/', getAllnews);
-router.post('/', createNews);
-router.get('/:id', getNews);
-router.patch('/:id', updateNews);
-router.delete('/:id', deleteNews);
+router.get('/', errorWrapper(getAllnews));
+router.post('/', errorWrapper(createNews));
+router.get('/:id', errorWrapper(getNews));
+router.patch('/:id', errorWrapper(updateNews));
+router.delete('/:id', errorWrapper(deleteNews));
 
 export { router };

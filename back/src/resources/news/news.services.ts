@@ -3,6 +3,9 @@ import path from 'path';
 const dirname = path.join(path.resolve());
 import { v4 as uuid } from 'uuid';
 import { promises as fs } from 'fs';
+import express, { Request, Response } from 'express';
+import News from './news.model';
+import { CustomError } from '../../helpers/errorHanlder';
 
 const getFileExtension = (filename: string) => filename.split('.').pop();
 
@@ -49,3 +52,47 @@ export const imgRemover = async (filename: string) => {
     console.log(message);
   }
 };
+
+export const addNews = async (req: Request) => {
+  const imgSoruce = req.files ? await fileHandler(req.files as FileArray | undefined) : undefined;
+  const newsItem = News.fromJson({ ...req.body, ...(imgSoruce && { img_src: imgSoruce }) });
+  return await News.query().insert(newsItem);
+};
+
+export const getNews = async (id: string) => {
+  const newsItem = await News.query().findById(id);
+  if (!newsItem) throw new CustomError('Новости с этим номером нет!', 403);
+  return newsItem;
+};
+
+export const updateNews = async (id: string, body: any, files: FileArray | undefined) => {
+  const newsItem = await News.query().findById(id);
+  const imgSoruce = files ? await fileHandler(files as FileArray | undefined) : undefined;
+
+  if (imgSoruce) {
+    const previousImgName = newsItem.img_src;
+    await imgRemover(previousImgName);
+  }
+
+  const updatedNewsItem = await News.query()
+    .findById(id)
+    .patch({ ...body, ...(imgSoruce && { img_src: imgSoruce }) });
+
+  // TODO: Переделать ошибку.
+
+  if (!updatedNewsItem) throw new CustomError('News id is required', 400);
+  return updatedNewsItem;
+};
+
+export const deleteNews = async (id: string) => {
+  const newsItem = await News.query().findById(id);
+  const imgName = newsItem.img_src;
+  const deletedNewsItem = await News.query().deleteById(id);
+
+  if (!deletedNewsItem) throw new CustomError('Что-то пошло не так', 400);
+
+  await imgRemover(imgName);
+  return deletedNewsItem;
+};
+
+export const news = { addNews, getNews, updateNews, deleteNews };
