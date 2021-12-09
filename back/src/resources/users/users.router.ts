@@ -1,4 +1,4 @@
-import express, {  Response } from 'express';
+import express, { Response } from 'express';
 // TODO: при редкатировании создавать копии в другой таблице для отката
 import { errorWrapper } from '../../helpers/errorHanlder';
 import { forAdminOnly } from '../auth/auth.services';
@@ -14,8 +14,8 @@ const getUsers = async (_req: RequestWithUser, res: Response) => {
 
 const createUser = async (req: RequestWithUser, res: Response) => {
   const { name, email, password } = req.body;
-  const user = await  User.createUser(name, email, password);
   await User.checkEmail(email);
+  const user = User.createUser(name, email, password);
   await User.addUser(user);
   res.status(200).json('createUser');
 };

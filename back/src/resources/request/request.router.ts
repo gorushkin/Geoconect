@@ -1,19 +1,20 @@
 import express, { Request, Response } from 'express';
 import Requests from './request.services';
 const router = express.Router();
+import { errorWrapper } from '../../helpers/errorHanlder';
 
 const getRequests = async (_req: Request, res: Response) => {
-  const requests = Requests.getRequests();
+  const requests = await Requests.getRequests();
   res.status(200).send(requests);
 };
 
 const createRequest = async (req: Request, res: Response) => {
   const { email, phone } = req.body;
-  await Requests.createRequest(phone, email);
-  res.status(200).send('createRequest');
+  const request = await Requests.addRequest(phone, email);
+  res.status(200).send(request);
 };
 
-router.get('/', getRequests);
-router.post('/', createRequest);
+router.get('/', errorWrapper(getRequests));
+router.post('/', errorWrapper(createRequest));
 
 export { router };
