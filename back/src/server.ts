@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { router as news } from './resources/news/news.router';
 import { router as users } from './resources/users/users.router';
 import { router as auth } from './resources/auth/auth.router';
-import { router as request } from './resources/request/request.router';
+import { router as applications } from './resources/applications/applications.router';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 
@@ -29,7 +29,7 @@ app.use((req, _res, next) => {
 app.use('/api/auth', auth);
 app.use('/api/news', news);
 app.use('/api/users', authMiddleware, users);
-app.use('/api/request', request);
+app.use('/api/applications', applications);
 
 app.use('/api/request', (req: Request, res: Response) => {
   console.log(req.body);
@@ -42,6 +42,10 @@ app.use('/api/test', (_req: Request, res: Response) =>
 
 app.use('/api/authtest', authMiddleware, (_req: RequestWithUser, res: Response) =>
   res.status(200).send({ message: 'Server is running!!!' })
+);
+
+app.use('*', (_req: Request, res: Response) =>
+  res.status(418).json({ message: 'I\'m a teapot' })
 );
 
 app.use(ErrorHandler);

@@ -1,6 +1,8 @@
 import { Model } from 'objection';
 
-export default class Requests extends Model {
+// TODO: переименовать табблицу в БД и миграциях
+
+export default class Applications extends Model {
   static get tableName() {
     return 'requests';
   }
@@ -19,7 +21,7 @@ export default class Requests extends Model {
       id: { type: 'integer' },
       email: { type: 'string', minLength: 1 },
       phone: { type: 'string', minLength: 1 },
-      body: { type: 'string', minLength: 1 },
+      body: { type: 'string' },
     },
   };
 }

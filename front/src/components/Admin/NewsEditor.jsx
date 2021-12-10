@@ -16,7 +16,7 @@ const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
   ssr: false,
 });
 
-const Editor = ({ onSubmit, data, edit = false }) => {
+const NewsEditor = ({ onSubmit, data, edit = false }) => {
   const {
     register,
     handleSubmit,
@@ -63,7 +63,6 @@ const Editor = ({ onSubmit, data, edit = false }) => {
       onConfirm: async () => {
         const result = await deleteNewsRequest(id);
         if (result) {
-          console.log('redirect');
           router.push(routes.NEWS);
         }
       },
@@ -183,4 +182,4 @@ const Editor = ({ onSubmit, data, edit = false }) => {
   );
 };
 
-export default Editor;
+export default NewsEditor;

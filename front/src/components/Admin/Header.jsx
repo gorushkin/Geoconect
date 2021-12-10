@@ -27,14 +27,17 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link href="/admin" passHref>
+            <Link href={routes.ADMIN} passHref>
               <Nav.Link>Home</Nav.Link>
             </Link>
-            <Link href="/admin/news" passHref>
+            <Link href={routes.NEWS} passHref>
               <Nav.Link>News</Nav.Link>
             </Link>
             <Link href="/admin/add_news" passHref>
               <Nav.Link>Add News</Nav.Link>
+            </Link>
+            <Link href={routes.APPLICATIONS} passHref>
+              <Nav.Link>Applications</Nav.Link>
             </Link>
           </Nav>
           {isAuthorized && (

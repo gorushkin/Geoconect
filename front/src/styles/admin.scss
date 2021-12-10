@@ -19,3 +19,15 @@
   z-index: 1001;
   box-sizing: border-box;
 }
+
+.applications__item {
+  p {
+    &:not(:last-of-type) {
+      margin-right: 15px;
+    }
+  }
+}
+
+.applications__table-row {
+  cursor: pointer;
+}

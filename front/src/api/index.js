@@ -22,13 +22,16 @@ export const apiRoutes = {
   IMAGES: 'images',
   TEST: 'test',
   AUTH__TEST: 'authtest',
-  CONTACT: 'contact'
+  APPLICATIONS: 'applications',
 };
 
 export const routes = {
+  ADMIN: '/admin',
   LOGIN: '/admin/login',
   NEWS: '/admin/news',
+  APPLICATIONS: '/admin/applications',
   EDIT_NEWS: '/admin/edit_news',
+  EDIT_APPLICATION: '/admin/edit_application',
   IMAGES: `${config.ORIGIN}/images`,
 };
 
@@ -61,6 +64,7 @@ const errorHandler = async (promise) => {
         : error.response?.data || error.message;
     if (message) {
       store.dispatch(actions.showAlert({ body: message, color: 'danger' }));
+      return { data: null };
     } else {
       throw Error(error);
     }
@@ -95,6 +99,12 @@ export const deleteNewsRequest = (id) => errorHandler(instance.delete(`${apiRout
 
 export const createUserRequest = (data) => errorHandler(instance.post(apiRoutes.USERS, data));
 export const testRequest = () => errorHandler(instance.post(apiRoutes.AUTH__TEST));
-export const contactRequest = () => errorHandler(instance.post(apiRoutes.CONTACT));
+
+export const getAllApplicationsRequest = () => errorHandler(instance.get(apiRoutes.APPLICATIONS));
+export const getApplicationRequest = (id) =>
+  errorHandler(instance.get(`${apiRoutes.APPLICATIONS}/${id}`));
+
+export const updateApplicationRequest = (id, data) =>
+  errorHandler(instance.post(`${apiRoutes.APPLICATIONS}/${id}`, data));
 
 export default instance;

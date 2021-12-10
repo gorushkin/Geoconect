@@ -74,9 +74,10 @@ export const updateNews = async (id: string, body: any, files: FileArray | undef
     await imgRemover(previousImgName);
   }
 
-  const updatedNewsItem = await News.query()
-    .findById(id)
-    .patch({ ...body, ...(imgSoruce && { img_src: imgSoruce }) });
+  const updatedNewsItem = await News.query().patchAndFetchById(id, {
+    ...body,
+    ...(imgSoruce && { img_src: imgSoruce }),
+  });
 
   // TODO: Переделать ошибку.
 
