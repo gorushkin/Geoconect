@@ -10,12 +10,12 @@ const initialState = {
   isAdmin: false,
 };
 
-const authLogin = createAsyncThunk('user/auth', async (values, { rejectWithValue }) => {
+const authLogin = createAsyncThunk('user/auth', async (values) => {
   const { data } = await authRequest(values);
   return data;
 });
 
-const createUser = createAsyncThunk('user/create', async (values, { rejectWithValue }) => {
+const createUser = createAsyncThunk('user/create', async (values) => {
   const { data } = await createUserRequest(values);
   return data;
 });

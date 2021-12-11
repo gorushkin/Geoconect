@@ -54,7 +54,7 @@ instance.interceptors.request.use(
 
 // TODO: вывод ошибок с новой строки
 
-const errorHandler = async (promise) => {
+const errorHandler = async (promise, toState = false) => {
   try {
     return await promise;
   } catch (error) {
@@ -64,6 +64,7 @@ const errorHandler = async (promise) => {
         : error.response?.data || error.message;
     if (message) {
       store.dispatch(actions.showAlert({ body: message, color: 'danger' }));
+      if (toState) throw Error();
       return { data: null };
     } else {
       throw Error(error);
@@ -71,7 +72,9 @@ const errorHandler = async (promise) => {
   }
 };
 
-export const authRequest = (data) => errorHandler(instance.post(apiRoutes.AUTH, data));
+const withStoreRequestError = (promise) => errorHandler(promise, true);
+
+export const authRequest = (data) => withStoreRequestError(instance.post(apiRoutes.AUTH, data));
 
 export const postRequest = () => errorHandler(instance.get(apiRoutes.NEWS));
 
@@ -97,7 +100,9 @@ export const updateNewsRequest = (id, data) => {
 
 export const deleteNewsRequest = (id) => errorHandler(instance.delete(`${apiRoutes.NEWS}/${id}`));
 
-export const createUserRequest = (data) => errorHandler(instance.post(apiRoutes.USERS, data));
+export const createUserRequest = (data) =>
+  withStoreRequestError(instance.post(apiRoutes.USERS, data));
+
 export const testRequest = () => errorHandler(instance.post(apiRoutes.AUTH__TEST));
 
 export const getAllApplicationsRequest = () => errorHandler(instance.get(apiRoutes.APPLICATIONS));
