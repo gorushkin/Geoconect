@@ -12,6 +12,8 @@ const getUsers = async (_req: RequestWithUser, res: Response) => {
   res.status(200).json(users);
 };
 
+// TODO: Валидации перенести в модели
+
 const createUser = async (req: RequestWithUser, res: Response) => {
   const { name, email, password } = req.body;
   const user = await User.addUser(name, email, password);
