@@ -20,4 +20,5 @@ export default configureStore({
       },
     }),
 });
-export const actions = { ...userAsyncActions, ...userActions, ...modalActions, ...alertActions };
+export const actions = { ...userActions, ...modalActions, ...alertActions };
+export const asyncActions = { ...userAsyncActions };

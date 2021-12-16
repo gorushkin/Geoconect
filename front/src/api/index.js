@@ -23,15 +23,18 @@ export const apiRoutes = {
   TEST: 'test',
   AUTH__TEST: 'authtest',
   APPLICATIONS: 'applications',
+  INFO: 'info',
 };
 
-export const routes = {
+export const PATH_ROUTES = {
   ADMIN: '/admin',
   LOGIN: '/admin/login',
+  SIGN_UP: '/admin/signup',
   NEWS: '/admin/news',
+  NEWS_EDIT: '/admin/add_news',
+  NEWS_ADD: '/admin/edit_news',
   APPLICATIONS: '/admin/applications',
-  EDIT_NEWS: '/admin/edit_news',
-  EDIT_APPLICATION: '/admin/edit_application',
+  APPLICATION_EDIT: '/admin/edit_application',
   IMAGES: `${config.ORIGIN}/images`,
 };
 
@@ -105,7 +108,13 @@ export const createUserRequest = (data) =>
 
 export const testRequest = () => errorHandler(instance.post(apiRoutes.AUTH__TEST));
 
+export const getServerInfoRequest = () => errorHandler(instance.get(apiRoutes.INFO));
+
 export const getAllApplicationsRequest = () => errorHandler(instance.get(apiRoutes.APPLICATIONS));
+
+export const createApplicationRequest = (data) =>
+  errorHandler(instance.post(apiRoutes.APPLICATIONS, data));
+
 export const getApplicationRequest = (id) =>
   errorHandler(instance.get(`${apiRoutes.APPLICATIONS}/${id}`));
 

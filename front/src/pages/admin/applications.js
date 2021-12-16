@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { Container, Row, ListGroup, Table } from 'react-bootstrap';
 
 import { getAllApplicationsRequest } from '../../api';
-import { routes } from '../../api';
+import { PATH_ROUTES } from '../../api';
 import Layout from '../../components/Admin/Layout';
 
 const ApplicationItem = ({ item }) => {
   const router = useRouter();
 
-  const onEditClickHandler = () => router.push(`${routes.EDIT_APPLICATION}?id=${item.id}`);
+  const onEditClickHandler = () => router.push(`${PATH_ROUTES.APPLICATION_EDIT}?id=${item.id}`);
 
   return (
     <tr className="applications__table-row" onClick={onEditClickHandler}>

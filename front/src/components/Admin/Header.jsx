@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { routes } from '../../api';
+import { PATH_ROUTES } from '../../api';
+import { routes } from '../../constants';
 import { actions } from '../../slices';
 
-const Header = () => {
+const Header = ({ isPageClosed }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const {
@@ -15,8 +17,14 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(actions.logout());
-    router.push(routes.LOGIN);
+    router.push(PATH_ROUTES.LOGIN);
   };
+
+  const filteredRoutes = useMemo(
+    () => (isAuthorized ? routes : routes.filter(({ closed }) => !closed)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isAuthorized]
+  );
 
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
@@ -27,18 +35,11 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link href={routes.ADMIN} passHref>
-              <Nav.Link>Home</Nav.Link>
-            </Link>
-            <Link href={routes.NEWS} passHref>
-              <Nav.Link>News</Nav.Link>
-            </Link>
-            <Link href="/admin/add_news" passHref>
-              <Nav.Link>Add News</Nav.Link>
-            </Link>
-            <Link href={routes.APPLICATIONS} passHref>
-              <Nav.Link>Applications</Nav.Link>
-            </Link>
+            {filteredRoutes.map((route, id) => (
+              <Link key={id} href={route.href} passHref>
+                <Nav.Link>{route.name}</Nav.Link>
+              </Link>
+            ))}
           </Nav>
           {isAuthorized && (
             <Nav>

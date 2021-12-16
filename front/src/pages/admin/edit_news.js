@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { getNewsRequest, updateNewsRequest } from '../../api';
-import Editor from '../../components/Admin/Editor';
-import 'react-markdown-editor-lite/lib/index.css';
 import Layout from '../../components/Admin/Layout';
+import Editor from '../../components/Admin/NewsEditor';
+import 'react-markdown-editor-lite/lib/index.css';
 
 const EditNews = () => {
   const [news, setNews] = useState();

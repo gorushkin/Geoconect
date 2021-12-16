@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { Container, Row, ListGroup } from 'react-bootstrap';
 
 import { getAllNewsRequest } from '../../api';
-import { routes } from '../../api';
+import { PATH_ROUTES } from '../../api';
 import Layout from '../../components/Admin/Layout';
 
 const NewsItem = ({ item }) => {
   const router = useRouter();
 
-  const onEditClickHandler = () => router.push(`${routes.EDIT_NEWS}?id=${item.id}`);
+  const onEditClickHandler = () => router.push(`${PATH_ROUTES.NEWS_EDIT}?id=${item.id}`);
 
   return (
     <ListGroup.Item

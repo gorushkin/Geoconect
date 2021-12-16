@@ -7,7 +7,7 @@ import { Button, Form, Row, Col, NavItem } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
-import { routes } from '../../api';
+import { PATH_ROUTES } from '../../api';
 import { deleteNewsRequest } from '../../api';
 import { showModalWindow } from '../../utils';
 import 'react-markdown-editor-lite/lib/index.css';
@@ -48,11 +48,11 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
     const changedData = getValues();
     const isDataEqual = _.isEqual(changedData, { body: data.body, title: data.title });
     isDataEqual
-      ? router.push(routes.NEWS)
+      ? router.push(PATH_ROUTES.NEWS)
       : showModalWindow({
         title: 'Подтвердите действие',
         body: 'Вы уверены, что хотите отменить все изменения?',
-        onConfirm: () => router.push(routes.NEWS),
+        onConfirm: () => router.push(PATH_ROUTES.NEWS),
       });
   };
 
@@ -63,7 +63,7 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
       onConfirm: async () => {
         const result = await deleteNewsRequest(id);
         if (result) {
-          router.push(routes.NEWS);
+          router.push(PATH_ROUTES.NEWS);
         }
       },
     });
@@ -73,13 +73,13 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
     const file = getValues('file') ? getValues('file')[0] : null;
     const { data } = await onSubmit({ ...values, file });
     if (data) {
-      router.push(routes.NEWS);
+      router.push(PATH_ROUTES.NEWS);
     }
   };
 
   const setImage = (data) => {
     if (data) {
-      setImagePreview(`${routes.IMAGES}/${data.img_src}`);
+      setImagePreview(`${PATH_ROUTES.IMAGES}/${data.img_src}`);
     }
   };
 

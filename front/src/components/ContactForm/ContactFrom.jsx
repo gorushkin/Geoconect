@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form';
 
+import { createApplicationRequest } from '../../api';
+
 const ContactForm = () => {
   const {
     register,
@@ -8,9 +10,9 @@ const ContactForm = () => {
     clearErrors,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log('data: ', data);
-    console.log('onSubmit');
+  const onSubmit = async (vlaues) => {
+    const { data } = await createApplicationRequest(vlaues);
+    if (data) console.log(data);
   };
 
   return (

@@ -1,9 +1,9 @@
 import { Col, Row } from 'react-bootstrap';
 
 import { createNewsRequest } from '../../api';
-import Editor from '../../components/Admin/Editor';
-import 'react-markdown-editor-lite/lib/index.css';
 import Layout from '../../components/Admin/Layout';
+import Editor from '../../components/Admin/NewsEditor';
+import 'react-markdown-editor-lite/lib/index.css';
 
 const AddNews = () => {
   const onSubmit = (data) => createNewsRequest(data);

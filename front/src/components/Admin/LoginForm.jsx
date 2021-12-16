@@ -1,50 +1,49 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import Link from 'next/dist/client/link';
+import { Row, Col, Form, Button } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { actions } from '../../slices';
+import { PATH_ROUTES } from '../../api';
+import { asyncActions } from '../../slices';
 
 const Login = () => {
-  const router = useRouter();
-  const [values, setValues] = useState({ email: 'qwerty@qwe.com', password: '12345' });
-  const onChange = (e) => setValues((value) => ({ ...value, [e.target.name]: e.target.value }));
   const dispatch = useDispatch();
-  const { isAuthorized } = useSelector((state) => state.user);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(actions.authLogin(values));
-  };
+  const { register, handleSubmit } = useForm();
 
-  useEffect(() => {
-    if (isAuthorized) router.push('/admin/cms');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthorized]);
+  const onSubmit = async (data) => dispatch(asyncActions.authLogin(data));
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control
-          value={values.email}
-          onChange={onChange}
-          type="email"
-          placeholder="Enter email"
-          name="email"
-        />
+        <Form.Control {...register('email')} type="email" placeholder="Enter email" name="email" />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control onChange={onChange} type="password" placeholder="Password" name="password" />
+        <Form.Control
+          {...register('password')}
+          type="password"
+          placeholder="Password"
+          name="password"
+        />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <Row className="align-items-center">
+        <Col lg={2}>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Col>
+        <Col>
+          <Link href={PATH_ROUTES.SIGN_UP}>
+            <a>Create account</a>
+          </Link>
+        </Col>
+      </Row>
     </Form>
   );
 };
