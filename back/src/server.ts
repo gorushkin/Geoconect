@@ -6,11 +6,11 @@ import { router as applications } from './resources/applications/applications.ro
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import { sendMail, startSMTP } from './helpers/emailSender';
-
+import { User } from './resources/users/users.services';
 import path from 'path';
 import { ErrorHandler, errorWrapper } from './helpers/errorHanlder';
 import { authMiddleware } from './resources/auth/auth.services';
-import { RequestWithUser } from './resources/users/users.services';
+import { getUsers, RequestWithUser } from './resources/users/users.services';
 const dirname = path.join(path.resolve());
 
 const app = express();
@@ -30,7 +30,7 @@ app.use((req, _res, next) => {
 
 app.use('/api/auth', auth);
 app.use('/api/news', news);
-app.use('/api/users', authMiddleware, users);
+app.use('/api/users',  users);
 app.use('/api/applications', applications);
 
 app.use('/api/request', (req: Request, res: Response) => {
@@ -45,6 +45,12 @@ app.use('/api/test', (_req: Request, res: Response) =>
 app.use('/api/authtest', authMiddleware, (_req: RequestWithUser, res: Response) =>
   res.status(200).send({ message: 'Server is running!!!' })
 );
+
+app.use('/api/info', async (_req: RequestWithUser, res: Response) => {
+  const users = await User.getUsers();
+  const isAdmin = users.length === 0;
+  res.status(200).send({ isAdmin });
+});
 
 app.use(
   '/api/emailTest',

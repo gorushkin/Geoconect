@@ -1,10 +1,10 @@
-back_dev:
+start_b:
 	cd back; npm run dev
 
 back_build:
 	cd back; npm run build
 
-front_dev:
+start_f:
 	cd front; npm run dev
 
 front_build:

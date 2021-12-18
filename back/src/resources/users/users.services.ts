@@ -9,12 +9,23 @@ export const checkEmail = async (email: string) => {
   if (isEmailUsed) throw new CustomError('This email is used!', 409);
 };
 
-export const createUser = (name: string, email: string, password: string) =>
-  Users.fromJson({ name, email, password });
+export const createUser = (
+  name: string,
+  email: string,
+  password: string,
+  passwordConfirm: string,
+  role?: string
+) => Users.fromJson({ name, email, password, passwordConfirm, role });
 
-export const addUser = async (name: string, email: string, password: string) => {
+export const addUser = async (
+  name: string,
+  email: string,
+  password: string,
+  passwordConfirm: string,
+  role?: string
+) => {
   await User.checkEmail(email);
-  const user = User.createUser(name, email, password);
+  const user = User.createUser(name, email, password, passwordConfirm, role);
   return await Users.query().insert(user);
 };
 

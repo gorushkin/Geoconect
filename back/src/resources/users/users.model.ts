@@ -27,8 +27,17 @@ export default class User extends Model {
     },
   };
 
+  $beforeValidate(jsonSchema: any, json: any) {
+    if (json.password !== json.passwordConfirm) throw Error('Passwords must match');
+    return jsonSchema;
+  }
+
   set password(value: string) {
     this.hashedPassword = encrypt(value);
+  }
+
+  set passwordConfirm(_value: string) {
+    return;
   }
 
   verifyPassword(password: string) {

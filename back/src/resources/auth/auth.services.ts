@@ -3,7 +3,7 @@ import User from '../users/users.model';
 import jwt from 'jsonwebtoken';
 import { CONFIG } from '../../helpers/config';
 import { CustomError } from '../../helpers/errorHanlder';
-import { RequestWithUser } from '../users/users.services';
+import { getUsers, RequestWithUser } from '../users/users.services';
 
 export const createToken = (user: User, password: string) => {
   const compareResults = user.verifyPassword(password);
@@ -30,6 +30,8 @@ export const authMiddleware = async (req: RequestWithUser, _res: Response, next:
 };
 
 export const forAdminOnly = async (req: RequestWithUser, _res: Response, next: NextFunction) => {
-  if (!req.user?.isAdmin()) return next('You can not do this action');
+  const users = await getUsers();
+  const isThereAnyAdmin = users.length !== 0;
+  if (isThereAnyAdmin && !req.user?.isAdmin()) return next('You can not do this action');
   return next();
 };

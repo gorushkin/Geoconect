@@ -7,6 +7,7 @@ export const getApplications = async () => {
 
 export const addApplications = async (phone: string, email: string) => {
   const newRequest = Applications.fromJson({ email, phone });
+  console.log('newRequest: ', newRequest);
   return await Applications.query().insert(newRequest);
 };
 
