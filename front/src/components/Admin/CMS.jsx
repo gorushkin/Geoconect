@@ -6,7 +6,13 @@ import CreateUserForm from './CreateUserForm';
 const CMS = () => {
   const { user } = useSelector((state) => state);
 
-  return <>{user.isAdmin && <CreateUserForm />}</>;
+  return (
+    <>
+      <Col>
+        <p>Какая-то информация о системе</p>
+      </Col>
+    </>
+  );
 };
 
 export default CMS;

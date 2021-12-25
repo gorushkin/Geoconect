@@ -9,6 +9,9 @@ const serverTypeMapping = {
 };
 
 const ORIGIN = serverTypeMapping[process.env.NEXT_PUBLIC_TYPE] || process.env.NEXT_PUBLIC_ORIGIN;
+const isDev = process.env.NODE_ENV === 'development';
+
+export const assetPrefix = isDev ? ORIGIN : '';
 
 const config = {
   API_BASE_URL: '/api/',
@@ -28,14 +31,16 @@ export const apiRoutes = {
 
 export const PATH_ROUTES = {
   ADMIN: '/admin',
-  LOGIN: '/admin/login',
+  LOGIN: '/admin',
+  // LOGIN: '/admin/login',
   SIGN_UP: '/admin/signup',
   NEWS: '/admin/news',
-  NEWS_EDIT: '/admin/add_news',
-  NEWS_ADD: '/admin/edit_news',
+  NEWS_EDIT: '/admin/edit_news',
+  NEWS_ADD: '/admin/add_news',
   APPLICATIONS: '/admin/applications',
   APPLICATION_EDIT: '/admin/edit_application',
   IMAGES: `${config.ORIGIN}/images`,
+  ADD_USER: '/admin/add_user',
 };
 
 const instance = axios.create({

@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown';
 import SwiperCore, { Scrollbar, Mousewheel, Navigation, Pagination, Autoplay } from 'swiper/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { routes } from '../../api';
+import { apiRoutes, assetPrefix } from '../../api';
 
 import useSwiperRef from './useSwiperRef';
 
@@ -35,7 +35,7 @@ const NewsItem = ({ item: { body, img_src } }) => {
   return (
     <>
       <div className="news__img">
-        <img src={`${routes.IMAGES}/${img_src}`} alt="" />
+        <img src={`${assetPrefix}/${apiRoutes.IMAGES}/${img_src}`} alt="" />
       </div>
       <div className="news__content">
         <ReactMarkdown>{body}</ReactMarkdown>

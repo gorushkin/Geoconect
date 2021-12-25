@@ -21,7 +21,7 @@ const Header = ({ isPageClosed }) => {
   };
 
   const filteredRoutes = useMemo(
-    () => (isAuthorized ? routes : routes.filter(({ closed }) => !closed)),
+    () => routes.filter(({ user, guest }) => (isAuthorized ? user : guest)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [isAuthorized]
   );
@@ -41,12 +41,23 @@ const Header = ({ isPageClosed }) => {
               </Link>
             ))}
           </Nav>
-          {isAuthorized && (
+          {isAuthorized ? (
             <Nav>
               <NavDropdown title={name} id="basic-nav-dropdown">
                 <NavDropdown.Item>Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          ) : (
+            <Nav>
+              <NavDropdown title="Menu" id="basic-nav-dropdown">
+                <Link href={PATH_ROUTES.LOGIN} passHref>
+                  <NavDropdown.Item>Login</NavDropdown.Item>
+                </Link>
+                <Link href={PATH_ROUTES.SIGN_UP} passHref>
+                  <NavDropdown.Item>Sign Up</NavDropdown.Item>
+                </Link>
               </NavDropdown>
             </Nav>
           )}

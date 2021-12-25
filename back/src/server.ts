@@ -46,9 +46,12 @@ app.use('/api/authtest', authMiddleware, (_req: RequestWithUser, res: Response) 
   res.status(200).send({ message: 'Server is running!!!' })
 );
 
+
+// TODO: переделать проверку на наличие админа
+
 app.use('/api/info', async (_req: RequestWithUser, res: Response) => {
   const users = await User.getUsers();
-  const isAdmin = users.length === 0;
+  const isAdmin = !!users.length;
   res.status(200).send({ isAdmin });
 });
 
@@ -56,7 +59,6 @@ app.use(
   '/api/emailTest',
   errorWrapper(async (_req: RequestWithUser, res: Response) => {
     const result = await sendMail();
-    console.log('result: ', result);
     res.status(200).send({ message: 'No message' });
   })
 );

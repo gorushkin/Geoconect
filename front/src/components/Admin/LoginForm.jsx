@@ -1,4 +1,5 @@
 import Link from 'next/dist/client/link';
+import { useRouter } from 'next/router';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +11,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
+  const { push } = useRouter();
 
   const onSubmit = async (data) => dispatch(asyncActions.authLogin(data));
 
