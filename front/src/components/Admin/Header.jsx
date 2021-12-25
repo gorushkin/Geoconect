@@ -8,12 +8,12 @@ import { PATH_ROUTES } from '../../api';
 import { routes } from '../../constants';
 import { actions } from '../../slices';
 
-const Header = ({ isPageClosed }) => {
+const Header = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const {
-    user: { isAuthorized, name },
-  } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
+
+  const { isAuthorized, name, role } = user;
 
   const logoutHandler = () => {
     dispatch(actions.logout());
@@ -21,9 +21,10 @@ const Header = ({ isPageClosed }) => {
   };
 
   const filteredRoutes = useMemo(
-    () => routes.filter(({ user, guest }) => (isAuthorized ? user : guest)),
+    () =>
+      routes.filter((route) => isAuthorized === route.auth && route[role]),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isAuthorized]
+    [isAuthorized, role]
   );
 
   return (

@@ -8,6 +8,8 @@ const initialState = {
   isAuthorized: false,
   token: '',
   isAdmin: false,
+  role: 'guest',
+  access: {},
 };
 
 const authLogin = createAsyncThunk('user/auth', async (values) => {
@@ -32,7 +34,20 @@ const slice = createSlice({
       const token = Cookies.get('token');
       const isAdmin = Cookies.get('isAdmin');
       const user = JSON.parse(localStorage.getItem('user'));
-      return token ? { ...state, isAuthorized: true, name: user.name, isAdmin } : initialState;
+      return token
+        ? {
+          ...state,
+          isAuthorized: true,
+          name: user.name,
+          isAdmin,
+          role: user.role,
+          access: {
+            user: user.role === 'user',
+            guest: user.role === 'guest',
+            admin: user.role === 'admin',
+          },
+        }
+        : initialState;
     },
   },
   extraReducers: (builder) => {
@@ -46,6 +61,12 @@ const slice = createSlice({
         isAuthorized: true,
         isAdmin: user.role === 'admin',
         token,
+        role: user.role,
+        access: {
+          user: user.role === 'user',
+          guest: user.role === 'guest',
+          admin: user.role === 'admin',
+        },
       };
     });
     builder.addCase(authLogin.rejected, () => initialState);
