@@ -23,9 +23,10 @@ export const addUser = async (
   password: string,
   passwordConfirm: string,
   role?: string
-) => {
+  ) => {
   await User.checkEmail(email);
-  const user = User.createUser(name, email, password, passwordConfirm, role);
+  const users = await getUsers();
+  const user = User.createUser(name, email, password, passwordConfirm, role  || !users.length ? 'admin' : 'user');
   return await Users.query().insert(user);
 };
 
