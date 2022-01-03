@@ -20,6 +20,14 @@ export const routes = [
     auth: true,
   },
   {
+    href: PATH_ROUTES.NEWS_EDIT,
+    name: 'Edit News',
+    guest: false,
+    user: true,
+    admin: true,
+    auth: true,
+  },
+  {
     href: PATH_ROUTES.APPLICATIONS,
     name: 'Applications',
     guest: false,

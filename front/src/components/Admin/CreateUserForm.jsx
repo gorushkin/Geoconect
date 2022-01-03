@@ -37,10 +37,11 @@ const CreateUserForm = () => {
   // TODO: инфу о сервере хранить в стейте
 
   const getSeverInfo = async () => {
-    const {
-      data: { isAdmin },
-    } = await getServerInfoRequest();
-    setIsAdmin(isAdmin);
+    const response = await getServerInfoRequest();
+
+    if (response) {
+      setIsAdmin(response.data.isAdmin);
+    }
   };
 
   useEffect(() => {
