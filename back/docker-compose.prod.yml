@@ -32,12 +32,10 @@ services:
   #   networks:
   #     - geo_net
   node:
-    ports:
-      - ${PORT}:${PORT}
-    env_file:
-      - ./.env
-    networks:
-      - geo_net
-networks:
-  geo_net:
-    driver: bridge
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+    command: node build/index.js

@@ -32,10 +32,13 @@ services:
   #   networks:
   #     - geo_net
   node:
+    build: .
     ports:
       - ${PORT}:${PORT}
     env_file:
       - ./.env
+    volumes:
+      - ./src/:/app/src/
     networks:
       - geo_net
 networks:

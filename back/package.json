@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development nodemon src/index.ts",
+    "dev": "nodemon src/index.ts",
     "dev:prod": "NODE_ENV=production nodemon src/index.ts",
     "build": "tsc",
     "dev:back2": "nodemon server/index.js",
