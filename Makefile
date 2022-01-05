@@ -29,7 +29,10 @@ docker_back-build:
 	cd back; docker build -t express .
 
 docker_back-create:
-	cd back; docker create --name express_app -p 5000:5000 -v "$$(pwd)"/src/:/app/src/ express
+	cd back; docker create --name express_app --env-file ./.env -p 5000:5000 -v "$$(pwd)"/src/:/app/src/ express
 
 docker_back-start:
 	cd back; docker container start express_app -a
+
+docker_back-sh:
+	cd back; docker exec -it express_app sh
