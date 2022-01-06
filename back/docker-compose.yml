@@ -39,6 +39,8 @@ services:
       - ./.env
     networks:
       - geo_net
+    volumes:
+      - ./images/:/app/images/
 networks:
   geo_net:
     driver: bridge
