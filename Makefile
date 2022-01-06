@@ -25,6 +25,8 @@ stop:
 db_init_dev:
 	cd back; npm run knex:init
 
+# docker back - start
+
 docker_back-build:
 	cd back; docker build -t express .
 
@@ -36,3 +38,18 @@ docker_back-start:
 
 docker_back-sh:
 	cd back; docker exec -it express_app sh
+
+# docker-compose back
+
+docker_front-build:
+	cd back; docker build -t nextjs .
+
+docker_front-create:
+	cd front; docker create --name nextjs_app --env-file ./.env -p 3500:3500 -v "$$(pwd)"/src/:/app/src/ nextjs
+
+
+dev_front:
+	cd front; docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+dev_back:
+	cd back; docker-compose -f docker-compose.yml -f docker-compose.backup.yml up
