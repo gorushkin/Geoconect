@@ -3,5 +3,5 @@ Dockerfile
 .dockerignore
 .git
 .gitignore
-.docker-compose*
-.package-lock.json
+docker-compose*
+package-lock.json
