@@ -52,4 +52,4 @@ dev_front:
 	cd front; docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 dev_back:
-	cd back; docker-compose -f docker-compose.yml -f docker-compose.backup.yml up
+	cd back;  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build

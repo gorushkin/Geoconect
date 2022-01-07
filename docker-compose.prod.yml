@@ -32,15 +32,17 @@ services:
   #   networks:
   #     - geo_net
   node:
-    build: .
-    ports:
-      - ${PORT}:${PORT}
-    env_file:
-      - ./.env
-    volumes:
-      - ./src/:/app/src/
-    networks:
-      - geo_net
-networks:
-  geo_net:
-    driver: bridge
+    build:
+      context: ./back
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+    command: node build/index.js
+  nextjs:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.prod
+    environment:
+      - NODE_ENV=production
+    command: npm start

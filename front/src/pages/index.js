@@ -1,4 +1,4 @@
-import { getAllNewsRequest } from '../api';
+import { getAllNewsRequestSSR } from '../api';
 import Layout from '../components/Layout';
 import Main from '../components/Main';
 
@@ -10,7 +10,7 @@ const Home = ({ news }) => (
 
 export const getStaticProps = async (context) => {
   try {
-    const { data } = await getAllNewsRequest();
+    const { data } = await getAllNewsRequestSSR(true);
     return {
       props: { news: data },
       revalidate: 60,

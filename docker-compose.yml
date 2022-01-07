@@ -1,0 +1,57 @@
+version: '3'
+services:
+  # postgres:
+  #   container_name: geo__db
+  #   image: postgres:14.0
+  #   ports:
+  #     - ${POSTGRES_PORT}:${POSTGRES_PORT}
+  #   volumes:
+  #     - /tmp/pgdata:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_PORT: ${POSTGRES_PORT}
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #     PGDATA: ${PGDATA}
+  #   networks:
+  #     - geo_net
+  #   restart: always
+  # pgadmin:
+  #   links:
+  #     - postgres:postgres
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4:6
+  #   ports:
+  #     - ${PGADMIN_PORT}:80
+  #   volumes:
+  #     - /data/pgadmin:/root/.pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+  #     PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+  #   networks:
+  #     - geo_net
+  node:
+    container_name: back
+    restart: always
+    ports:
+      - ${PORT_BACK}:${PORT_BACK}
+    env_file: ./back/.env
+    networks:
+      - geo_net
+    volumes:
+      - ./back/images/:/app/images/
+  nextjs:
+    container_name: front
+    restart: always
+    environment:
+      - SSR_ORIGIN=node:${PORT_BACK}
+    env_file:
+      - ./front/.env
+    ports:
+      - ${PORT_FRONT}:${PORT_FRONT}
+    networks:
+      - geo_net
+networks:
+  geo_net:
+    driver: bridge

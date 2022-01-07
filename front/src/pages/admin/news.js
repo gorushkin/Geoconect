@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Container, Row, ListGroup } from 'react-bootstrap';
 
-import { getAllNewsRequest } from '../../api';
+import { getAllNewsRequestCSR } from '../../api';
 import { PATH_ROUTES } from '../../api';
 import Layout from '../../components/Admin/Layout';
 
@@ -29,7 +29,7 @@ const News = () => {
 
   useEffect(() => {
     const getAllNews = async () => {
-      const { data } = await getAllNewsRequest();
+      const { data } = await getAllNewsRequestCSR();
       setNews(data);
     };
 
