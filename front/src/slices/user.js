@@ -34,7 +34,7 @@ const slice = createSlice({
       const token = Cookies.get('token');
       const isAdmin = Cookies.get('isAdmin');
       const user = JSON.parse(localStorage.getItem('user'));
-      return token
+      return token && user
         ? {
           ...state,
           isAuthorized: true,

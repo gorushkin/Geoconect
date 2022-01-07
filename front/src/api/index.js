@@ -3,20 +3,17 @@ import Cookies from 'js-cookie';
 
 import store, { actions } from '../slices';
 
-const serverTypeMapping = {
-  dev: process.env.NEXT_PUBLIC_DEV_ORIGIN,
-  local: process.env.NEXT_PUBLIC_LOCAL_ORIGIN,
-};
+// const serverTypeMapping = {
+//   dev: process.env.NEXT_PUBLIC_DEV_ORIGIN,
+//   local: process.env.NEXT_PUBLIC_LOCAL_ORIGIN,
+// };
 
-const ORIGIN_CSR =
-  serverTypeMapping[process.env.NEXT_PUBLIC_TYPE] || process.env.NEXT_PUBLIC_ORIGIN;
-const isDev = process.env.NODE_ENV === 'development';
-
-export const assetPrefix = isDev ? ORIGIN_CSR : '';
+// const ORIGIN_CSR =
+//   serverTypeMapping[process.env.NEXT_PUBLIC_TYPE] || process.env.NEXT_PUBLIC_ORIGIN;
 
 const config = {
   API_BASE_URL: '/api/',
-  ORIGIN_CSR,
+  ORIGIN_CSR: '',
   ORIGIN_SRR: `http://${process.env.SSR_ORIGIN}`,
 };
 
@@ -77,7 +74,6 @@ const errorHandler = async (promise, toState = false) => {
       error.response && typeof error.response.data === 'object'
         ? Object.values(error.response.data).join('\n')
         : error.response?.data || error.message;
-    console.log('message: ', message);
     if (message) {
       store.dispatch(actions.showAlert({ body: message, color: 'danger' }));
       if (toState) throw Error();
