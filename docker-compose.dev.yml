@@ -40,6 +40,7 @@ services:
       - NODE_ENV=development
     volumes:
       - ./back/src/:/app/src/
+      - ./data/dev.sqlite3/:/app/src/database/dev.sqlite3
     command: npm run dev
   nextjs:
     build:

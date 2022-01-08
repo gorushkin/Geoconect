@@ -41,11 +41,12 @@ services:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
+    restart: on-failure
     networks:
       - geo_net
   node:
     container_name: back
-    restart: always
+    restart: on-failure
     ports:
       - ${PORT_BACK}:${PORT_BACK}
     env_file: ./back/.env
@@ -55,7 +56,7 @@ services:
       - ./back/images/:/app/images/
   nextjs:
     container_name: front
-    restart: always
+    restart: on-failure
     environment:
       - SSR_ORIGIN=node:${PORT_BACK}
     env_file:
