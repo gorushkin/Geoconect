@@ -36,6 +36,9 @@ docker_back-create:
 docker_back-start:
 	cd back; docker container start express_app -a
 
+docker_back-run:
+	cd back; docker run --rm --name express_app --env-file ./.env -p 5000:5000 -v "$$(pwd)"/src/:/app/src/ express
+
 docker_back-sh:
 	cd back; docker exec -it express_app sh
 
@@ -53,3 +56,15 @@ dev_front:
 
 dev_back:
 	cd back;  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+
+dev:
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+dev_build:
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+
+prod:
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+
+prod_build:
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build

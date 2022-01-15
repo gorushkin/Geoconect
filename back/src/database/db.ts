@@ -3,7 +3,6 @@ import { CONFIG } from '../helpers/config';
 import configs from './knexfile';
 
 const config = configs[CONFIG.NODE_ENV || 'development'];
-console.log('config: ', config);
 
 const knex = config ? Knex(config) : null;
 

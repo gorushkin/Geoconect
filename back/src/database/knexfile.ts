@@ -1,12 +1,10 @@
 import { Knex } from 'knex';
 import path from 'path';
-import { CONFIG } from '../helpers/config';
 const dirname = path.resolve();
 
-const isModeDevelopment = CONFIG.NODE_ENV;
+const DB_PATH = process.env['DB_PATH'] || 'db';
 
-const getPath = (value: string) =>
-  isModeDevelopment ? path.join(dirname, 'src', 'database', value) : path.join(dirname, value);
+const getPath = (value: string) => path.join(dirname, value);
 
 const migrations = {
   directory: getPath('migrations'),
@@ -24,12 +22,11 @@ const configs: IKnexConfig = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: getPath('./dev.sqlite3'),
+      filename: getPath(`${DB_PATH}/dev.sqlite3`),
     },
     migrations,
     seeds,
   },
-
   staging: {
     client: 'postgresql',
     connection: {
@@ -46,11 +43,18 @@ const configs: IKnexConfig = {
     },
     seeds,
   },
-
   production: {
+    client: 'sqlite3',
+    connection: {
+      filename: getPath('./dev.sqlite3'),
+    },
+    migrations,
+    seeds,
+  },
+  producttion: {
     client: 'pg',
     connection: {
-      host: '127.0.0.1',
+      host: 'postgres',
       port: 5432,
       database: 'geo',
       user: 'postgres',
