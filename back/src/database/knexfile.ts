@@ -46,30 +46,30 @@ const configs: IKnexConfig = {
   production: {
     client: 'sqlite3',
     connection: {
-      filename: getPath('./dev.sqlite3'),
+      filename: getPath(`${DB_PATH}/dev.sqlite3`),
     },
     migrations,
     seeds,
   },
-  producttion: {
-    client: 'pg',
-    connection: {
-      host: 'postgres',
-      port: 5432,
-      database: 'geo',
-      user: 'postgres',
-      password: 'postgres',
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-      directory: migrations.directory,
-    },
-    seeds,
-  },
+  // producttion: {
+  //   client: 'pg',
+  //   connection: {
+  //     host: 'postgres',
+  //     port: 5432,
+  //     database: 'geo',
+  //     user: 'postgres',
+  //     password: 'postgres',
+  //   },
+  //   pool: {
+  //     min: 2,
+  //     max: 10,
+  //   },
+  //   migrations: {
+  //     tableName: 'knex_migrations',
+  //     directory: migrations.directory,
+  //   },
+  //   seeds,
+  // },
 };
 
 export default configs;

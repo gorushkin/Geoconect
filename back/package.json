@@ -10,7 +10,7 @@
     "start": "NODE_ENV=production node build/index.js",
     "lint": "next lint",
     "migrate:dev": "DB_PATH='../../db/' knex --knexfile src/database/knexfile.ts migrate:latest",
-    "migrate:prod": "DB_PATH='../../db/' knex --knexfile build/database/knexfile.js migrate:latest"
+    "migrate": "DB_PATH='../../db/' knex --knexfile build/database/knexfile.js migrate:latest"
   },
   "dependencies": {
     "@types/multer": "^1.4.7",
