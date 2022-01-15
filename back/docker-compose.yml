@@ -1,0 +1,46 @@
+version: '3'
+services:
+  # postgres:
+  #   container_name: geo__db
+  #   image: postgres:14.0
+  #   ports:
+  #     - ${POSTGRES_PORT}:${POSTGRES_PORT}
+  #   volumes:
+  #     - /tmp/pgdata:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_PORT: ${POSTGRES_PORT}
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #     PGDATA: ${PGDATA}
+  #   networks:
+  #     - geo_net
+  #   restart: always
+  # pgadmin:
+  #   links:
+  #     - postgres:postgres
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4:6
+  #   ports:
+  #     - ${PGADMIN_PORT}:80
+  #   volumes:
+  #     - /data/pgadmin:/root/.pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+  #     PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+  #   networks:
+  #     - geo_net
+  node:
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - ./.env
+    networks:
+      - geo_net
+    volumes:
+      - ./images/:/app/images/
+networks:
+  geo_net:
+    driver: bridge

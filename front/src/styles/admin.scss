@@ -1,0 +1,33 @@
+.admin__user {
+  margin-left: auto;
+  outline: 2px solid red;
+}
+
+.editor__wrapper {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(158, 153, 153);
+}
+
+.badge__link {
+  cursor: pointer;
+}
+
+.notification__alert {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1001;
+  box-sizing: border-box;
+}
+
+.applications__item {
+  p {
+    &:not(:last-of-type) {
+      margin-right: 15px;
+    }
+  }
+}
+
+.applications__table-row {
+  cursor: pointer;
+}

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nextjs:
+    build:
+      context: .
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - ./.env
+    networks:
+      - geo_net
+networks:
+  geo_net:
+    driver: bridge

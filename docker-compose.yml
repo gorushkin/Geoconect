@@ -1,0 +1,36 @@
+version: '3'
+services:
+  proxy:
+    image: nginx:1.20
+    container_name: proxy
+    depends_on:
+      - node
+      - nextjs
+    ports:
+      - 80:80
+    restart: on-failure
+    networks:
+      - geo_net
+  node:
+    container_name: back
+    restart: on-failure
+    ports:
+      - ${PORT_BACK}:${PORT_BACK}
+    env_file: ./back/.env
+    networks:
+      - geo_net
+    volumes:
+      - ./back/images/:/app/images/
+  nextjs:
+    container_name: front
+    restart: on-failure
+    environment:
+      - SSR_ORIGIN=node:${PORT_BACK}
+    env_file: ./front/.env
+    ports:
+      - ${PORT_FRONT}:${PORT_FRONT}
+    networks:
+      - geo_net
+networks:
+  geo_net:
+    driver: bridge

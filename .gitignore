@@ -1,32 +1,42 @@
-# Created by https://www.gitignore.io/api/visualstudiocode
-# Edit at https://www.gitignore.io/?templates=visualstudiocode
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# dependencies
+/node_modules
+# /back/node_modules
+/*/node_modules
+/*/.env
+/.pnp
+.pnp.js
+.nginx
+.env
 
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
+# testing
+/coverage
+/back/images
 
+# next.js
+/*/.next/
+/*/out/
 
-# End of https://www.gitignore.io/api/visualstudiocode
-css/*.*
-node_modules
+# production
+/*/build
+
+# misc
 .DS_Store
-.idea
-.vscode
-*.ai
-*.log
-*.pdf
-*.psd
-*.sublime*
-npm-debug.*
-source/css/*.css
-Thumbs.db
-# pp/
-build/
-prod/
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
+
+dev.sqlite3

@@ -1,0 +1,129 @@
+.index {
+  .contact {
+    background: url("/contact__back.jpg") no-repeat center / cover;
+    min-height: 518px;
+    padding-top: 145px;
+    padding-bottom: 35px;
+
+    @include _992 {
+      padding: 30px 0;
+      background: url("/contact__back.jpg") no-repeat / cover;
+    }
+  }
+
+  .contact__inner {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: 120px;
+    display: flex;
+
+    @include _992 {
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+    }
+  }
+
+  .contact__title {
+    font-family: $font2;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 42px;
+    color: #000000;
+    margin-bottom: 30px;
+
+    @include _992 {
+      margin-bottom: 30px;
+      font-size: 40px;
+      line-height: 42px;
+      text-align: center;
+    }
+  }
+
+  .contact__text {
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+    max-width: 250px;
+
+    @include _992 {
+      text-align: center;
+      max-width: none;
+      margin-bottom: 30px;
+    }
+  }
+
+  .contact__form {
+    width: 100%;
+    max-width: 285px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @include _992 {
+      max-width: 450px;
+    }
+  }
+
+  .contact__form-element-wrapper {
+    position: relative;
+  }
+
+  .contact__from-error {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgb(231, 76, 60);
+    border: 1px dashed black;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-family: Arial;
+    font-size: 14px;
+    padding: 6px 5px 5px;
+    z-index: 9999;
+  }
+
+  .contact__input {
+    border: 2px solid #c2ccd5;
+    border-radius: 38px;
+    padding: 22.5px 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    color: #a7becb;
+    width: 100%;
+  }
+
+  .contact__btn {
+    border: 2px solid $color-main;
+    margin-bottom: 30px;
+    padding: 21px 0;
+
+    &:hover {
+      padding: 21px 0;
+    }
+
+    @include _992 {
+      max-width: none;
+    }
+  }
+
+  .contact__warning {
+    text-align: center;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 18px;
+    text-align: center;
+    color: #000000;
+
+    a {
+      display: block;
+      color: $color-main;
+      text-decoration: underline;
+    }
+  }
+}
