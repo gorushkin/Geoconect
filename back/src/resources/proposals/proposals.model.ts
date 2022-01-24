@@ -1,8 +1,8 @@
 import { Model, ValidationError } from 'objection';
 
-export default class Applications extends Model {
+export default class Proposal extends Model {
   static get tableName() {
-    return 'requests';
+    return 'proposals';
   }
 
   id: number;

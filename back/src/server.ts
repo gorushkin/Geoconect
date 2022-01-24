@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { router as news } from './resources/news/news.router';
 import { router as users } from './resources/users/users.router';
 import { router as auth } from './resources/auth/auth.router';
-import { router as applications } from './resources/applications/applications.router';
+import { router as proposals } from './resources/proposals/proposals.router';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import { sendMail, startSMTP } from './helpers/emailSender';
@@ -30,8 +30,8 @@ app.use((req, _res, next) => {
 
 app.use('/api/auth', auth);
 app.use('/api/news', news);
-app.use('/api/users',  users);
-app.use('/api/applications', applications);
+app.use('/api/users', users);
+app.use('/api/applications', proposals);
 
 app.use('/api/request', (req: Request, res: Response) => {
   console.log(req.body);
@@ -46,14 +46,15 @@ app.use('/api/authtest', authMiddleware, (_req: RequestWithUser, res: Response) 
   res.status(200).send({ message: 'Server is running!!!' })
 );
 
-
 // TODO: переделать проверку на наличие админа
 
-app.use('/api/info', async (_req: RequestWithUser, res: Response) => {
+const getServerInfo = async (_req: RequestWithUser, res: Response) => {
   const users = await User.getUsers();
   const isAdmin = !!users.length;
   res.status(200).send({ isAdmin });
-});
+};
+
+app.use('/api/info', errorWrapper(getServerInfo));
 
 app.use(
   '/api/emailTest',
