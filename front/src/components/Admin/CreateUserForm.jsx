@@ -37,10 +37,10 @@ const CreateUserForm = () => {
   // TODO: инфу о сервере хранить в стейте
 
   const getSeverInfo = async () => {
-    const response = await getServerInfoRequest();
+    const {data} = await getServerInfoRequest();
 
-    if (response) {
-      setIsAdmin(response.data.isAdmin);
+    if (data) {
+      setIsAdmin(data.isAdmin);
     }
   };
 
