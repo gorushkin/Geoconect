@@ -72,17 +72,23 @@
 
   .contact__from-error {
     position: absolute;
-    left: 0;
-    top: 0;
-    background-color: rgb(231, 76, 60);
-    border: 1px dashed black;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    font-family: Arial;
-    font-size: 14px;
-    padding: 6px 5px 5px;
     z-index: 9999;
+    border: 2px solid #c2ccd5;
+    border-radius: 38px;
+    padding: 22.5px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: #535d63;
+    width: 100%;
+    background: #ffffff;
+    color: $color-red;
+    font-size: 16px;
+    border: 2px solid $color-red;
   }
+
+
 
   .contact__input {
     border: 2px solid #c2ccd5;
@@ -97,10 +103,10 @@
     width: 100%;
 
     &--error {
-      border: 2px solid rgb(231, 76, 60);
+      border: 2px solid $color-red;
 
       &::placeholder {
-        color: red;
+        color: $color-red;
         font-size: 16px;
       }
     }
