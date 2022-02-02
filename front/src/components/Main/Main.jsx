@@ -15,7 +15,7 @@ const Main = ({ news }) => {
                 Проектирование горных производств и объектов, маркшейдерское обеспечение горных
                 работ
               </p>
-              <a href="" className="promo__btn btn">
+              <a href="#contact" className="promo__btn btn">
                 Оставить заявку
               </a>
               <div className="promo__social">
@@ -174,7 +174,7 @@ const Main = ({ news }) => {
                   Высокая деловая репутация ООО «Геоконект» подтверждена многочисленными
                   положительными отзывами Заказчиков.
                 </p>
-                <a href="" className="documents__btn btn btn--trans">
+                <a href="#contact" className="documents__btn btn btn--trans">
                   Заказать обратный звонок
                 </a>
               </div>
@@ -221,7 +221,7 @@ const Main = ({ news }) => {
                   заказчиками и органами государственной власти РФ.
                 </p>
               </div>
-              <a href="" className="about__btn btn btn--trans">
+              <a href="#contact" className="about__btn btn btn--trans">
                 Заказать обратный звонок
               </a>
             </div>
