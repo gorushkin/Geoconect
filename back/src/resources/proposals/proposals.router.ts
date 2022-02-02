@@ -10,8 +10,8 @@ const getProposals = async (_req: Request, res: Response) => {
 };
 
 const createProposal = async (req: Request, res: Response) => {
-  const { email, phone } = req.body;
-  const proposal = await Applications.addProposal(phone, email);
+  const { name, phone } = req.body;
+  const proposal = await Applications.addProposal(phone, name);
   res.status(200).json(proposal);
 };
 

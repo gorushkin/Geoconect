@@ -13,13 +13,14 @@ export default class Proposal extends Model {
 
   static jsonSchema = {
     type: 'name',
-    required: ['email', 'phone'],
+    required: ['phone', 'name'],
 
     properties: {
       id: { type: 'integer' },
       email: { type: 'string', minLength: 1 },
       phone: { type: 'string', minLength: 1 },
       body: { type: 'string' },
+      name: { type: 'string' },
     },
   };
 }

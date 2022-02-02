@@ -5,8 +5,8 @@ export const getProposals = async () => {
   return await Proposal.query();
 };
 
-export const addProposal = async (phone: string, email: string) => {
-  const newProposal = Proposal.fromJson({ email, phone });
+export const addProposal = async (phone: string, name: string) => {
+  const newProposal = Proposal.fromJson({ name, phone });
   return await Proposal.query().insert(newProposal);
 };
 
