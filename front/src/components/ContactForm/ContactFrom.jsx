@@ -1,6 +1,27 @@
+import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 
 import { createApplicationRequest } from '../../api';
+
+const ContactFomElement = ({ clearErrors, register, placeholder, error }) => {
+  const elementClassnames = cn('contact__input contact__from-element', {
+    'contact__input--error': error,
+  });
+
+  const errorMessage = error?.message;
+
+  return (
+    <div className="contact__form-element-wrapper">
+      <input
+        onClick={() => clearErrors(register.name)}
+        className={elementClassnames}
+        {...register}
+        placeholder={errorMessage || placeholder}
+        autoComplete="off"
+      />
+    </div>
+  );
+};
 
 const ContactForm = () => {
   const {
@@ -10,8 +31,8 @@ const ContactForm = () => {
     clearErrors,
   } = useForm();
 
-  const onSubmit = async (vlaues) => {
-    const { data } = await createApplicationRequest(vlaues);
+  const onSubmit = async (values) => {
+    const { data } = await createApplicationRequest(values);
     if (data) console.log(data);
   };
 
@@ -24,43 +45,31 @@ const ContactForm = () => {
             <p className="contact__text">Мы перезвоним Вам в ближайшее время</p>
           </div>
           <form className="contact__form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="contact__form-element-wrapper">
-              {errors?.name?.message && (
-                <p className="contact__from-error">{errors?.name?.message}</p>
-              )}
-              <input
-                onClick={() => clearErrors(['name'])}
-                {...register('name', { required: { value: true, message: 'Укажите Ваше имя' } })}
-                type="text"
-                className="contact__input contact__from-element"
-                placeholder="Ваше имя"
-              />
-            </div>
-            <div className="contact__form-element-wrapper">
-              {errors?.phone?.message && (
-                <p className="contact__from-error">{errors?.phone?.message}</p>
-              )}
-              <input
-                onClick={() => clearErrors(['phone'])}
-                {...register('phone', {
-                  required: {
-                    value: true,
-                    message: ' Введите номер телефона',
-                  },
-                  // maxLength: {
-                  //   value: 12,
-                  //   message: 'Номер слишком длинный',
-                  // },
-                  pattern: {
-                    value: /[0-9]+/i,
-                    message: 'Формат +79999999999',
-                  },
-                })}
-                type="tel"
-                className="contact__input contact__from-element"
-                placeholder="+7 (___) ___-__-__"
-              />
-            </div>
+            <ContactFomElement
+              clearErrors={clearErrors}
+              register={register('name', {
+                required: { value: true, message: 'Укажите Ваше имя' },
+              })}
+              placeholder="Ваше имя"
+              error={errors?.name}
+            />
+            <ContactFomElement
+              clearErrors={clearErrors}
+              register={register('phone', {
+                required: {
+                  value: true,
+                  message: ' Введите номер телефона',
+                },
+                pattern: {
+                  value: /[0-9]+/i,
+                  message: 'Формат +79999999999',
+                },
+              })}
+              placeholder="+7 (___) ___-__-__"
+              type="tel"
+              error={errors?.phone}
+            />
+
             <button type="submit" className="contact__btn btn contact__from-element">
               Отправить заявку
             </button>
