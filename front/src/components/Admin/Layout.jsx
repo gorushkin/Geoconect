@@ -12,7 +12,7 @@ import ModalWindow from './ModalWindow';
 
 const getRoutes = (role = 'guest', pathname, routes) => {
   const path = routes.find((item) => item.href === pathname);
-  return path[role];
+  return path ? path[role] : false;
 };
 
 const Layout = ({ children, title }) => {

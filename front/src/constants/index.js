@@ -36,6 +36,14 @@ export const routes = [
     auth: true,
   },
   {
+    href: PATH_ROUTES.APPLICATION_EDIT,
+    name: 'Applications',
+    guest: false,
+    user: true,
+    admin: true,
+    auth: true,
+  },
+  {
     href: PATH_ROUTES.ADD_USER,
     name: 'Add user',
     guest: false,
