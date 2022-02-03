@@ -75,6 +75,9 @@ const errorHandler = async (promise, toState = false) => {
         ? Object.values(error.response.data).join('\n')
         : error.response?.data || error.message;
     if (message) {
+      if (message === 'UNAUTHORIZED') {
+        store.dispatch(actions.logout());
+      }
       store.dispatch(actions.showAlert({ body: message, color: 'danger' }));
       if (toState) throw Error();
       return { data: null };
@@ -83,6 +86,8 @@ const errorHandler = async (promise, toState = false) => {
     }
   }
 };
+
+// withStoreRequestError для добавиления пустых данных в стейт
 
 const withStoreRequestError = (promise) => errorHandler(promise, true);
 

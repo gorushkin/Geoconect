@@ -16,14 +16,15 @@ export const createToken = (user: User, password: string) => {
 
 export const authMiddleware = async (req: RequestWithUser, _res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
+  const error = new CustomError('UNAUTHORIZED', 401);
   if (!authorization) {
-    const error = new CustomError('UNAUTHORIZED', 401);
     return next(error);
   }
   const data = jwt.verify(authorization, CONFIG.SECRET);
   if (typeof data !== 'string') {
     const { id } = data;
     const user = await User.query().findOne({ id });
+    if (!user) return next(error);
     req.user = user;
   }
   next();
