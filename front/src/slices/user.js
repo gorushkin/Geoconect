@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 
-import { authRequest, createUserRequest } from '../api';
+import { authRequest } from '../api';
 
 const initialState = {
   name: '',
@@ -14,11 +14,6 @@ const initialState = {
 
 const authLogin = createAsyncThunk('user/auth', async (values) => {
   const { data } = await authRequest(values);
-  return data;
-});
-
-const createUser = createAsyncThunk('user/create', async (values) => {
-  const { data } = await createUserRequest(values);
   return data;
 });
 
@@ -73,7 +68,7 @@ const slice = createSlice({
   },
 });
 
-export const asyncActions = { authLogin, createUser };
+export const asyncActions = { authLogin };
 export const actions = { ...slice.actions };
 
 export default slice.reducer;

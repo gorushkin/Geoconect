@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import { Row, Col, Form, Button, FloatingLabel } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -5,9 +6,10 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 
-import { getServerInfoRequest, testRequest } from '../../api';
+import { getServerInfoRequest, PATH_ROUTES, testRequest } from '../../api';
+import { createUserRequest } from '../../api';
 import { useYupValidationResolver } from '../../hooks';
-import { asyncActions } from '../../slices/user';
+import { actions } from '../../slices';
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -23,10 +25,16 @@ const CreateUserForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver });
+  } = useForm({});
 
-  const onSubmit = (data) => {
-    disaptch(asyncActions.createUser(data));
+  const router = useRouter()
+
+  const onSubmit = async (values) => {
+    const { data } = await createUserRequest(values);
+    if (data) {
+      disaptch(actions.showAlert({ body: data, color: 'success' }));
+      router.push(PATH_ROUTES.ADMIN);
+    }
   };
 
   const onTestButtonClickHandler = async () => {
@@ -37,7 +45,7 @@ const CreateUserForm = () => {
   // TODO: инфу о сервере хранить в стейте
 
   const getSeverInfo = async () => {
-    const {data} = await getServerInfoRequest();
+    const { data } = await getServerInfoRequest();
 
     if (data) {
       setIsAdmin(data.isAdmin);
