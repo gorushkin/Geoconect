@@ -5,6 +5,7 @@ RUN mkdir db
 COPY package.json ./
 COPY src/ ./src
 COPY tsconfig.json ./
+COPY tsconfig.production.json ./
 
 RUN npm install
 RUN npm install knex -g
