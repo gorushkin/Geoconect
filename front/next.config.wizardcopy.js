@@ -1,15 +1,12 @@
+// This file sets a custom webpack configuration to use your Next.js app
+// with Sentry.
+// https://nextjs.org/docs/api-reference/next.config.js/introduction
+// https://docs.sentry.io/platforms/javascript/guides/nextjs/
+
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
-  reactStrictMode: true,
-  env: {
-    NEXT_PUBLIC_TYPE: process.env.NEXT_PUBLIC_TYPE,
-    NEXT_PUBLIC_ORIGIN: process.env.ORIGIN,
-    NEXT_PUBLIC_DEV_ORIGIN: process.env.DEV_ORIGIN,
-    NEXT_PUBLIC_PROD_ORIGIN: process.env.PROD_ORIGIN,
-    NEXT_PUBLIC_LOCAL_ORIGIN: process.env.LOCAL_ORIGIN,
-    NEXT_PUBLIC_SENTRY_DSN: process.env.SENTRY_DSN,
-  },
+  // Your existing module.exports
 };
 
 const sentryWebpackPluginOptions = {

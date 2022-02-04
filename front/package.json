@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
+    "@sentry/nextjs": "^6.17.4",
     "@tiptap/react": "^2.0.0-beta.81",
     "@tiptap/starter-kit": "^2.0.0-beta.123",
     "axios": "^0.22.0",

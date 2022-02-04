@@ -10,6 +10,11 @@
 .nginx
 .env
 
+
+# Sentry
+.sentryclirc
+
+
 # testing
 /coverage
 /back/images
