@@ -10,6 +10,7 @@ const {
   SMTP_HOST = '',
   SMTP_PORT = 465,
   SMTP_TEST_MAIL_ADDRESS,
+  SENTRY_DSN,
 } = process.env;
 
 export const CONFIG = {
@@ -21,6 +22,7 @@ export const CONFIG = {
   SMTP_HOST,
   SMTP_PORT: Number(SMTP_PORT),
   SMTP_TEST_MAIL_ADDRESS,
+  SENTRY_DSN,
   SMTP: {
     login: SMTP_LOGIN,
     password: SMTP_PASSWORD,

@@ -11,9 +11,26 @@ import path from 'path';
 import { ErrorHandler, errorWrapper } from './helpers/errorHanlder';
 import { authMiddleware } from './resources/auth/auth.services';
 import { getUsers, RequestWithUser } from './resources/users/users.services';
+import * as Sentry from '@sentry/node';
 const dirname = path.join(path.resolve());
+import { CONFIG } from './helpers/config';
+import { RewriteFrames } from '@sentry/integrations';
+
+if (CONFIG.NODE_ENV === 'production') {
+  Sentry.init({
+    dsn: CONFIG.SENTRY_DSN,
+    integrations: [
+      new RewriteFrames({
+        root: global.__dirname,
+      }),
+    ],
+  });
+}
 
 const app = express();
+
+app.use(Sentry.Handlers.requestHandler());
+
 startSMTP();
 app.use(fileUpload());
 app.use(cors());
@@ -65,6 +82,8 @@ app.use(
 );
 
 app.use('*', (_req: Request, res: Response) => res.status(418).json({ message: "I'm a teapot" }));
+
+app.use(Sentry.Handlers.errorHandler());
 
 app.use(ErrorHandler);
 
