@@ -2,6 +2,10 @@ FROM node:14.17-alpine
 WORKDIR /app/
 COPY package.json ./
 COPY next.config.js ./
+COPY .sentryclirc ./
+COPY sentry.client.config.js ./
+COPY sentry.server.config.js ./
+COPY sentry.properties ./
 COPY public ./public
 
 RUN npm install

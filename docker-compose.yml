@@ -21,7 +21,7 @@ services:
       - geo_net
     volumes:
       - ./back/images/:/app/images/
-      - ./db/:/app/db/
+      - ./db/:/app/data/
   nextjs:
     container_name: front
     restart: on-failure
