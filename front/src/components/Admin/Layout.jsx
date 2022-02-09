@@ -5,26 +5,26 @@ import { useSelector } from 'react-redux';
 
 import LoginForm from '../../components/Admin/LoginForm';
 import { routes } from '../../constants';
+import { useClient } from '../../hooks/useClient';
+import { setDocumentTitle, getRoutes } from '../../utils';
 
 import Alert from './Alert';
 import Header from './Header';
 import ModalWindow from './ModalWindow';
 
-const getRoutes = (role = 'guest', pathname, routes) => {
-  const path = routes.find((item) => item.href === pathname);
-  return path ? path[role] : false;
-};
-
 const Layout = ({ children, title }) => {
   const { user } = useSelector((state) => state);
   const [isPageOpened, setIsPageOpened] = useState(false);
   const { pathname } = useRouter();
+  const isClient = useClient();
 
   useEffect(() => {
     setIsPageOpened(getRoutes(user.role, pathname, routes));
   }, [user, pathname]);
 
   const pageTitle = isPageOpened ? title : 'Login';
+
+  if (isClient) setDocumentTitle(pageTitle);
 
   return (
     <>

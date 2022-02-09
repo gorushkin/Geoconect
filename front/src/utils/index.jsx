@@ -24,3 +24,12 @@ export default cookies;
 export const showModalWindow = (data) => {
   store.dispatch(actions.showModal(data));
 };
+
+export const setDocumentTitle = (title) => {
+  document.title = title ? `Geoconect - ${title}` : 'Geoconect';
+};
+
+export const getRoutes = (role = 'guest', pathname, routes) => {
+  const path = routes.find((item) => item.href === pathname);
+  return path ? path[role] : false;
+};
