@@ -7,7 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
-import { routes } from '../../api';
+import { PATH_ROUTES } from '../../api';
 import { deleteNewsRequest } from '../../api';
 import { showModalWindow } from '../../utils';
 import 'react-markdown-editor-lite/lib/index.css';
@@ -34,6 +34,7 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
   useEffect(() => {
     if (data) {
       setValue('phone', data?.phone || '');
+      setValue('name', data?.name || '');
       setValue('email', data?.email || '');
       setValue('body', data?.body || '');
     }
@@ -46,13 +47,14 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
       body: data.body || '',
       email: data.email,
       phone: data.phone,
+      name: data.name,
     });
     isDataEqual
-      ? router.push(routes.APPLICATIONS)
+      ? router.push(PATH_ROUTES.APPLICATIONS)
       : showModalWindow({
         title: 'Подтвердите действие',
         body: 'Вы уверены, что хотите отменить все изменения?',
-        onConfirm: () => router.push(routes.APPLICATIONS),
+        onConfirm: () => router.push(PATH_ROUTES.APPLICATIONS),
       });
   };
 
@@ -63,7 +65,7 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
       onConfirm: async () => {
         const result = await deleteNewsRequest(id);
         if (result) {
-          router.push(routes.APPLICATIONS);
+          router.push(PATH_ROUTES.APPLICATIONS);
         }
       },
     });
@@ -71,18 +73,30 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
 
   const onSubmitHandler = async (values) => {
     const { data } = await onSubmit(values);
-    if (data) router.push(routes.APPLICATIONS);
+    if (data) router.push(PATH_ROUTES.APPLICATIONS);
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          isInvalid={errors.name}
+          type="text"
+          placeholder="Name"
+          {...register('name', { required: true, minLength: 1 })}
+        />
+        <Form.Control.Feedback type="invalid">
+          Необходимо ввести адрес электронной почты
+        </Form.Control.Feedback>
+      </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email</Form.Label>
         <Form.Control
           isInvalid={errors.email}
           type="text"
           placeholder="Email"
-          {...register('email', { required: true, minLength: 1 })}
+          {...register('email')}
         />
         <Form.Control.Feedback type="invalid">
           Необходимо ввести адрес электронной почты

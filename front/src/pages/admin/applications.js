@@ -14,6 +14,7 @@ const ApplicationItem = ({ item }) => {
   return (
     <tr className="applications__table-row" onClick={onEditClickHandler}>
       <td>{item.id}</td>
+      <td>{item.name}</td>
       <td>{item.email}</td>
       <td>{item.phone}</td>
       <td>{item.title || 'Нет данных'}</td>
@@ -21,8 +22,6 @@ const ApplicationItem = ({ item }) => {
     </tr>
   );
 };
-
-// TODO:  Если не получится получить новости, то вывести сообщение о том, что не удалось это сделать
 
 const Applications = () => {
   const [applications, setApplications] = useState([]);
@@ -46,6 +45,7 @@ const Applications = () => {
             <thead>
               <tr>
                 <th>#</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Title</th>

@@ -17,7 +17,7 @@ export default class Proposal extends Model {
 
     properties: {
       id: { type: 'integer' },
-      email: { type: 'string', minLength: 1 },
+      email: { type: 'string'},
       phone: { type: 'string', minLength: 1 },
       body: { type: 'string' },
       name: { type: 'string' },
