@@ -8,7 +8,7 @@ import { useForm, Controller } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 
 import { PATH_ROUTES } from '../../api';
-import { deleteNewsRequest } from '../../api';
+import { deleteApplicationRequest } from '../../api';
 import { showModalWindow } from '../../utils';
 import 'react-markdown-editor-lite/lib/index.css';
 
@@ -63,7 +63,7 @@ const NewsEditor = ({ onSubmit, data, edit = false }) => {
       title: 'Подтвердите действие',
       body: 'Вы уверены, что хотите удалить новость?',
       onConfirm: async () => {
-        const result = await deleteNewsRequest(id);
+        const result = await deleteApplicationRequest(id);
         if (result) {
           router.push(PATH_ROUTES.APPLICATIONS);
         }

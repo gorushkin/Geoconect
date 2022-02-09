@@ -121,6 +121,9 @@ export const updateNewsRequest = (id, data) => {
 export const deleteNewsRequest = (id) =>
   errorHandler(instanse.csr.delete(`${apiRoutes.NEWS}/${id}`));
 
+export const deleteApplicationRequest = (id) =>
+  errorHandler(instanse.csr.delete(`${apiRoutes.APPLICATIONS}/${id}`));
+
 export const createUserRequest = (data) => errorHandler(instanse.csr.post(apiRoutes.USERS, data));
 
 export const testRequest = () => errorHandler(instanse.csr.post(apiRoutes.AUTH__TEST));

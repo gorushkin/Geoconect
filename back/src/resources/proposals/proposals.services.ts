@@ -23,4 +23,11 @@ export const updateProposal = async (id: string, body: any) => {
   return updatedProposals;
 };
 
-export default { getProposals, addProposal, getProposal, updateProposal };
+export const deleteProposal = async (id: string) => {
+  const deletedProposal = await Proposal.query().deleteById(id);
+
+  if (!deletedProposal) throw new CustomError('Что-то пошло не так', 400);
+  return deletedProposal;
+};
+
+export default { getProposals, addProposal, getProposal, updateProposal, deleteProposal };

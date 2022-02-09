@@ -39,9 +39,21 @@ const updateProposals = async (req: Request, res: Response) => {
   res.status(200).json(updatedProposal);
 };
 
+const deleteProposal = async (req: Request, res: Response) => {
+  const {
+    params: { id },
+  } = req;
+
+  if (!id) throw new CustomError('Proposal id is required', 400);
+
+  const deletedProposalItem = await Applications.deleteProposal(id);
+  res.status(200).json(deletedProposalItem);
+};
+
 router.get('/', authMiddleware, errorWrapper(getProposals));
 router.post('/', errorWrapper(createProposal));
 router.get('/:id', authMiddleware, errorWrapper(getProposal));
 router.post('/:id', authMiddleware, errorWrapper(updateProposals));
+router.delete('/:id', errorWrapper(deleteProposal));
 
 export { router };
