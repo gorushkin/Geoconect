@@ -35,7 +35,7 @@ const Layout = ({ children, title }) => {
         <Row className="justify-content-center pt-3 mb-3">
           <h1 lg={8}>{pageTitle}</h1>
         </Row>
-        <div className="justify-content-center">{isPageOpened ? children : <LoginForm />}</div>
+        <div className="justify-content-center pb-5">{isPageOpened ? children : <LoginForm />}</div>
       </Container>
     </>
   );

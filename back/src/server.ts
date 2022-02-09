@@ -39,7 +39,7 @@ app.use('/images', express.static(path.join(dirname, 'images')));
 app.use(express.urlencoded());
 
 app.use((req, _res, next) => {
-  console.log(req.originalUrl);
+  console.log(`${req.method} ${req.originalUrl}`);
   console.log(JSON.stringify(req.body, null, 2));
   console.log('-----------------');
   next();
