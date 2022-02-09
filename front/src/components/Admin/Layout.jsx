@@ -24,7 +24,7 @@ const Layout = ({ children, title }) => {
     setIsPageOpened(getRoutes(user.role, pathname, routes));
   }, [user, pathname]);
 
-  const pageTitle = isPageOpened ? 'Login' : title;
+  const pageTitle = isPageOpened ? title : 'Login';
 
   return (
     <>

@@ -9,7 +9,7 @@ const AddNews = () => {
   const onSubmit = (data) => createNewsRequest(data);
 
   return (
-    <Layout closed>
+    <Layout title="Add News" closed>
       <Row>
         <Col>
           <Editor onSubmit={onSubmit} />

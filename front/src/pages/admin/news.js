@@ -37,7 +37,7 @@ const News = () => {
   }, []);
 
   return (
-    <Layout title="AllNews" closed>
+    <Layout title="All News" closed>
       <Container>
         <Row className="justify-content-center">
           <ListGroup>
