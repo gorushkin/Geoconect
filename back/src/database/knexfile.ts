@@ -2,7 +2,7 @@ import { Knex } from 'knex';
 import path from 'path';
 const dirname = path.resolve();
 
-const DB_PATH = process.env['DB_PATH'] || 'db';
+const DB_PATH = process.env['DB_PATH'] || 'data';
 
 const getPath = (value: string) => path.join(dirname, value);
 
