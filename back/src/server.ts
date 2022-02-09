@@ -48,7 +48,7 @@ app.use((req, _res, next) => {
 app.use('/api/auth', auth);
 app.use('/api/news', news);
 app.use('/api/users', users);
-app.use('/api/applications', authMiddleware, proposals);
+app.use('/api/applications',  proposals);
 
 app.use('/api/request', (req: Request, res: Response) => {
   console.log(req.body);

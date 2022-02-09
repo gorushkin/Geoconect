@@ -3,6 +3,7 @@ import Applications from './proposals.services';
 const router = express.Router();
 import { errorWrapper } from '../../helpers/errorHanlder';
 import { CustomError } from '../../helpers/errorHanlder';
+import { authMiddleware } from '../auth/auth.services';
 
 const getProposals = async (_req: Request, res: Response) => {
   const proposals = await Applications.getProposals();
@@ -38,9 +39,9 @@ const updateProposals = async (req: Request, res: Response) => {
   res.status(200).json(updatedProposal);
 };
 
-router.get('/', errorWrapper(getProposals));
+router.get('/', authMiddleware, errorWrapper(getProposals));
 router.post('/', errorWrapper(createProposal));
-router.get('/:id', errorWrapper(getProposal));
-router.post('/:id', errorWrapper(updateProposals));
+router.get('/:id', authMiddleware, errorWrapper(getProposal));
+router.post('/:id', authMiddleware, errorWrapper(updateProposals));
 
 export { router };
