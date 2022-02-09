@@ -36,7 +36,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {filteredRoutes.map((route, id) => (
+            {filteredRoutes.filter(({navbar}) => navbar).map((route, id) => (
               <Link key={id} href={route.href} passHref>
                 <Nav.Link>{route.name}</Nav.Link>
               </Link>

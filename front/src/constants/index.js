@@ -9,8 +9,24 @@ export const headerList = [
 ];
 
 export const routes = [
-  { href: PATH_ROUTES.ADMIN, name: 'Home', guest: false, user: true, admin: true, auth: true },
-  { href: PATH_ROUTES.NEWS, name: 'News', guest: false, user: true, admin: true, auth: true },
+  {
+    href: PATH_ROUTES.ADMIN,
+    name: 'Home',
+    guest: false,
+    user: true,
+    admin: true,
+    auth: true,
+    navbar: true,
+  },
+  {
+    href: PATH_ROUTES.NEWS,
+    name: 'News',
+    guest: false,
+    user: true,
+    admin: true,
+    auth: true,
+    navbar: true,
+  },
   {
     href: PATH_ROUTES.NEWS_ADD,
     name: 'Add News',
@@ -18,6 +34,7 @@ export const routes = [
     user: true,
     admin: true,
     auth: true,
+    navbar: true,
   },
   {
     href: PATH_ROUTES.NEWS_EDIT,
@@ -34,6 +51,7 @@ export const routes = [
     user: true,
     admin: true,
     auth: true,
+    navbar: true,
   },
   {
     href: PATH_ROUTES.APPLICATION_EDIT,
@@ -50,6 +68,7 @@ export const routes = [
     user: false,
     admin: true,
     auth: true,
+    navbar: true,
   },
   { href: PATH_ROUTES.LOGIN, name: 'Login', guest: true, user: true, admin: false, auth: false },
   { href: PATH_ROUTES.SIGN_UP, name: 'Sign up', guest: true, user: true, admin: true, auth: false },
