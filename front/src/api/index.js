@@ -26,6 +26,8 @@ export const apiRoutes = {
   AUTH__TEST: 'authtest',
   APPLICATIONS: 'applications',
   INFO: 'info',
+  TOOLS_IMAGES: 'tools/images',
+  TOOLS_DB: 'tools/db',
 };
 
 export const PATH_ROUTES = {
@@ -40,6 +42,7 @@ export const PATH_ROUTES = {
   APPLICATION_EDIT: '/admin/edit_application',
   IMAGES: `${config.ORIGIN_CSR}/images`,
   ADD_USER: '/admin/add_user',
+  TOOLS: '/admin/tools',
 };
 
 const instanse = {
@@ -141,5 +144,10 @@ export const getApplicationRequest = (id) =>
 
 export const updateApplicationRequest = (id, data) =>
   errorHandler(instanse.csr.post(`${apiRoutes.APPLICATIONS}/${id}`, data));
+
+export const makeImagesBackupRequest = () =>
+  errorHandler(instanse.csr.post(apiRoutes.TOOLS_IMAGES));
+
+export const makeDBBackupRequest = () => errorHandler(instanse.csr.post(apiRoutes.TOOLS_DB));
 
 export default instanse;

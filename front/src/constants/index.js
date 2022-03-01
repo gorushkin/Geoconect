@@ -70,6 +70,15 @@ export const routes = [
     auth: true,
     navbar: true,
   },
+  {
+    href: PATH_ROUTES.TOOLS,
+    name: 'Tools',
+    guest: false,
+    user: false,
+    admin: true,
+    auth: true,
+    navbar: true,
+  },
   { href: PATH_ROUTES.LOGIN, name: 'Login', guest: true, user: true, admin: false, auth: false },
   { href: PATH_ROUTES.SIGN_UP, name: 'Sign up', guest: true, user: true, admin: true, auth: false },
 ];
