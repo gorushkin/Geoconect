@@ -22,6 +22,7 @@ services:
     volumes:
       - ./back/images/:/app/images/
       - ./data/:/app/data/
+      - ./backup/:/app/backup/
   nextjs:
     container_name: front
     restart: on-failure

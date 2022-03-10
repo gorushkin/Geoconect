@@ -146,8 +146,8 @@ export const updateApplicationRequest = (id, data) =>
   errorHandler(instanse.csr.post(`${apiRoutes.APPLICATIONS}/${id}`, data));
 
 export const makeImagesBackupRequest = () =>
-  errorHandler(instanse.csr.post(apiRoutes.TOOLS_IMAGES));
+  withStoreRequestError(instanse.csr.get(apiRoutes.TOOLS_IMAGES));
 
-export const makeDBBackupRequest = () => errorHandler(instanse.csr.post(apiRoutes.TOOLS_DB));
+export const makeDBBackupRequest = () => errorHandler(instanse.csr.get(apiRoutes.TOOLS_DB));
 
 export default instanse;

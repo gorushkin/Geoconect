@@ -4,6 +4,7 @@
 /node_modules
 # /back/node_modules
 /*/node_modules
+/backup
 /*/.env
 /.pnp
 .pnp.js

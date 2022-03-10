@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import User from '../users/users.model';
 import jwt from 'jsonwebtoken';
 import { CONFIG } from '../../helpers/config';
 import { CustomError } from '../../helpers/errorHanlder';
 import { getUsers, RequestWithUser } from '../users/users.services';
+import cookie from 'cookie';
 
 export const createToken = (user: User, password: string) => {
   const compareResults = user.verifyPassword(password);
@@ -16,11 +17,13 @@ export const createToken = (user: User, password: string) => {
 
 export const authMiddleware = async (req: RequestWithUser, _res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
+  const cookies = cookie.parse(req.headers.cookie || '');
+  const token = authorization || cookies['token'];
   const error = new CustomError('UNAUTHORIZED', 401);
-  if (!authorization) {
+  if (!token) {
     return next(error);
   }
-  const data = jwt.verify(authorization, CONFIG.SECRET);
+  const data = jwt.verify(token, CONFIG.SECRET);
   if (typeof data !== 'string') {
     const { id } = data;
     const user = await User.query().findOne({ id });

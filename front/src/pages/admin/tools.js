@@ -1,16 +1,27 @@
+import Link from 'next/link';
 import { Container, Row, Col, Form, Button, ListGroup, Badge } from 'react-bootstrap';
 
 import { makeImagesBackupRequest, makeDBBackupRequest } from '../../api';
 import Layout from '../../components/Admin/Layout';
 
+// const dowunloadFile = (data) => {
+//   const blob = new Blob([data], { type: 'type' });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement('a');
+//   a.href = url;
+//   a.download = 'filename.zip';
+//   a.click();
+// };
+
 const onImagesBackupClickHandler = async () => {
-  const response = await makeImagesBackupRequest();
-  console.log('response: ', response);
+  const { data } = await makeImagesBackupRequest();
+  console.log('data: ', data);
 };
 
 const onDBBackupClickHandler = async () => {
-  const response = await makeDBBackupRequest();
-  console.log('response: ', response);
+  const {
+    data: { data, message },
+  } = await makeDBBackupRequest();
 };
 
 const Tools = () => (
@@ -26,6 +37,13 @@ const Tools = () => (
           <span>Cделать бекап картинок</span>
           <Badge variant="primary" pill>
             14
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="/files/2022-2-10-15-43-58.zip"
+            >
+              Home
+            </a>
           </Badge>
         </ListGroup.Item>
         <ListGroup.Item

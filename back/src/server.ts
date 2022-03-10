@@ -2,7 +2,9 @@ import express, { Request, Response } from 'express';
 import { router as news } from './resources/news/news.router';
 import { router as users } from './resources/users/users.router';
 import { router as auth } from './resources/auth/auth.router';
+import { router as tools } from './resources/tools/tools.router';
 import { router as proposals } from './resources/proposals/proposals.router';
+import { router as files } from './resources/files/files.router';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import { sendMail, startSMTP } from './helpers/emailSender';
@@ -15,6 +17,7 @@ import * as Sentry from '@sentry/node';
 const dirname = path.join(path.resolve());
 import { CONFIG } from './helpers/config';
 import { RewriteFrames } from '@sentry/integrations';
+import { CustomError } from './helpers/errorHanlder';
 
 if (CONFIG.NODE_ENV === 'production') {
   Sentry.init({
@@ -48,7 +51,9 @@ app.use((req, _res, next) => {
 app.use('/api/auth', auth);
 app.use('/api/news', news);
 app.use('/api/users', users);
-app.use('/api/applications',  proposals);
+app.use('/api/applications', proposals);
+app.use('/api/tools', tools);
+app.use('/files/', authMiddleware, files);
 
 app.use('/api/request', (req: Request, res: Response) => {
   console.log(req.body);
