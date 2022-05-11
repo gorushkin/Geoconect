@@ -9,8 +9,8 @@
     "start:dev": "node build/index.js",
     "start": "NODE_ENV=production node build/index.js",
     "lint": "next lint",
-    "migrate:dev": "DB_PATH='../../data/' knex --knexfile src/database/knexfile.ts migrate:latest",
-    "migrate": "DB_PATH='../../data/' knex --knexfile build/database/knexfile.js migrate:latest"
+    "migrate:dev": "DB_PATH='../../data/db' DB_NAME='db.sqlite3' knex --knexfile src/database/knexfile.ts migrate:latest",
+    "migrate": "DB_PATH='../../data/db' DB_NAME='db.sqlite3'  knex --knexfile build/database/knexfile.js migrate:latest"
   },
   "dependencies": {
     "@sentry/integrations": "^6.17.4",
