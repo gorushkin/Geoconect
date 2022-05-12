@@ -1,9 +1,12 @@
 import { Knex } from 'knex';
 import path from 'path';
 const dirname = path.resolve();
-import { CONFIG } from '../helpers/config';
 
+import { CONFIG } from '../helpers/config';
 const getPath = (...values: string[]) => path.join.apply(null, [dirname, ...values]);
+
+const DB_PATH = CONFIG.DB_PATH || '../../data/db/';
+const DB_NAME = CONFIG.DB_NAME || 'db.sqlite3';
 
 const migrations = {
   directory: getPath('migrations'),
@@ -17,15 +20,11 @@ interface IKnexConfig {
   [key: string]: Knex.Config;
 }
 
-if (!CONFIG.DB_PATH || !CONFIG.DB_NAME) {
-  throw new Error('There is something wrong with your DBu');
-}
-
 const configs: IKnexConfig = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: getPath('..', CONFIG.DB_PATH, CONFIG.DB_NAME),
+      filename: getPath(DB_PATH, DB_NAME),
     },
     migrations,
     seeds,
@@ -49,7 +48,7 @@ const configs: IKnexConfig = {
   production: {
     client: 'sqlite3',
     connection: {
-      filename: getPath(`../${CONFIG.DB_PATH}/${CONFIG.DB_NAME}`),
+      filename: getPath(DB_PATH, DB_NAME),
     },
     migrations,
     seeds,

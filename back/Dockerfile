@@ -1,14 +1,13 @@
 FROM node:14.17-alpine
 WORKDIR /app/
-RUN mkdir db
 
 COPY package.json ./
-COPY src/ ./src
-COPY tsconfig.json ./
-COPY tsconfig.production.json ./
-
 RUN npm install
 RUN npm install knex -g
+COPY tsconfig.json ./
+COPY tsconfig.production.json ./
+# COPY src/ ./src
+
 ARG NODE_ENV
 
 RUN if [ "$NODE_ENV" = "production" ]; \

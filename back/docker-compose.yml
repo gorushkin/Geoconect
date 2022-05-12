@@ -40,7 +40,7 @@ services:
     networks:
       - geo_net
     volumes:
-      - ./images/:/app/images/
+      - ../data/:/app/data/
 networks:
   geo_net:
     driver: bridge
