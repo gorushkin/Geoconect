@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { CustomError } from './errorHanlder';
 dotenv.config();
 
 const {
@@ -21,6 +22,14 @@ const {
   ADMIN_PASSW,
   DB_NAME,
 } = process.env;
+
+if (!IMAGES_FOLDER_PATH) {
+  throw new CustomError('Upload images folder is not defined', 500);
+}
+
+if (!ADMIN_PASSW) {
+  throw new CustomError('Add admin data to config', 500);
+}
 
 export const CONFIG = {
   PORT,

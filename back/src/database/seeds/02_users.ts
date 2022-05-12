@@ -5,10 +5,6 @@ import { User } from '../../resources/users/users.services';
 
 const adminPass = CONFIG.ADMIN_PASSW;
 
-if (!adminPass) {
-  throw new Error('Add admin data to config');
-}
-
 const hashedPassword = encrypt(adminPass);
 const user = {
   id: 1,

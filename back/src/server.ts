@@ -38,7 +38,7 @@ startSMTP();
 app.use(fileUpload());
 app.use(cors());
 app.use(express.json());
-app.use('/images', express.static(path.join(dirname, 'images')));
+app.use('/images', express.static(path.join(dirname, CONFIG.IMAGES_FOLDER_PATH)));
 app.use(express.urlencoded());
 
 app.use((req, _res, next) => {

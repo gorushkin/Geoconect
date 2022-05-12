@@ -6,6 +6,7 @@ import { promises as fs } from 'fs';
 import express, { Request, Response } from 'express';
 import News from './news.model';
 import { CustomError } from '../../helpers/errorHanlder';
+import { CONFIG } from '../../helpers/config';
 
 const getFileExtension = (filename: string) => filename.split('.').pop();
 
@@ -23,12 +24,14 @@ const checkFolder = async (path: string) => {
   }
 };
 
-const getPath = (filename?: string) => path.join(dirname, 'images', filename ? filename : '');
+const pathToImages = CONFIG.IMAGES_FOLDER_PATH;
+
+const getPath = (filename?: string) => path.join(dirname, pathToImages, filename ? filename : '');
 
 export const fileHandler = async (data: FileArray | undefined) => {
-  if (!data) throw Error('something wrong with image');
+  if (!data) throw new CustomError('Something wrong with image', 500);
   const file = data['imgSource'];
-  if (Array.isArray(file) || !file) throw Error('something wrong with image');
+  if (Array.isArray(file) || !file) throw new CustomError('Something wrong with image', 500);
   const filename = getFilename(file.name);
   const path = getPath(filename);
   const folderPath = getPath();
