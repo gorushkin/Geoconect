@@ -6,7 +6,7 @@ RUN npm install
 RUN npm install knex -g
 COPY tsconfig.json ./
 COPY tsconfig.production.json ./
-# COPY src/ ./src
+COPY src/ ./src
 
 ARG NODE_ENV
 
