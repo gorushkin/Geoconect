@@ -23,8 +23,8 @@ const createUser = async (req: RequestWithUser, res: Response) => {
 
 const getUser = async (_req: RequestWithUser, _res: Response) => {};
 
-router.get('/', authMiddleware, errorWrapper(getUsers));
+router.get('/', errorWrapper(getUsers));
 router.post('/', forAdminOnly, errorWrapper(createUser));
-router.get('/:id', authMiddleware, errorWrapper(getUser));
+router.get('/:id', errorWrapper(getUser));
 
 export { router };
