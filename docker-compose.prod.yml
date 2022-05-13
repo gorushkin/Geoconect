@@ -1,41 +1,41 @@
 version: '3'
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:14.0
-    ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
-    # volumes:
-    #   - /tmp/pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_DB: ${POSTGRES_DB}
-      PGDATA: ${PGDATA}
-    networks:
-      - geo_net
-    restart: on-failure
-    env_file: ./back/.env
-  pgadmin:
-    links:
-      - postgres
-    depends_on:
-      - postgres
-    container_name: pgadmin
-    image: dpage/pgadmin4:6
-    env_file: .env
-    ports:
-       - 5050:80
-    volumes:
-      - /data/pgadmin:/root/.pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
-    restart: on-failure
-    networks:
-      - geo_net
+  # postgres:
+  #   container_name: postgres
+  #   image: postgres:14.0
+  #   ports:
+  #     - ${POSTGRES_PORT}:${POSTGRES_PORT}
+  #   # volumes:
+  #   #   - /tmp/pgdata:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_PORT: ${POSTGRES_PORT}
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #     PGDATA: ${PGDATA}
+  #   networks:
+  #     - geo_net
+  #   restart: on-failure
+  #   env_file: ./back/.env
+  # pgadmin:
+  #   links:
+  #     - postgres
+  #   depends_on:
+  #     - postgres
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4:6
+  #   env_file: .env
+  #   ports:
+  #      - 5050:80
+  #   volumes:
+  #     - /data/pgadmin:/root/.pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+  #     PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+  #   restart: on-failure
+  #   networks:
+  #     - geo_net
   proxy:
     volumes:
       - ./proxy/prod/nginx.conf:/etc/nginx/nginx.conf
