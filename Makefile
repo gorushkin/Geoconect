@@ -73,8 +73,11 @@ dev:
 dev_build:
 	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 
-prod:
+prod_start:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+
+prod_stop:
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 
 prod_build:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
